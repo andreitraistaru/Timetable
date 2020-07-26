@@ -7,13 +7,52 @@
     android:background="@color/backgroundMainActivity"
     tools:context=".MainActivity">
 
-    <ImageButton
-        android:id="@+id/imageButton3"
-        android:layout_width="132dp"
-        android:layout_height="98dp"
+    <Button
+        android:id="@+id/timetable"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="50dp"
         android:background="@color/backgroundMainActivity"
-        android:scaleType="fitCenter"
-        app:srcCompat="@drawable/timetable_icon"
-        tools:layout_editor_absoluteX="72dp"
-        tools:layout_editor_absoluteY="195dp" />
+        android:drawableStart="@drawable/timetable_icon_small"
+        android:soundEffectsEnabled="false"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@string/timetable_button_name" />
+
+    <Button
+        android:id="@+id/settings"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="40dp"
+        android:background="@color/backgroundMainActivity"
+        android:drawableStart="@drawable/settings_icon_small"
+        android:soundEffectsEnabled="false"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/events"
+        tools:text="Settings" />
+
+    <Button
+        android:id="@+id/events"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="40dp"
+        android:background="@color/backgroundMainActivity"
+        android:drawableStart="@drawable/events_icon_small"
+        android:soundEffectsEnabled="false"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timetable"
+        tools:text="Events" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
