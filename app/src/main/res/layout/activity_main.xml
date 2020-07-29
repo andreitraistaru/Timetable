@@ -14,14 +14,15 @@
         android:layout_marginTop="50dp"
         android:background="@color/backgroundMainActivity"
         android:drawableStart="@drawable/timetable_icon_small"
+        android:shadowColor="#FFFFFF"
         android:soundEffectsEnabled="false"
+        android:text="@string/timetable_button_text"
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="@string/timetable_button_name" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/settings"
@@ -31,13 +32,13 @@
         android:background="@color/backgroundMainActivity"
         android:drawableStart="@drawable/settings_icon_small"
         android:soundEffectsEnabled="false"
+        android:text="@string/settings_button_text"
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/events"
-        tools:text="Settings" />
+        app:layout_constraintTop_toBottomOf="@+id/events" />
 
     <Button
         android:id="@+id/events"
@@ -47,12 +48,12 @@
         android:background="@color/backgroundMainActivity"
         android:drawableStart="@drawable/events_icon_small"
         android:soundEffectsEnabled="false"
+        android:text="@string/events_button_text"
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/timetable"
-        tools:text="Events" />
+        app:layout_constraintTop_toBottomOf="@+id/timetable" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
