@@ -3,4 +3,5 @@
     <string name="timetable_button_text">My Timetable</string>
     <string name="events_button_text">Events</string>
     <string name="settings_button_text">Settings</string>
+    <string name="action_settings">actionSettings</string>
 </resources>
