@@ -1,8 +1,10 @@
-package com.timetable;
+package com.timetable.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.timetable.R;
 
 public class ViewEventsActivity extends AppCompatActivity {
 

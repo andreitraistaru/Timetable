@@ -1,6 +1,8 @@
-package com.timetable;
+package com.timetable.school;
 
 import android.graphics.Color;
+
+import com.timetable.utils.Constants;
 
 import java.util.ArrayList;
 import java.util.Date;
