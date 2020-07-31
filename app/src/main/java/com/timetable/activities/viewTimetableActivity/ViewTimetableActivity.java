@@ -14,6 +14,7 @@ import android.widget.TableLayout;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.timetable.R;
+import com.timetable.utils.Constants;
 
 public class ViewTimetableActivity extends AppCompatActivity {
 
@@ -35,7 +36,7 @@ public class ViewTimetableActivity extends AppCompatActivity {
         new TabLayoutMediator(tabLayout, viewPager, new TabLayoutMediator.TabConfigurationStrategy() {
             @Override
             public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
-                tab.setText("Tab " + (position + 1));
+                tab.setText(Constants.getWeekDay(position));
             }
         }).attach();
     }

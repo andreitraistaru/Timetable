@@ -16,7 +16,7 @@ public class TimetableFragmentAdapter extends FragmentStateAdapter {
     @NonNull
     @Override
     public Fragment createFragment(int position) {
-        return new DayFragment();
+        return new DayFragment(position);
     }
 
     @Override

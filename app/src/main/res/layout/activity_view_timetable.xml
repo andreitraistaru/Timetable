@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backgroundMainActivity"
+    android:background="@color/backgroundColor"
     tools:context=".activities.viewTimetableActivity.ViewTimetableActivity">
 
     <com.google.android.material.tabs.TabLayout
@@ -20,43 +20,7 @@
         app:tabIndicatorHeight="7dp"
         app:tabMode="scrollable"
         app:tabTextAppearance="@style/TextAppearance.AppCompat.Large"
-        app:tabTextColor="@color/textTabsViewTimetableActivity">
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/monday" />
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/tuesday" />
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/wednesday" />
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/thursday" />
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/friday" />
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/saturday" />
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/sunday" />
-    </com.google.android.material.tabs.TabLayout>
+        app:tabTextColor="@color/textTabsViewTimetableActivity"/>
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager"

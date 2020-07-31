@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backgroundMainActivity"
+    android:background="@color/backgroundColor"
     tools:context=".activities.MainActivity">
 
     <Button
@@ -14,6 +14,7 @@
         android:layout_marginTop="70dp"
         android:background="@drawable/button_border"
         android:drawableStart="@drawable/timetable_icon_small"
+        android:onClick="viewTimetable"
         android:shadowColor="#FFFFFF"
         android:soundEffectsEnabled="false"
         android:text="@string/timetable_button_text"
@@ -31,6 +32,7 @@
         android:layout_marginTop="40dp"
         android:background="@drawable/button_border"
         android:drawableStart="@drawable/settings_icon_small"
+        android:onClick="viewSettings"
         android:soundEffectsEnabled="false"
         android:text="@string/settings_button_text"
         android:textAlignment="center"
@@ -47,6 +49,7 @@
         android:layout_marginTop="40dp"
         android:background="@drawable/button_border"
         android:drawableStart="@drawable/events_icon_small"
+        android:onClick="viewEvents"
         android:soundEffectsEnabled="false"
         android:text="@string/events_button_text"
         android:textAlignment="center"
