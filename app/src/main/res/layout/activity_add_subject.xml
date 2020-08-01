@@ -18,10 +18,8 @@
         android:layout_marginBottom="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -71,6 +69,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
+                android:checked="true"
+                android:onClick="showFieldsForAddingLectures"
                 android:text="@string/lecturesCheckBox_activity_add_subject"
                 android:visibility="visible"
                 app:layout_constraintStart_toStartOf="parent"
@@ -85,6 +85,7 @@
                 android:drawableStart="@android:drawable/ic_menu_add"
                 android:text="@string/newClass_activity_add_subject_hint"
                 android:textAllCaps="false"
+                android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/lecturesCheckBox_activity_add_subject" />
@@ -94,6 +95,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
+                android:visibility="visible"
                 app:layout_constraintEnd_toStartOf="@+id/colorLectures_activity_add_subject"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/newClassLectures_activity_add_subject" />
@@ -103,13 +105,14 @@
                 android:layout_width="30dp"
                 android:layout_height="0dp"
                 android:layout_marginTop="4dp"
+                android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="@+id/colorPickerLectures_activity_add_subject"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/newClassLectures_activity_add_subject" />
 
             <EditText
                 android:id="@+id/teacherNameLectures_activity_add_subject"
-                android:layout_width="403dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:autofillHints=""
@@ -155,6 +158,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
+                android:onClick="showFieldsForAddingSeminars"
                 android:text="@string/seminarsCheckBox_activity_add_subject"
                 android:visibility="visible"
                 app:layout_constraintStart_toStartOf="parent"
@@ -170,15 +174,17 @@
                 android:text="@string/newClass_activity_add_subject_hint"
                 android:textAlignment="gravity"
                 android:textAllCaps="false"
+                android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/seminarsCheckBox_activity_add_subject" />
 
             <SeekBar
                 android:id="@+id/colorPickerSeminars_activity_add_subject"
-                android:layout_width="373dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
+                android:visibility="visible"
                 app:layout_constraintEnd_toStartOf="@+id/colorSeminars_activity_add_subject"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/newClassSeminars_activity_add_subject" />
@@ -188,8 +194,9 @@
                 android:layout_width="30dp"
                 android:layout_height="0dp"
                 android:layout_marginTop="4dp"
+                android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="@+id/colorPickerSeminars_activity_add_subject"
-                app:layout_constraintEnd_toEndOf="@+id/colorLectures_activity_add_subject"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/newClassSeminars_activity_add_subject" />
 
             <EditText
@@ -217,7 +224,7 @@
                 android:inputType="textPersonName"
                 android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/locationLaboratories_activity_add_subject2"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/teacherNameSeminars_activity_add_subject" />
 
             <EditText
@@ -240,6 +247,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
+                android:onClick="showFieldsForAddingLaboratories"
                 android:text="@string/laboratoriesCheckBox_activity_add_subject"
                 android:visibility="visible"
                 app:layout_constraintStart_toStartOf="parent"
@@ -255,15 +263,18 @@
                 android:text="@string/newClass_activity_add_subject_hint"
                 android:textAlignment="gravity"
                 android:textAllCaps="false"
+                android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/laboratoriesCheckBox_activity_add_subject" />
 
             <SeekBar
                 android:id="@+id/colorPickerLaboratories_activity_add_subject"
-                android:layout_width="373dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
+                android:visibility="visible"
+                app:layout_constraintEnd_toStartOf="@+id/colorLaboratories_activity_add_subject"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/newClassLaboratories_activity_add_subject" />
 
@@ -272,12 +283,13 @@
                 android:layout_width="30dp"
                 android:layout_height="0dp"
                 android:layout_marginTop="4dp"
+                android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="@+id/colorPickerLaboratories_activity_add_subject"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/newClassLaboratories_activity_add_subject" />
 
             <EditText
-                android:id="@+id/teacherNameLaboratories_activity_add_subject2"
+                android:id="@+id/teacherNameLaboratories_activity_add_subject"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
@@ -291,7 +303,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/colorPickerLaboratories_activity_add_subject" />
 
             <EditText
-                android:id="@+id/locationLaboratories_activity_add_subject2"
+                android:id="@+id/locationLaboratories_activity_add_subject"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
@@ -302,10 +314,10 @@
                 android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/teacherNameLaboratories_activity_add_subject2" />
+                app:layout_constraintTop_toBottomOf="@+id/teacherNameLaboratories_activity_add_subject" />
 
             <EditText
-                android:id="@+id/infoLaboratories_activity_add_subject2"
+                android:id="@+id/infoLaboratories_activity_add_subject"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
@@ -317,17 +329,18 @@
                 android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/locationLaboratories_activity_add_subject2" />
+                app:layout_constraintTop_toBottomOf="@+id/locationLaboratories_activity_add_subject" />
 
             <CheckBox
                 android:id="@+id/othersCheckBox_activity_add_subject"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
+                android:onClick="showFieldsForAddingOthers"
                 android:text="@string/othersCheckBox_activity_add_subject"
                 android:visibility="visible"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/infoLaboratories_activity_add_subject2" />
+                app:layout_constraintTop_toBottomOf="@+id/infoLaboratories_activity_add_subject" />
 
             <Button
                 android:id="@+id/newClassOthers_activity_add_subject"
@@ -339,6 +352,7 @@
                 android:text="@string/newClass_activity_add_subject_hint"
                 android:textAlignment="gravity"
                 android:textAllCaps="false"
+                android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/othersCheckBox_activity_add_subject" />
@@ -348,6 +362,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
+                android:visibility="visible"
                 app:layout_constraintEnd_toStartOf="@+id/colorOthers_activity_add_subject"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -358,12 +373,13 @@
                 android:layout_width="30dp"
                 android:layout_height="0dp"
                 android:layout_marginTop="4dp"
+                android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="@+id/colorPickerOthers_activity_add_subject"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/newClassOthers_activity_add_subject" />
 
             <EditText
-                android:id="@+id/teacherNameOthers_activity_add_subject3"
+                android:id="@+id/teacherNameOthers_activity_add_subject"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
@@ -377,7 +393,21 @@
                 app:layout_constraintTop_toBottomOf="@+id/colorPickerOthers_activity_add_subject" />
 
             <EditText
-                android:id="@+id/infoOthers_activity_add_subject3"
+                android:id="@+id/locationOthers_activity_add_subject"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:ems="10"
+                android:hint="@string/locationOthers_activity_add_subject_hint"
+                android:importantForAutofill="no"
+                android:inputType="textPersonName"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/teacherNameOthers_activity_add_subject" />
+
+            <EditText
+                android:id="@+id/infoOthers_activity_add_subject"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
@@ -389,21 +419,20 @@
                 android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/teacherNameOthers_activity_add_subject3" />
+                app:layout_constraintTop_toBottomOf="@+id/locationOthers_activity_add_subject" />
 
-            <EditText
-                android:id="@+id/locationOthers_activity_add_subject3"
-                android:layout_width="0dp"
+            <Button
+                android:id="@+id/save_activity_add_subject"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:ems="10"
-                android:hint="@string/locationOthers_activity_add_subject_hint"
-                android:importantForAutofill="no"
-                android:inputType="textPersonName"
-                android:visibility="visible"
+                android:background="@drawable/button_border"
+                android:drawableStart="@android:drawable/ic_menu_save"
+                android:text="@string/save_activity_add_subject_hint"
+                android:textAllCaps="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/infoOthers_activity_add_subject3" />
+                app:layout_constraintTop_toBottomOf="@+id/infoOthers_activity_add_subject" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

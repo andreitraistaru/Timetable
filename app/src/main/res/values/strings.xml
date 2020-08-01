@@ -37,6 +37,7 @@
     <string name="infoOthers_activity_add_subject_hint">Description</string>
 
     <string name="newClass_activity_add_subject_hint">Add new time interval</string>
+    <string name="save_activity_add_subject_hint">Save</string>
 
     <string name="differentTimetableEvenWeekCheckBox_activity_add_subject">Different timetable in even weeks</string>
     <string name="lecturesCheckBox_activity_add_subject">Add Lectures Time</string>
