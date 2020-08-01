@@ -5,4 +5,5 @@
     <color name="colorAccent">#03DAC5</color>
     <color name="backgroundColor">#509153</color>
     <color name="textTabsViewTimetableActivity">#FFFFFF</color>
+    <color name="timetableItemsDivider">#370F32</color>
 </resources>

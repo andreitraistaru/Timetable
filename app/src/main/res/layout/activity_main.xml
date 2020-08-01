@@ -8,7 +8,7 @@
     tools:context=".activities.MainActivity">
 
     <Button
-        android:id="@+id/timetable"
+        android:id="@+id/timetable_activity_main"
         android:layout_width="300dp"
         android:layout_height="60dp"
         android:layout_marginTop="70dp"
@@ -26,7 +26,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/settings"
+        android:id="@+id/settings_activity_main"
         android:layout_width="300dp"
         android:layout_height="60dp"
         android:layout_marginTop="40dp"
@@ -40,10 +40,10 @@
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/events" />
+        app:layout_constraintTop_toBottomOf="@+id/events_activity_main" />
 
     <Button
-        android:id="@+id/events"
+        android:id="@+id/events_activity_main"
         android:layout_width="300dp"
         android:layout_height="60dp"
         android:layout_marginTop="40dp"
@@ -57,6 +57,6 @@
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/timetable" />
+        app:layout_constraintTop_toBottomOf="@+id/timetable_activity_main" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
