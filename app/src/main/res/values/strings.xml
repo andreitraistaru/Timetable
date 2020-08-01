@@ -36,6 +36,8 @@
     <string name="locationOthers_activity_add_subject_hint">Location</string>
     <string name="infoOthers_activity_add_subject_hint">Description</string>
 
+    <string name="newClass_activity_add_subject_hint">Add new time interval</string>
+
     <string name="differentTimetableEvenWeekCheckBox_activity_add_subject">Different timetable in even weeks</string>
     <string name="lecturesCheckBox_activity_add_subject">Add Lectures Time</string>
     <string name="seminarsCheckBox_activity_add_subject">Add Seminars Time</string>

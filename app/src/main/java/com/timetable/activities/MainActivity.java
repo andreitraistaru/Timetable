@@ -4,10 +4,16 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.LinearGradient;
+import android.graphics.Shader;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.RectShape;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.SeekBar;
 import android.widget.Toast;
 
 import com.timetable.R;
@@ -36,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
 
         return true;
     }
+
+    private int initialColor = 0;
 
     public void viewTimetable(View view) {
         startActivity(new Intent(this, ViewTimetableActivity.class));
