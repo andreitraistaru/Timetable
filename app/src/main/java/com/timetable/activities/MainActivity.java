@@ -32,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         Toast.makeText(this, "Settings clicked!", Toast.LENGTH_SHORT).show();
 
+        startActivity(new Intent(this, AddSubjectActivity.class));
+
         return true;
     }
 

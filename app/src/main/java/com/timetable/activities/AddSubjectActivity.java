@@ -6,13 +6,13 @@ import android.os.Bundle;
 
 import com.timetable.R;
 
-public class ViewEventsActivity extends AppCompatActivity {
+public class AddSubjectActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_events);
+        setContentView(R.layout.activity_add_subject);
 
-        getSupportActionBar().setTitle(R.string.events_activity_title);
+        getSupportActionBar().setTitle(R.string.add_subject_activity_title);
     }
 }

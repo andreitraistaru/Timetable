@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/subjectName_add_subject_activity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroundColor"
+    tools:context=".activities.AddSubjectActivity">
+
+    <EditText
+        android:id="@+id/subjectName_activity_add_subject"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="4dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:hint="@string/subjectName_activity_add_subject_hint"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <CheckBox
+        android:id="@+id/lecturesCheckBox_activity_add_subject"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:text="@string/lecturesCheckBox_activity_add_subject"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/subjectInfo_activity_add_subject" />
+
+    <EditText
+        android:id="@+id/teacherName_activity_add_subject"
+        android:layout_width="403dp"
+        android:layout_height="wrap_content"
+        android:autofillHints=""
+        android:ems="10"
+        android:hint="@string/teacherName_activity_add_subject_hint"
+        android:inputType="textPersonName"
+        android:visibility="invisible"
+        tools:layout_editor_absoluteX="4dp"
+        tools:layout_editor_absoluteY="171dp" />
+
+    <EditText
+        android:id="@+id/location_activity_add_subject"
+        android:layout_width="403dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/location_activity_add_subject_hint"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName"
+        android:visibility="invisible"
+        tools:layout_editor_absoluteX="4dp"
+        tools:layout_editor_absoluteY="232dp" />
+
+    <CheckBox
+        android:id="@+id/seminarsCheckBox_activity_add_subject"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/seminarsCheckBox_activity_add_subject"
+        android:visibility="invisible"
+        tools:layout_editor_absoluteX="97dp"
+        tools:layout_editor_absoluteY="302dp" />
+
+    <CheckBox
+        android:id="@+id/othersCheckBox_activity_add_subject"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/othersCheckBox_activity_add_subject"
+        android:visibility="invisible"
+        tools:layout_editor_absoluteX="77dp"
+        tools:layout_editor_absoluteY="408dp" />
+
+    <CheckBox
+        android:id="@+id/laboratoriesCheckBox_activity_add_subject"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/laboratoriesCheckBox_activity_add_subject"
+        android:visibility="invisible"
+        tools:layout_editor_absoluteX="85dp"
+        tools:layout_editor_absoluteY="351dp" />
+
+    <EditText
+        android:id="@+id/subjectInfo_activity_add_subject"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="4dp"
+        android:ems="10"
+        android:hint="@string/subjectInfo_activity_add_subject_hint"
+        android:inputType="textMultiLine"
+        android:maxLines="5"
+        android:minLines="5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/subjectName_activity_add_subject" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
