@@ -22,11 +22,23 @@
 
     <string name="subjectName_activity_add_subject_hint">Subject\'s name</string>
     <string name="subjectInfo_activity_add_subject_hint">Subject\'s description</string>
-    <string name="teacherName_activity_add_subject_hint">Teacher\'s name</string>
-    <string name="location_activity_add_subject_hint">Location</string>
 
-    <string name="lecturesCheckBox_activity_add_subject">Add Lectures</string>
-    <string name="seminarsCheckBox_activity_add_subject">Add Seminars</string>
-    <string name="laboratoriesCheckBox_activity_add_subject">Add Laboratories</string>
-    <string name="othersCheckBox_activity_add_subject">Add Other Activities</string>
+    <string name="teacherNameLectures_activity_add_subject_hint">Lecture Teacher\'s name</string>
+    <string name="locationLectures_activity_add_subject_hint">Lecture Location</string>
+    <string name="infoLectures_activity_add_subject_hint">Lecture Description</string>
+    <string name="teacherNameSeminars_activity_add_subject_hint">Seminar Teacher\'s name</string>
+    <string name="locationSeminars_activity_add_subject_hint">Seminar Location</string>
+    <string name="infoSeminars_activity_add_subject_hint">Seminar Description</string>
+    <string name="teacherNameLaboratories_activity_add_subject_hint">Laboratory Teacher\'s name</string>
+    <string name="locationLaboratories_activity_add_subject_hint">Laboratory Location</string>
+    <string name="infoLaboratories_activity_add_subject_hint">Laboratory Description</string>
+    <string name="teacherNameOthers_activity_add_subject_hint">Teacher\'s name</string>
+    <string name="locationOthers_activity_add_subject_hint">Location</string>
+    <string name="infoOthers_activity_add_subject_hint">Description</string>
+
+    <string name="differentTimetableEvenWeekCheckBox_activity_add_subject">Different timetable in even weeks</string>
+    <string name="lecturesCheckBox_activity_add_subject">Add Lectures Time</string>
+    <string name="seminarsCheckBox_activity_add_subject">Add Seminars Time</string>
+    <string name="laboratoriesCheckBox_activity_add_subject">Add Laboratories Time</string>
+    <string name="othersCheckBox_activity_add_subject">Add Other Activities Time</string>
 </resources>
