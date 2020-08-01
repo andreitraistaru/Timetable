@@ -114,7 +114,6 @@
                 android:minLines="3"
                 android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/locationLectures_activity_add_subject" />
 
@@ -153,7 +152,7 @@
                 android:inputType="textPersonName"
                 android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/locationSeminars_activity_add_subject2"
+                app:layout_constraintStart_toStartOf="@+id/locationLaboratories_activity_add_subject2"
                 app:layout_constraintTop_toBottomOf="@+id/teacherNameSeminars_activity_add_subject" />
 
             <EditText
@@ -182,13 +181,13 @@
                 app:layout_constraintTop_toBottomOf="@+id/infoSeminars_activity_add_subject" />
 
             <EditText
-                android:id="@+id/teacherNameSeminars_activity_add_subject2"
-                android:layout_width="352dp"
+                android:id="@+id/teacherNameLaboratories_activity_add_subject2"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:autofillHints=""
                 android:ems="10"
-                android:hint="@string/teacherNameSeminars_activity_add_subject_hint"
+                android:hint="@string/teacherNameLaboratories_activity_add_subject_hint"
                 android:inputType="textPersonName"
                 android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -196,33 +195,33 @@
                 app:layout_constraintTop_toBottomOf="@+id/laboratoriesCheckBox_activity_add_subject" />
 
             <EditText
-                android:id="@+id/locationSeminars_activity_add_subject2"
+                android:id="@+id/locationLaboratories_activity_add_subject2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:ems="10"
-                android:hint="@string/locationSeminars_activity_add_subject_hint"
+                android:hint="@string/locationLaboratories_activity_add_subject_hint"
                 android:importantForAutofill="no"
                 android:inputType="textPersonName"
                 android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/teacherNameSeminars_activity_add_subject2" />
+                app:layout_constraintTop_toBottomOf="@+id/teacherNameLaboratories_activity_add_subject2" />
 
             <EditText
-                android:id="@+id/infoSeminars_activity_add_subject2"
-                android:layout_width="352dp"
+                android:id="@+id/infoLaboratories_activity_add_subject2"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:autofillHints=""
                 android:ems="10"
-                android:hint="@string/infoSeminars_activity_add_subject_hint"
+                android:hint="@string/infoLaboratories_activity_add_subject_hint"
                 android:inputType="textMultiLine"
                 android:minLines="3"
                 android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/locationSeminars_activity_add_subject2" />
+                app:layout_constraintTop_toBottomOf="@+id/locationLaboratories_activity_add_subject2" />
 
             <CheckBox
                 android:id="@+id/othersCheckBox_activity_add_subject"
@@ -232,16 +231,16 @@
                 android:text="@string/othersCheckBox_activity_add_subject"
                 android:visibility="visible"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/infoSeminars_activity_add_subject2" />
+                app:layout_constraintTop_toBottomOf="@+id/infoLaboratories_activity_add_subject2" />
 
             <EditText
-                android:id="@+id/teacherNameSeminars_activity_add_subject3"
+                android:id="@+id/teacherNameOthers_activity_add_subject3"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:autofillHints=""
                 android:ems="10"
-                android:hint="@string/teacherNameSeminars_activity_add_subject_hint"
+                android:hint="@string/teacherNameOthers_activity_add_subject_hint"
                 android:inputType="textPersonName"
                 android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -249,33 +248,33 @@
                 app:layout_constraintTop_toBottomOf="@+id/othersCheckBox_activity_add_subject" />
 
             <EditText
-                android:id="@+id/infoSeminars_activity_add_subject3"
+                android:id="@+id/infoOthers_activity_add_subject3"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:autofillHints=""
                 android:ems="10"
-                android:hint="@string/infoSeminars_activity_add_subject_hint"
+                android:hint="@string/infoOthers_activity_add_subject_hint"
                 android:inputType="textMultiLine"
                 android:minLines="3"
                 android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/teacherNameSeminars_activity_add_subject3" />
+                app:layout_constraintTop_toBottomOf="@+id/teacherNameOthers_activity_add_subject3" />
 
             <EditText
-                android:id="@+id/locationSeminars_activity_add_subject3"
+                android:id="@+id/locationOthers_activity_add_subject3"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:ems="10"
-                android:hint="@string/locationSeminars_activity_add_subject_hint"
+                android:hint="@string/locationOthers_activity_add_subject_hint"
                 android:importantForAutofill="no"
                 android:inputType="textPersonName"
                 android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/infoSeminars_activity_add_subject3" />
+                app:layout_constraintTop_toBottomOf="@+id/infoOthers_activity_add_subject3" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
