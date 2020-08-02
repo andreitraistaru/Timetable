@@ -6,4 +6,5 @@
     <color name="backgroundColor">#509153</color>
     <color name="textTabsViewTimetableActivity">#FFFFFF</color>
     <color name="timetableItemsDivider">#370F32</color>
+    <color name="dialogTextColot">#161D45</color>
 </resources>

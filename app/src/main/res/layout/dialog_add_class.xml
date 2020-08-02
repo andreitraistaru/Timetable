@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroundColor"
+    android:visibility="visible">
+
+    <TextView
+        android:id="@+id/chooseDay_dialog_add_class"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/day_dialog_add_class"
+        android:textColor="@color/dialogTextColot"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/spinner_dialog_add_class"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        android:entries="@array/weekDays"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chooseDay_dialog_add_class" />
+
+    <TextView
+        android:id="@+id/chooseStartHour_dialog_add_class"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/start_hour_dialog_add_class"
+        android:textColor="@color/dialogTextColot"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_dialog_add_class" />
+
+    <com.google.android.material.slider.Slider
+        android:id="@+id/startHour_dialog_add_class"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:valueFrom="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chooseStartHour_dialog_add_class" />
+
+    <TextView
+        android:id="@+id/chooseFinishHour_dialog_add_class"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/finish_hour_dialog_add_class"
+        android:textColor="@color/dialogTextColot"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/startHour_dialog_add_class" />
+
+    <TextView
+        android:id="@+id/chooseFrequency_dialog_add_class2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/frequency_dialog_add_class"
+        android:textColor="@color/dialogTextColot"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/finishHour_dialog_add_class" />
+
+    <com.google.android.material.slider.Slider
+        android:id="@+id/finishHour_dialog_add_class"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chooseFinishHour_dialog_add_class" />
+
+    <RadioGroup
+        android:id="@+id/frequency_dialog_add_class"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chooseFrequency_dialog_add_class2">
+
+        <RadioButton
+            android:id="@+id/frequency_even_dialog_add_class"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/frequency_even_dialog_add_class" />
+
+        <RadioButton
+            android:id="@+id/frequency_odd_dialog_add_class"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/frequency_odd_dialog_add_class" />
+
+        <RadioButton
+            android:id="@+id/frequency_both_dialog_add_class"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/frequency_both_dialog_add_class" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/cancel_dialog_add_class"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/button_border"
+        android:drawableStart="@android:drawable/ic_menu_close_clear_cancel"
+        android:gravity="center"
+        android:text="@string/cancel_dialog_add_class"
+        app:layout_constraintBottom_toBottomOf="@+id/save_dialog_add_class"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frequency_dialog_add_class" />
+
+    <Button
+        android:id="@+id/save_dialog_add_class"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/button_border"
+        android:drawableStart="@android:drawable/ic_menu_save"
+        android:gravity="center"
+        android:text="@string/save_dialog_add_class"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frequency_dialog_add_class" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
