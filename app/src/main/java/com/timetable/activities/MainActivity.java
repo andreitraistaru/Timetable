@@ -3,6 +3,7 @@ package com.timetable.activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.LinearGradient;
 import android.graphics.Shader;
@@ -10,13 +11,17 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.RectShape;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.timetable.R;
+import com.timetable.activities.viewTimetableActivity.NewClassDialog;
 import com.timetable.activities.viewTimetableActivity.ViewTimetableActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -54,6 +59,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void viewSettings(View view) {
-          startActivity(new Intent(this, SettingsActivity.class));
+        startActivity(new Intent(this, SettingsActivity.class));
     }
 }

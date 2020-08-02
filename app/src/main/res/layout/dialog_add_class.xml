@@ -16,7 +16,7 @@
         android:layout_marginEnd="8dp"
         android:text="@string/day_dialog_add_class"
         android:textColor="@color/dialogTextColot"
-        android:textSize="18sp"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -42,18 +42,21 @@
         android:layout_marginEnd="8dp"
         android:text="@string/start_hour_dialog_add_class"
         android:textColor="@color/dialogTextColot"
-        android:textSize="18sp"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinner_dialog_add_class" />
 
-    <com.google.android.material.slider.Slider
+    <SeekBar
         android:id="@+id/startHour_dialog_add_class"
+        style="@style/Widget.AppCompat.SeekBar.Discrete"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:max="23"
+        android:progress="0"
         android:valueFrom="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -68,7 +71,7 @@
         android:layout_marginEnd="8dp"
         android:text="@string/finish_hour_dialog_add_class"
         android:textColor="@color/dialogTextColot"
-        android:textSize="18sp"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/startHour_dialog_add_class" />
@@ -82,18 +85,21 @@
         android:layout_marginEnd="8dp"
         android:text="@string/frequency_dialog_add_class"
         android:textColor="@color/dialogTextColot"
-        android:textSize="18sp"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/finishHour_dialog_add_class" />
 
-    <com.google.android.material.slider.Slider
+    <SeekBar
         android:id="@+id/finishHour_dialog_add_class"
+        style="@style/Widget.AppCompat.SeekBar.Discrete"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:max="23"
+        android:progress="0"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/chooseFinishHour_dialog_add_class" />

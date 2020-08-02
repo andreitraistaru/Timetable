@@ -2,12 +2,18 @@ package com.timetable.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.SeekBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.timetable.R;
 
@@ -129,5 +135,55 @@ public class AddSubjectActivity extends AppCompatActivity {
             location.setVisibility(View.VISIBLE);
             info.setVisibility(View.VISIBLE);
         }
+    }
+
+    public void showNewClassDialog(View view) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        ViewGroup viewGroup = findViewById(android.R.id.content);
+        final View dialogView = LayoutInflater.from(view.getContext()).inflate(R.layout.dialog_add_class, viewGroup, false);
+
+        builder.setView(dialogView);
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+
+        SeekBar startHour = dialogView.findViewById(R.id.startHour_dialog_add_class);
+        SeekBar finishHour = dialogView.findViewById(R.id.finishHour_dialog_add_class);
+
+        startHour.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                TextView startHour = dialogView.findViewById(R.id.chooseStartHour_dialog_add_class);
+
+                startHour.setText(getResources().getString(R.string.start_hour_dialog_add_class) + " " + seekBar.getProgress());
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+        finishHour.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                TextView finishHour = dialogView.findViewById(R.id.chooseFinishHour_dialog_add_class);
+
+                finishHour.setText(getResources().getString(R.string.finish_hour_dialog_add_class) + " " + seekBar.getProgress());
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
     }
 }
