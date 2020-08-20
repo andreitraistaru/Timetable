@@ -146,8 +146,14 @@ public class AddSubjectActivity extends AppCompatActivity {
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
 
+        TextView startHourTextView = dialogView.findViewById(R.id.chooseStartHour_dialog_add_class);
+        TextView finishHourTextView = dialogView.findViewById(R.id.chooseFinishHour_dialog_add_class);
+
         SeekBar startHour = dialogView.findViewById(R.id.startHour_dialog_add_class);
         SeekBar finishHour = dialogView.findViewById(R.id.finishHour_dialog_add_class);
+
+        startHourTextView.setText(getResources().getString(R.string.start_hour_dialog_add_class) + " " + startHour.getProgress());
+        finishHourTextView.setText(getResources().getString(R.string.start_hour_dialog_add_class) + " " + finishHour.getProgress());
 
         startHour.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override

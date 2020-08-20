@@ -67,4 +67,10 @@
     <string name="frequency_both_dialog_add_class">Each week</string>
     <string name="cancel_dialog_add_class">Cancel</string>
     <string name="save_dialog_add_class">Save</string>
+
+    <string name="semester_duration_settings">Number of weeks in semester:</string>
+    <string name="starting_date_settings">First day of the semester:</string>
+    <string name="ending_date_settings">Last day of the semester:</string>
+    <string name="holidays_settings">Holidays during the semester:</string>
+    <string name="add_holidays_settings">Add new holiday</string>
 </resources>

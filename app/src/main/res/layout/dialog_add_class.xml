@@ -15,7 +15,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:text="@string/day_dialog_add_class"
-        android:textColor="@color/dialogTextColot"
+        android:textColor="@color/dialogTextColor"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,13 +23,13 @@
 
     <Spinner
         android:id="@+id/spinner_dialog_add_class"
-        android:layout_width="0dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="32dp"
+        android:background="@drawable/spinner_border"
         android:entries="@array/weekDays"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:popupBackground="@color/backgroundColor"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/chooseDay_dialog_add_class" />
 
@@ -41,7 +41,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:text="@string/start_hour_dialog_add_class"
-        android:textColor="@color/dialogTextColot"
+        android:textColor="@color/dialogTextColor"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -70,7 +70,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:text="@string/finish_hour_dialog_add_class"
-        android:textColor="@color/dialogTextColot"
+        android:textColor="@color/dialogTextColor"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -84,7 +84,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:text="@string/frequency_dialog_add_class"
-        android:textColor="@color/dialogTextColot"
+        android:textColor="@color/dialogTextColor"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -136,11 +136,11 @@
 
     <Button
         android:id="@+id/cancel_dialog_add_class"
+        style="@android:style/Widget.Holo.Light.Button.Inset"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:background="@drawable/button_border"
         android:drawableStart="@android:drawable/ic_menu_close_clear_cancel"
         android:gravity="center"
         android:text="@string/cancel_dialog_add_class"
@@ -150,11 +150,11 @@
 
     <Button
         android:id="@+id/save_dialog_add_class"
+        style="@android:style/Widget.Holo.Light.Button.Inset"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:background="@drawable/button_border"
         android:drawableStart="@android:drawable/ic_menu_save"
         android:gravity="center"
         android:text="@string/save_dialog_add_class"
