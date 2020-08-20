@@ -1,83 +1,45 @@
 package com.timetable.school;
 
-import android.graphics.Color;
-
-import com.timetable.utils.Constants;
-
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Subject {
     private String name;
-    private ArrayList<Date> time;
-    private ArrayList<Date> timeEvenWeek;
-    private String teacher;
-    private String location;
-    private String otherInfo;
-    private Color color;
+    private String description;
     private boolean differentOnEvenWeeks;
+    private ArrayList<SubjectComponent> components;
 
-    public String getName() {
-        return name;
+    public Subject(String name, String description, boolean differentOnEvenWeeks) {
+        this.name = name;
+        this.description = description;
+        this.differentOnEvenWeeks = differentOnEvenWeeks;
+        this.components = new ArrayList<>();
     }
-    public ArrayList<Date> getTime() {
-        return time;
-    }
-    public ArrayList<Date> getTimeEvenWeek() {
-        return timeEvenWeek;
-    }
-    public String getTeacher() {
-        return teacher;
-    }
-    public String getLocation() {
-        return location;
-    }
-    public String getOtherInfo() {
-        return otherInfo;
-    }
-    public Color getColor() {
-        return color;
-    }
+
     public boolean isDifferentOnEvenWeeks() {
         return differentOnEvenWeeks;
     }
 
-    public Subject(String name) {
+    public String getName() {
+        return name;
+    }
+    public String getDescription() {
+        return description;
+    }
+    public ArrayList<SubjectComponent> getComponents() {
+        return components;
+    }
+
+    public void setName(String name) {
         this.name = name;
-
-        time = new ArrayList<>();
-        timeEvenWeek = null;
-        teacher = Constants.UNDEFINED;
-        location = Constants.UNDEFINED;
-        otherInfo = Constants.UNDEFINED;
-        differentOnEvenWeeks = false;
+    }
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    public void setDifferentOnEvenWeeks(boolean differentOnEvenWeeks) {
+        this.differentOnEvenWeeks = differentOnEvenWeeks;
     }
 
-    public void addTime(Date date) {
-        time.add(date);
-    }
-    public void addTimeOnEvenWeeks(Date date) {
-        if (timeEvenWeek != null) {
-            timeEvenWeek.add(date);
-        }
-    }
-    public void setTeacher(String teacher) {
-        this.teacher = teacher;
-    }
-    public void setLocation(String location) {
-        this.location = location;
-    }
-    public void setOtherInfo(String otherInfo) {
-        this.otherInfo = otherInfo;
-    }
-    public void setColor(Color color) {
-        this.color = color;
-    }
-    public void enableDifferentOnEvenWeeks() {
-        if (!differentOnEvenWeeks) {
-            differentOnEvenWeeks = true;
-
-            timeEvenWeek = new ArrayList<Date>();
-        }
+    public void addComponent(SubjectComponent component) {
+        this.components.add(component);
     }
 }

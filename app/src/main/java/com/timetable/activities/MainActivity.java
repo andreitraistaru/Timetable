@@ -26,7 +26,7 @@ import com.timetable.activities.viewTimetableActivity.ViewTimetableActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-      @Override
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -47,8 +47,6 @@ public class MainActivity extends AppCompatActivity {
 
         return true;
     }
-
-    private int initialColor = 0;
 
     public void viewTimetable(View view) {
         startActivity(new Intent(this, ViewTimetableActivity.class));
