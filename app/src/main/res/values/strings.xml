@@ -67,16 +67,18 @@
     <string name="frequency_both_dialog_add_class">Each week</string>
     <string name="save_dialog_add_class">Save</string>
 
-    <string name="start_day_dialog_add_holiday">Choose the first day of the holiday:</string>
-    <string name="end_day_dialog_add_holiday">Choose the last day of the holiday:</string>
+    <string name="start_day_default_dialog_add_holiday">Choose the first day of the holiday:\n\t\t\tundefined</string>
+    <string name="start_day_dialog_add_holiday">Choose the first day of the holiday:\n\t\t\t%02d.%02d.%d</string>
+    <string name="end_day_default_dialog_add_holiday">Choose the last day of the holiday:\n\t\t\tundefined</string>
+    <string name="end_day_dialog_add_holiday">Choose the last day of the holiday:\n\t\t\t%02d.%02d.%d</string>
     <string name="working_week_dialog_add_holiday">Holiday during working week</string>
     <string name="save_dialog_add_holiday">Save</string>
 
     <string name="choose_dialog_add_holiday">Choose selected date</string>
 
     <string name="semester_duration_year_structure">Number of weeks in semester:</string>
-    <string name="starting_date_year_structure">First day of the semester:</string>
-    <string name="ending_date_year_structure">Last day of the semester:</string>
+    <string name="starting_date_year_structure">First day of the semester:\n\t\t\t%02d.%02d.%d</string>
+    <string name="ending_date_year_structure">Last day of the semester:\n\t\t\t%02d.%02d.%d</string>
     <string name="subjects_year_structure">Subjects during the semester:</string>
     <string name="add_subjects_year_structure">Add new subject</string>
     <string name="holidays_year_structure">Holidays during the semester:</string>

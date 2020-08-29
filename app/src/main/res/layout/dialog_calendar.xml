@@ -8,7 +8,7 @@
     android:visibility="visible">
 
     <CalendarView
-        android:id="@+id/calendarView"
+        android:id="@+id/calendarView_dialog_calendar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -27,5 +27,5 @@
         android:text="@string/choose_dialog_add_holiday"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/calendarView" />
+        app:layout_constraintTop_toBottomOf="@+id/calendarView_dialog_calendar" />
 </androidx.constraintlayout.widget.ConstraintLayout>
