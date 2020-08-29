@@ -2,6 +2,7 @@ package com.timetable.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -23,6 +24,10 @@ public class YearStructureActivity extends AppCompatActivity {
 
     public void changeLastDayOfSemester(View view) {
 
+    }
+
+    public void addSubject(View view) {
+        startActivity(new Intent(this, AddSubjectActivity.class));
     }
 
     public void addHoliday(View view) {
