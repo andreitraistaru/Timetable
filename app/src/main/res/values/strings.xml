@@ -65,8 +65,14 @@
     <string name="frequency_even_dialog_add_class">For even weeks only</string>
     <string name="frequency_odd_dialog_add_class">For odd weeks only</string>
     <string name="frequency_both_dialog_add_class">Each week</string>
-    <string name="cancel_dialog_add_class">Cancel</string>
     <string name="save_dialog_add_class">Save</string>
+
+    <string name="start_day_dialog_add_holiday">Choose the first day of the holiday:</string>
+    <string name="end_day_dialog_add_holiday">Choose the last day of the holiday:</string>
+    <string name="working_week_dialog_add_holiday">Holiday during working week</string>
+    <string name="save_dialog_add_holiday">Save</string>
+
+    <string name="choose_dialog_add_holiday">Choose selected date</string>
 
     <string name="semester_duration_year_structure">Number of weeks in semester:</string>
     <string name="starting_date_year_structure">First day of the semester:</string>

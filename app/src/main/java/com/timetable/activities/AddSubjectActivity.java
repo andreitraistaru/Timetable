@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -143,11 +142,11 @@ public class AddSubjectActivity extends AppCompatActivity {
         final View dialogView = LayoutInflater.from(view.getContext()).inflate(R.layout.dialog_add_class, viewGroup, false);
 
         builder.setView(dialogView);
-        AlertDialog alertDialog = builder.create();
+        final AlertDialog alertDialog = builder.create();
         alertDialog.show();
 
-        TextView startHourTextView = dialogView.findViewById(R.id.chooseStartHour_dialog_add_class);
-        TextView finishHourTextView = dialogView.findViewById(R.id.chooseFinishHour_dialog_add_class);
+        TextView startHourTextView = dialogView.findViewById(R.id.chooseHolidayStart_dialog_add_holiday);
+        TextView finishHourTextView = dialogView.findViewById(R.id.chooseHolidayEnd_dialog_add_holiday);
 
         SeekBar startHour = dialogView.findViewById(R.id.startHour_dialog_add_class);
         SeekBar finishHour = dialogView.findViewById(R.id.finishHour_dialog_add_class);
@@ -158,7 +157,7 @@ public class AddSubjectActivity extends AppCompatActivity {
         startHour.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                TextView startHour = dialogView.findViewById(R.id.chooseStartHour_dialog_add_class);
+                TextView startHour = dialogView.findViewById(R.id.chooseHolidayStart_dialog_add_holiday);
 
                 startHour.setText(getResources().getString(R.string.start_hour_dialog_add_class) + " " + seekBar.getProgress());
             }
@@ -176,7 +175,7 @@ public class AddSubjectActivity extends AppCompatActivity {
         finishHour.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                TextView finishHour = dialogView.findViewById(R.id.chooseFinishHour_dialog_add_class);
+                TextView finishHour = dialogView.findViewById(R.id.chooseHolidayEnd_dialog_add_holiday);
 
                 finishHour.setText(getResources().getString(R.string.finish_hour_dialog_add_class) + " " + seekBar.getProgress());
             }
@@ -189,6 +188,15 @@ public class AddSubjectActivity extends AppCompatActivity {
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
 
+            }
+        });
+
+        Button save = dialogView.findViewById(R.id.save_dialog_add_class);
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(dialogView.getContext(), "Saved!", Toast.LENGTH_SHORT).show();
+                alertDialog.dismiss();
             }
         });
     }

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroundColor"
+    android:visibility="visible">
+
+    <TextView
+        android:id="@+id/chooseHolidayStart_dialog_add_holiday"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/start_day_dialog_add_holiday"
+        android:textColor="@color/dialogTextColor"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/startingDate_dialog_add_holiday"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/startingDate_dialog_add_holiday" />
+
+    <ImageButton
+        android:id="@+id/startingDate_dialog_add_holiday"
+        style="@android:style/Widget.Holo.Light.Button.Inset"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:onClick="chooseFirstDayOfHoliday"
+        android:padding="0dp"
+        android:paddingStart="0dp"
+        android:paddingTop="0dp"
+        android:paddingEnd="0dp"
+        android:paddingBottom="0dp"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_menu_my_calendar" />
+
+    <TextView
+        android:id="@+id/chooseHolidayEnd_dialog_add_holiday"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/end_day_dialog_add_holiday"
+        android:textColor="@color/dialogTextColor"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/endingDate_dialog_add_holiday"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/endingDate_dialog_add_holiday" />
+
+    <ImageButton
+        android:id="@+id/endingDate_dialog_add_holiday"
+        style="@android:style/Widget.Holo.Light.Button.Inset"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:onClick="chooseLastDayOfHoliday"
+        android:padding="0dp"
+        android:paddingStart="0dp"
+        android:paddingTop="0dp"
+        android:paddingEnd="0dp"
+        android:paddingBottom="0dp"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/startingDate_dialog_add_holiday"
+        app:srcCompat="@android:drawable/ic_menu_my_calendar" />
+
+    <CheckBox
+        android:id="@+id/working_week_dialog_add_holiday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/working_week_dialog_add_holiday"
+        android:textColor="@color/dialogTextColor"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/endingDate_dialog_add_holiday" />
+
+    <Button
+        android:id="@+id/save_dialog_add_holiday"
+        style="@android:style/Widget.Holo.Light.Button.Inset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:drawableStart="@android:drawable/ic_menu_save"
+        android:gravity="center"
+        android:text="@string/save_dialog_add_holiday"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/working_week_dialog_add_holiday" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

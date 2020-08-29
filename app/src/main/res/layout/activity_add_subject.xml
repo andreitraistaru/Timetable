@@ -90,7 +90,7 @@
             <Button
                 android:id="@+id/newClassLectures_activity_add_subject"
                 style="@android:style/Widget.Holo.Light.Button.Inset"
-                android:layout_width="200dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:drawableStart="@android:drawable/ic_menu_add"
@@ -194,7 +194,7 @@
             <Button
                 android:id="@+id/newClassSeminars_activity_add_subject"
                 style="@android:style/Widget.Holo.Light.Button.Inset"
-                android:layout_width="200dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:drawableStart="@android:drawable/ic_menu_add"
@@ -297,7 +297,7 @@
             <Button
                 android:id="@+id/newClassLaboratories_activity_add_subject"
                 style="@android:style/Widget.Holo.Light.Button.Inset"
-                android:layout_width="200dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:drawableStart="@android:drawable/ic_menu_add"
@@ -400,7 +400,7 @@
             <Button
                 android:id="@+id/newClassOthers_activity_add_subject"
                 style="@android:style/Widget.Holo.Light.Button.Inset"
-                android:layout_width="200dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:drawableStart="@android:drawable/ic_menu_add"
