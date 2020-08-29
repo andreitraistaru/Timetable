@@ -1,4 +1,4 @@
-package com.timetable.school;
+package com.timetable.database;
 
 import android.graphics.Color;
 

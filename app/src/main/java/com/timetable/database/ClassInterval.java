@@ -1,4 +1,4 @@
-package com.timetable.school;
+package com.timetable.database;
 
 public class ClassInterval {
     private WeekDay day;

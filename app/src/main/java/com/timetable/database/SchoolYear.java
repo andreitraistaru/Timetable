@@ -1,6 +1,4 @@
-package com.timetable.school;
-
-import android.util.Pair;
+package com.timetable.database;
 
 import java.util.ArrayList;
 import java.util.Date;

@@ -3,9 +3,9 @@
 
     <string name="timetable_button_text">My Timetable</string>
     <string name="events_button_text">Events</string>
-    <string name="settings_button_text">Settings</string>
+    <string name="year_structure_button_text">Year\'s structure</string>
 
-    <string name="settings_activity_title">Settings</string>
+    <string name="year_structure_activity_title">Year\'s structure</string>
     <string name="events_activity_title">Events</string>
     <string name="add_subject_activity_title">New Subject</string>
 

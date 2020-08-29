@@ -7,14 +7,14 @@ import android.view.View;
 
 import com.timetable.R;
 
-public class SettingsActivity extends AppCompatActivity {
+public class YearStructureActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
+        setContentView(R.layout.activity_year_structure);
 
-        getSupportActionBar().setTitle(R.string.settings_activity_title);
+        getSupportActionBar().setTitle(R.string.year_structure_activity_title);
     }
 
     public void changeFirstDayOfSemester(View view) {
