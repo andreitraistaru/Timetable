@@ -1,4 +1,4 @@
-package com.timetable.database;
+package com.timetable.database.subjects;
 
 import androidx.room.Dao;
 import androidx.room.Insert;

@@ -1,8 +1,15 @@
-package com.timetable.database;
+package com.timetable.database.holidays;
+
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 import java.util.Date;
 
+@Entity (tableName = "holidays")
 public class Holiday {
+    @PrimaryKey (autoGenerate = true)
+    private int id;
+
     private boolean workingWeek;
     private Date firstDay;
     private Date lastDay;
@@ -13,10 +20,12 @@ public class Holiday {
         this.lastDay = lastDay;
     }
 
+    public int getId() {
+        return id;
+    }
     public boolean isWorkingWeek() {
         return workingWeek;
     }
-
     public Date getFirstDay() {
         return firstDay;
     }
@@ -24,6 +33,9 @@ public class Holiday {
         return lastDay;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
     public void setWorkingWeek(boolean workingWeek) {
         this.workingWeek = workingWeek;
     }
