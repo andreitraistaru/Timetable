@@ -22,7 +22,7 @@ public class Constants {
             case 0:
                 return calendar.get(Calendar.DAY_OF_MONTH);
             case 1:
-                return calendar.get(Calendar.MONTH) + 1;
+                return calendar.get(Calendar.MONTH);
             case 2:
                 return calendar.get(Calendar.YEAR);
             default:
