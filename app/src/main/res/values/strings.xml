@@ -78,7 +78,7 @@
 
     <string name="semester_duration_year_structure">Number of weeks in semester:</string>
     <string name="starting_date_year_structure">First day of the semester:\n\t\t\t%02d.%02d.%d</string>
-    <string name="ending_date_year_structure">Last day of the semester:\n\t\t\t%02d.%02d.%d</string>
+    <string name="ending_date_year_structure">(Last day of the semester:\t%02d.%02d.%d)</string>
     <string name="subjects_year_structure">Subjects during the semester:</string>
     <string name="add_subjects_year_structure">Add new subject</string>
     <string name="holidays_year_structure">Holidays during the semester:</string>

@@ -5,18 +5,25 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowInsets;
 import android.widget.Button;
 import android.widget.CalendarView;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.timetable.R;
+import com.timetable.utils.Constants;
 
 import java.text.DateFormat;
 import java.util.Calendar;
@@ -24,17 +31,46 @@ import java.util.Date;
 
 public class YearStructureActivity extends AppCompatActivity {
 
+    private final String sharedPreferenceName = "YearStructureSharedPreferences";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_year_structure);
 
         getSupportActionBar().setTitle(R.string.year_structure_activity_title);
+
+        final SharedPreferences sharedPreferences = getSharedPreferences(sharedPreferenceName, MODE_PRIVATE);
+        final EditText semesterDuration = findViewById(R.id.semesterDuration_year_structure_activity);
+        TextView semesterStart = findViewById(R.id.startingDateInfo_year_structure_activity);
+
+        semesterDuration.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (!semesterDuration.getText().toString().isEmpty()) {
+                    sharedPreferences.edit().putInt("semester_duration", Integer.parseInt(semesterDuration.getText().toString())).apply();
+                }
+
+                updateSemesterEnd();
+            }
+        });
+
+        semesterDuration.setText(String.valueOf(sharedPreferences.getInt("semester_duration", Constants.SEMESTER_DURATION_DEFAULT)));
+        semesterStart.setText(getResources().getString(R.string.starting_date_year_structure,
+                sharedPreferences.getInt("semester_start_day", Constants.getSemesterStartDefault(0)),
+                sharedPreferences.getInt("semester_start_month", Constants.getSemesterStartDefault(1)),
+                sharedPreferences.getInt("semester_start_year", Constants.getSemesterStartDefault(2))));
+        updateSemesterEnd();
     }
 
-    public void chooseSemesterPeriod(View view) {
+    public void chooseSemesterStart(View view) {
         final TextView semesterBegin = findViewById(R.id.startingDateInfo_year_structure_activity);
-        final TextView semesterEnd = findViewById(R.id.endingDateInfo_year_structure_activity);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
         ViewGroup viewGroup = findViewById(android.R.id.content);
@@ -55,33 +91,37 @@ public class YearStructureActivity extends AppCompatActivity {
         });
 
         Button chooseDate = dialogView.findViewById(R.id.choose_date_dialog_calendar);
+        chooseDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                semesterBegin.setText(getResources().getString(R.string.starting_date_year_structure,
+                        selectedDate.get(Calendar.DAY_OF_MONTH), selectedDate.get(Calendar.MONTH) + 1, selectedDate.get(Calendar.YEAR)));
 
-        switch (view.getId()) {
-            case R.id.startingDate_year_structure_activity:
-                chooseDate.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        semesterBegin.setText(getResources().getString(R.string.starting_date_year_structure,
-                                selectedDate.get(Calendar.DAY_OF_MONTH), selectedDate.get(Calendar.MONTH) + 1, selectedDate.get(Calendar.YEAR)));
+                SharedPreferences sharedPreferences = getSharedPreferences(sharedPreferenceName, MODE_PRIVATE);
+                sharedPreferences.edit().putInt("semester_start_day", selectedDate.get(Calendar.DAY_OF_MONTH)).apply();
+                sharedPreferences.edit().putInt("semester_start_month", selectedDate.get(Calendar.MONTH) + 1).apply();
+                sharedPreferences.edit().putInt("semester_start_year", selectedDate.get(Calendar.YEAR)).apply();
 
-                        alertDialog.dismiss();
-                    }
-                });
+                updateSemesterEnd();
 
-                break;
-            case R.id.endingDate_year_structure_activity:
-                chooseDate.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        semesterEnd.setText(getResources().getString(R.string.ending_date_year_structure,
-                                selectedDate.get(Calendar.DAY_OF_MONTH), selectedDate.get(Calendar.MONTH) + 1, selectedDate.get(Calendar.YEAR)));
+                alertDialog.dismiss();
+            }
+        });
+    }
 
-                        alertDialog.dismiss();
-                    }
-                });
+    private void updateSemesterEnd() {
+        SharedPreferences sharedPreferences = getSharedPreferences(sharedPreferenceName, MODE_PRIVATE);
+        TextView semesterEnd = findViewById(R.id.endingDateInfo_year_structure_activity);
+        Calendar calendar = Calendar.getInstance();
 
-                break;
-        }
+        calendar.set(sharedPreferences.getInt("semester_start_year", Constants.getSemesterStartDefault(2)),
+                        sharedPreferences.getInt("semester_start_month", Constants.getSemesterStartDefault(1)),
+                        sharedPreferences.getInt("semester_start_day", Constants.getSemesterStartDefault(0)));
+
+        calendar.add(Calendar.WEEK_OF_YEAR, sharedPreferences.getInt("semester_duration", Constants.SEMESTER_DURATION_DEFAULT));
+        calendar.add(Calendar.DATE, -1);
+
+        semesterEnd.setText(getResources().getString(R.string.ending_date_year_structure, calendar.get(Calendar.DAY_OF_MONTH), calendar.get(Calendar.MONTH), calendar.get(Calendar.YEAR)));
     }
 
     public void addSubject(View view) {

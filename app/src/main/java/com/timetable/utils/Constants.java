@@ -1,7 +1,9 @@
 package com.timetable.utils;
 
+import java.util.Calendar;
+import java.util.Date;
+
 public class Constants {
-    public static final String UNDEFINED = "undefined";
     public static final int MONDAY = 0;
     public static final int TUESDAY = 1;
     public static final int WEDNESDAY = 2;
@@ -9,6 +11,24 @@ public class Constants {
     public static final int FRIDAY = 4;
     public static final int SATURDAY = 5;
     public static final int SUNDAY = 6;
+
+    public static final int SEMESTER_DURATION_DEFAULT = 14;
+
+    public static int getSemesterStartDefault(int returnValue) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+
+        switch (returnValue) {
+            case 0:
+                return calendar.get(Calendar.DAY_OF_MONTH);
+            case 1:
+                return calendar.get(Calendar.MONTH) + 1;
+            case 2:
+                return calendar.get(Calendar.YEAR);
+            default:
+                return 0;
+        }
+    }
 
     public static String getWeekDay(int day) {
         switch (day) {
