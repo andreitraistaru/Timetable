@@ -7,12 +7,12 @@ import java.util.ArrayList;
 public class SubjectComponent {
     private SubjectComponentType type;
     private ArrayList<ClassInterval> intervals;
-    private Color color;
+    private int color;
     private String teacher;
     private String location;
     private String description;
 
-    public SubjectComponent(SubjectComponentType type, Color color, String teacher, String location, String description) {
+    public SubjectComponent(SubjectComponentType type, int color, String teacher, String location, String description) {
         this.type = type;
         this.intervals = new ArrayList<>();
         this.color = color;
@@ -27,7 +27,7 @@ public class SubjectComponent {
     public ArrayList<ClassInterval> getIntervals() {
         return intervals;
     }
-    public Color getColor() {
+    public int getColor() {
         return color;
     }
     public String getTeacher() {
@@ -40,7 +40,7 @@ public class SubjectComponent {
         return description;
     }
 
-    public void setColor(Color color) {
+    public void setColor(int color) {
         this.color = color;
     }
     public void setTeacher(String teacher) {

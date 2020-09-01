@@ -1,19 +1,19 @@
 package com.timetable.database.subjects;
 
 public class ClassInterval {
-    private WeekDay day;
+    private int day;
     private int startingHour;
     private int endingHour;
-    private ClassFrequency frequency;
+    private int frequency;
 
-    public void ClassFrequency(WeekDay day, int startingHour, int endingHour, ClassFrequency frequency) {
+    public ClassInterval(int day, int startingHour, int endingHour, int frequency) {
         this.day = day;
         this.startingHour = startingHour;
         this.endingHour = endingHour;
         this.frequency = frequency;
     }
 
-    public WeekDay getDay() {
+    public int getDay() {
         return day;
     }
     public int getStartingHour() {
@@ -22,11 +22,11 @@ public class ClassInterval {
     public int getEndingHour() {
         return endingHour;
     }
-    public ClassFrequency getFrequency() {
+    public int getFrequency() {
         return frequency;
     }
 
-    public void setDay(WeekDay day) {
+    public void setDay(int day) {
         this.day = day;
     }
     public void setStartingHour(int startingHour) {
@@ -35,7 +35,7 @@ public class ClassInterval {
     public void setEndingHour(int endingHour) {
         this.endingHour = endingHour;
     }
-    public void setFrequency(ClassFrequency frequency) {
+    public void setFrequency(int frequency) {
         this.frequency = frequency;
     }
 }

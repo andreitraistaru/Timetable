@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.timetable.R;
+import com.timetable.activities.addSubjectActivity.AddSubjectActivity;
 import com.timetable.activities.viewTimetableActivity.ViewTimetableActivity;
 
 public class MainActivity extends AppCompatActivity {

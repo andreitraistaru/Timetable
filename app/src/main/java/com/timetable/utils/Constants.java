@@ -12,6 +12,10 @@ public class Constants {
     public static final int SATURDAY = 5;
     public static final int SUNDAY = 6;
 
+    public static final int EVEN_ONLY = 0;
+    public static final int ODD_ONLY = 1;
+    public static final int BOTH = 2;
+
     public static final int SEMESTER_DURATION_DEFAULT = 14;
 
     public static int getSemesterStartDefault(int returnValue) {

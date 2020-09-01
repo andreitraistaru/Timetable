@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.AddSubjectActivity"></activity>
+        <activity android:name=".activities.addSubjectActivity.AddSubjectActivity"></activity>
         <activity android:name=".activities.viewTimetableActivity.ViewTimetableActivity" />
         <activity android:name=".activities.ViewEventsActivity" />
         <activity android:name=".activities.YearStructureActivity" />

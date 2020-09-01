@@ -116,6 +116,13 @@
         app:layout_constraintTop_toBottomOf="@+id/chooseFrequency_dialog_add_class2">
 
         <RadioButton
+            android:id="@+id/frequency_both_dialog_add_class"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="@string/frequency_both_dialog_add_class" />
+
+        <RadioButton
             android:id="@+id/frequency_even_dialog_add_class"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -126,12 +133,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/frequency_odd_dialog_add_class" />
-
-        <RadioButton
-            android:id="@+id/frequency_both_dialog_add_class"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/frequency_both_dialog_add_class" />
     </RadioGroup>
 
     <Button

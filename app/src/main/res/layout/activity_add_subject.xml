@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backgroundColor"
-    tools:context=".activities.AddSubjectActivity">
+    tools:context=".activities.addSubjectActivity.AddSubjectActivity">
 
     <ScrollView
         android:id="@+id/scrollView"
@@ -72,7 +72,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:checked="true"
-                android:onClick="showFieldsForAddingLectures"
+                android:onClick="showFields"
                 android:text="@string/lecturesCheckBox_activity_add_subject"
                 android:visibility="visible"
                 app:layout_constraintStart_toStartOf="parent"
@@ -103,24 +103,14 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/classLectures_activity_add_subject" />
 
-            <SeekBar
+            <com.divyanshu.colorseekbar.ColorSeekBar
                 android:id="@+id/colorPickerLectures_activity_add_subject"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:visibility="visible"
-                app:layout_constraintEnd_toStartOf="@+id/colorLectures_activity_add_subject"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/newClassLectures_activity_add_subject" />
-
-            <View
-                android:id="@+id/colorLectures_activity_add_subject"
-                android:layout_width="30dp"
-                android:layout_height="0dp"
-                android:layout_marginTop="8dp"
-                android:visibility="visible"
-                app:layout_constraintBottom_toBottomOf="@+id/colorPickerLectures_activity_add_subject"
+                app:barHeight="12dp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/newClassLectures_activity_add_subject" />
 
             <EditText
@@ -174,7 +164,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:onClick="showFieldsForAddingSeminars"
+                android:onClick="showFields"
                 android:text="@string/seminarsCheckBox_activity_add_subject"
                 android:visibility="visible"
                 app:layout_constraintStart_toStartOf="parent"
@@ -208,24 +198,14 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/classSeminars_activity_add_subject" />
 
-            <SeekBar
+            <com.divyanshu.colorseekbar.ColorSeekBar
                 android:id="@+id/colorPickerSeminars_activity_add_subject"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:visibility="visible"
-                app:layout_constraintEnd_toStartOf="@+id/colorSeminars_activity_add_subject"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/newClassSeminars_activity_add_subject" />
-
-            <View
-                android:id="@+id/colorSeminars_activity_add_subject"
-                android:layout_width="30dp"
-                android:layout_height="0dp"
-                android:layout_marginTop="8dp"
-                android:visibility="visible"
-                app:layout_constraintBottom_toBottomOf="@+id/colorPickerSeminars_activity_add_subject"
+                app:barHeight="12dp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/newClassSeminars_activity_add_subject" />
 
             <EditText
@@ -279,7 +259,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:onClick="showFieldsForAddingLaboratories"
+                android:onClick="showFields"
                 android:text="@string/laboratoriesCheckBox_activity_add_subject"
                 android:visibility="visible"
                 app:layout_constraintStart_toStartOf="parent"
@@ -311,24 +291,14 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/classLaboratories_activity_add_subject" />
 
-            <SeekBar
+            <com.divyanshu.colorseekbar.ColorSeekBar
                 android:id="@+id/colorPickerLaboratories_activity_add_subject"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:visibility="visible"
-                app:layout_constraintEnd_toStartOf="@+id/colorLaboratories_activity_add_subject"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/newClassLaboratories_activity_add_subject" />
-
-            <View
-                android:id="@+id/colorLaboratories_activity_add_subject"
-                android:layout_width="30dp"
-                android:layout_height="0dp"
-                android:layout_marginTop="8dp"
-                android:visibility="visible"
-                app:layout_constraintBottom_toBottomOf="@+id/colorPickerLaboratories_activity_add_subject"
+                app:barHeight="12dp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/newClassLaboratories_activity_add_subject" />
 
             <EditText
@@ -382,7 +352,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:onClick="showFieldsForAddingOthers"
+                android:onClick="showFields"
                 android:text="@string/othersCheckBox_activity_add_subject"
                 android:visibility="visible"
                 app:layout_constraintStart_toStartOf="parent"
@@ -414,25 +384,14 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/classOthers_activity_add_subject" />
 
-            <SeekBar
+            <com.divyanshu.colorseekbar.ColorSeekBar
                 android:id="@+id/colorPickerOthers_activity_add_subject"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:visibility="visible"
-                app:layout_constraintEnd_toStartOf="@+id/colorOthers_activity_add_subject"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/newClassOthers_activity_add_subject" />
-
-            <View
-                android:id="@+id/colorOthers_activity_add_subject"
-                android:layout_width="30dp"
-                android:layout_height="0dp"
-                android:layout_marginTop="8dp"
-                android:visibility="visible"
-                app:layout_constraintBottom_toBottomOf="@+id/colorPickerOthers_activity_add_subject"
+                app:barHeight="12dp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/newClassOthers_activity_add_subject" />
 
             <EditText

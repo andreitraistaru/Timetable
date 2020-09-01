@@ -20,16 +20,6 @@
     <string name="saturday">Saturday</string>
     <string name="sunday">Sunday</string>
 
-    <string-array name="weekDays">
-        <item>Monday</item>
-        <item>Tuesday</item>
-        <item>Wednesday</item>
-        <item>Thursday</item>
-        <item>Friday</item>
-        <item>Saturday</item>
-        <item>Sunday</item>
-    </string-array>
-
     <string name="subjectName_activity_add_subject_hint">Subject\'s name (required)</string>
     <string name="subjectName_activity_add_subject_error">Field required!</string>
     <string name="subjectInfo_activity_add_subject_hint">Subject\'s description</string>
@@ -60,8 +50,8 @@
     <string name="othersCheckBox_activity_add_subject">Add Other Activities Time</string>
 
     <string name="day_dialog_add_class">Choose the day of week for the activity:</string>
-    <string name="start_hour_dialog_add_class">Choose a start hour for the activity:</string>
-    <string name="finish_hour_dialog_add_class">Choose a finish hour for the activity:</string>
+    <string name="start_hour_dialog_add_class">Choose a start hour for the activity: %d</string>
+    <string name="finish_hour_dialog_add_class">Choose a finish hour for the activity: %d</string>
     <string name="frequency_dialog_add_class">Choose frequency for the activity:</string>
     <string name="frequency_even_dialog_add_class">For even weeks only</string>
     <string name="frequency_odd_dialog_add_class">For odd weeks only</string>
