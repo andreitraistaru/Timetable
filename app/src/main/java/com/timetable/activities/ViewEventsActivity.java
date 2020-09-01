@@ -13,6 +13,8 @@ public class ViewEventsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_events);
 
-        getSupportActionBar().setTitle(R.string.events_activity_title);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(R.string.events_activity_title);
+        }
     }
 }

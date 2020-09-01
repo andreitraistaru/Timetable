@@ -1,5 +1,7 @@
 package com.timetable.activities.addSubjectActivity;
 
+import android.app.Activity;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,29 +12,47 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.timetable.R;
 import com.timetable.database.subjects.ClassInterval;
+import com.timetable.utils.Constants;
 
 import java.util.ArrayList;
 
 public class ClassIntervalItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public static class ClassIntervalItemViewHolder extends RecyclerView.ViewHolder {
-        private TextView textView;
+        private TextView weekDay;
+        private TextView startHour;
+        private TextView endHour;
+        private TextView frequency;
 
         public ClassIntervalItemViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            textView = itemView.findViewById(R.id.textView);
+            weekDay = itemView.findViewById(R.id.weekDay_item_class_interval);
+            startHour = itemView.findViewById(R.id.startingHour_item_class_interval);
+            endHour = itemView.findViewById(R.id.endingHour_item_class_interval);
+            frequency = itemView.findViewById(R.id.frequency_item_class_interval);
         }
 
-        public TextView getTextView() {
-            return textView;
+        public void setWeekDay(String text) {
+            weekDay.setText(text);
+        }
+        public void setStartHour(String text) {
+            startHour.setText(text);
+        }
+        public void setEndHour(String text) {
+            endHour.setText(text);
+        }
+        public void setFrequency(String text) {
+            frequency.setText(text);
         }
     }
 
+    private Context context;
     private ArrayList<ClassInterval> intervals;
 
-    public ClassIntervalItemAdapter(ArrayList<ClassInterval> intervals) {
+    public ClassIntervalItemAdapter(Context context, ArrayList<ClassInterval> intervals) {
         super();
 
+        this.context = context;
         this.intervals = intervals;
     }
 
@@ -44,7 +64,12 @@ public class ClassIntervalItemAdapter extends RecyclerView.Adapter<RecyclerView.
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        ((ClassIntervalItemViewHolder) holder).getTextView().setText("" + intervals.get(position).getStartingHour() + " -> " + intervals.get(position).getEndingHour());
+        ClassInterval classInterval = intervals.get(position);
+
+        ((ClassIntervalItemViewHolder) holder).setWeekDay(Constants.getWeekDay(context, classInterval.getDay()));
+        ((ClassIntervalItemViewHolder) holder).setStartHour(context.getResources().getString(R.string.startingHour_item_class_interval, classInterval.getStartingHour()));
+        ((ClassIntervalItemViewHolder) holder).setEndHour(context.getResources().getString(R.string.endingHour_item_class_interval, classInterval.getEndingHour()));
+        ((ClassIntervalItemViewHolder) holder).setFrequency(Constants.getFrequency(context, classInterval.getFrequency()));
     }
 
     @Override

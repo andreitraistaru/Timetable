@@ -33,7 +33,9 @@ public class YearStructureActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_year_structure);
 
-        getSupportActionBar().setTitle(R.string.year_structure_activity_title);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(R.string.year_structure_activity_title);
+        }
 
         final SharedPreferences sharedPreferences = getSharedPreferences(sharedPreferenceName, MODE_PRIVATE);
         final EditText semesterDuration = findViewById(R.id.semesterDuration_year_structure_activity);

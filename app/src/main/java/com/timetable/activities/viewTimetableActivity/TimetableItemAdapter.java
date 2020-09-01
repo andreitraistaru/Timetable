@@ -22,7 +22,7 @@ public class TimetableItemAdapter extends RecyclerView.Adapter<RecyclerView.View
         public TimetableItemViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            textView = itemView.findViewById(R.id.textView);
+            textView = itemView.findViewById(R.id.item_timetable);
         }
     }
 

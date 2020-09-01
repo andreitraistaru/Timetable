@@ -12,7 +12,7 @@ public class SubjectComponent {
     private String location;
     private String description;
 
-    public SubjectComponent(SubjectComponentType type, int color, String teacher, String location, String description) {
+    public SubjectComponent(SubjectComponentType type, ArrayList<ClassInterval> intervals, int color, String teacher, String location, String description) {
         this.type = type;
         this.intervals = new ArrayList<>();
         this.color = color;

@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Timetable</string>
 
+    <string name="nothing" />
+
     <string name="timetable_button_text">My Timetable</string>
     <string name="events_button_text">Events</string>
     <string name="year_structure_button_text">Year\'s structure</string>
@@ -19,6 +21,10 @@
     <string name="friday">Friday</string>
     <string name="saturday">Saturday</string>
     <string name="sunday">Sunday</string>
+
+    <string name="even_only">Even weeks only</string>
+    <string name="odd_only">Odd weeks only</string>
+    <string name="both">Both even and odd weeks</string>
 
     <string name="subjectName_activity_add_subject_hint">Subject\'s name (required)</string>
     <string name="subjectName_activity_add_subject_error">Field required!</string>
@@ -57,6 +63,7 @@
     <string name="frequency_odd_dialog_add_class">For odd weeks only</string>
     <string name="frequency_both_dialog_add_class">Each week</string>
     <string name="save_dialog_add_class">Save</string>
+    <string name="wrong_starting_ending_hours">Bad input! Ending hour before starting hour!</string>
 
     <string name="start_day_default_dialog_add_holiday">Choose the first day of the holiday:\n\t\t\tundefined</string>
     <string name="start_day_dialog_add_holiday">Choose the first day of the holiday:\n\t\t\t%02d.%02d.%d</string>
@@ -74,4 +81,7 @@
     <string name="add_subjects_year_structure">Add new subject</string>
     <string name="holidays_year_structure">Holidays during the semester:</string>
     <string name="add_holidays_year_structure">Add new holiday</string>
+
+    <string name="startingHour_item_class_interval">Starts at: %d</string>
+    <string name="endingHour_item_class_interval">Ends at: %d</string>
 </resources>

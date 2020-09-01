@@ -1,5 +1,9 @@
 package com.timetable.utils;
 
+import android.content.Context;
+
+import com.timetable.R;
+
 import java.util.Calendar;
 import java.util.Date;
 
@@ -34,24 +38,37 @@ public class Constants {
         }
     }
 
-    public static String getWeekDay(int day) {
+    public static String getWeekDay(Context context, int day) {
         switch (day) {
             case MONDAY:
-                return "Monday";
+                return context.getResources().getString(R.string.monday);
             case TUESDAY:
-                return "Tuesday";
+                return context.getResources().getString(R.string.tuesday);
             case WEDNESDAY:
-                return "Wednesday";
+                return context.getResources().getString(R.string.wednesday);
             case THURSDAY:
-                return "Thursday";
+                return context.getResources().getString(R.string.thursday);
             case FRIDAY:
-                return "Friday";
+                return context.getResources().getString(R.string.friday);
             case SATURDAY:
-                return "Saturday";
+                return context.getResources().getString(R.string.saturday);
             case SUNDAY:
-                return "Sunday";
+                return context.getResources().getString(R.string.sunday);
             default:
-                return "";
+                return context.getResources().getString(R.string.nothing);
+        }
+    }
+
+    public static String getFrequency(Context context, int frequency) {
+        switch (frequency) {
+            case EVEN_ONLY:
+                return context.getResources().getString(R.string.even_only);
+            case ODD_ONLY:
+                return context.getResources().getString(R.string.odd_only);
+            case BOTH:
+                return context.getResources().getString(R.string.both);
+            default:
+                return context.getResources().getString(R.string.nothing);
         }
     }
 }

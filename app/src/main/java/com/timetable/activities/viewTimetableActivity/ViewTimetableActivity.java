@@ -22,8 +22,9 @@ public class ViewTimetableActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_timetable);
 
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.hide();
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
 
         tabLayout = findViewById(R.id.tabLayout);
         viewPager = findViewById(R.id.viewPager);
@@ -32,7 +33,7 @@ public class ViewTimetableActivity extends AppCompatActivity {
         new TabLayoutMediator(tabLayout, viewPager, new TabLayoutMediator.TabConfigurationStrategy() {
             @Override
             public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
-                tab.setText(Constants.getWeekDay(position));
+                tab.setText(Constants.getWeekDay(tabLayout.getContext(), position));
             }
         }).attach();
     }

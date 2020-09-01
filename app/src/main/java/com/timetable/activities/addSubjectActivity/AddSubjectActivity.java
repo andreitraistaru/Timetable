@@ -39,7 +39,9 @@ public class AddSubjectActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_subject);
 
-        getSupportActionBar().setTitle(R.string.add_subject_activity_title);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(R.string.add_subject_activity_title);
+        }
 
         lecturesIntervals = new ArrayList<>();
         seminarsIntervals = new ArrayList<>();
@@ -58,19 +60,19 @@ public class AddSubjectActivity extends AppCompatActivity {
 
         RecyclerView lecturesRecyclerView = findViewById(R.id.classLectures_activity_add_subject);
         lecturesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        lecturesRecyclerView.setAdapter(new ClassIntervalItemAdapter(lecturesIntervals));
+        lecturesRecyclerView.setAdapter(new ClassIntervalItemAdapter(this, lecturesIntervals));
 
         RecyclerView seminarsRecyclerView = findViewById(R.id.classSeminars_activity_add_subject);
         seminarsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        seminarsRecyclerView.setAdapter(new ClassIntervalItemAdapter(seminarsIntervals));
+        seminarsRecyclerView.setAdapter(new ClassIntervalItemAdapter(this, seminarsIntervals));
 
         RecyclerView laboratoriesRecyclerView = findViewById(R.id.classLaboratories_activity_add_subject);
         laboratoriesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        laboratoriesRecyclerView.setAdapter(new ClassIntervalItemAdapter(laboratoriesIntervals));
+        laboratoriesRecyclerView.setAdapter(new ClassIntervalItemAdapter(this, laboratoriesIntervals));
 
         RecyclerView othersRecyclerView = findViewById(R.id.classOthers_activity_add_subject);
         othersRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        othersRecyclerView.setAdapter(new ClassIntervalItemAdapter(othersIntervals));
+        othersRecyclerView.setAdapter(new ClassIntervalItemAdapter(this, othersIntervals));
     }
 
     public void showFields(View view) {
@@ -243,6 +245,13 @@ public class AddSubjectActivity extends AppCompatActivity {
                 int weekDay = ((Spinner) dialogView.findViewById(R.id.spinner_dialog_add_class)).getSelectedItemPosition();
                 int startHour = ((SeekBar) dialogView.findViewById(R.id.startHour_dialog_add_class)).getProgress();
                 int endHour = ((SeekBar) dialogView.findViewById(R.id.finishHour_dialog_add_class)).getProgress();
+
+                if (startHour >= endHour) {
+                    Toast.makeText(dialogView.getContext(), dialogView.getContext().getResources().getString(R.string.wrong_starting_ending_hours), Toast.LENGTH_SHORT).show();
+
+                    return;
+                }
+
                 int frequency;
 
                 switch (((RadioGroup) dialogView.findViewById(R.id.frequency_dialog_add_class)).getCheckedRadioButtonId()) {
@@ -267,25 +276,43 @@ public class AddSubjectActivity extends AppCompatActivity {
     }
 
     private void addNewClassInterval(ClassInterval classInterval, int where) {
+        ClassIntervalItemAdapter adapter;
+
         switch (where) {
             case R.id.newClassLectures_activity_add_subject:
                 lecturesIntervals.add(classInterval);
-                ((RecyclerView) findViewById(R.id.classLectures_activity_add_subject)).getAdapter().notifyItemInserted(lecturesIntervals.size() - 1);
+                adapter = (ClassIntervalItemAdapter) ((RecyclerView) findViewById(R.id.classLectures_activity_add_subject)).getAdapter();
+
+                if (adapter != null) {
+                    adapter.notifyItemInserted(lecturesIntervals.size() - 1);
+                }
 
                 return;
             case R.id.newClassSeminars_activity_add_subject:
                 seminarsIntervals.add(classInterval);
-                ((RecyclerView) findViewById(R.id.classSeminars_activity_add_subject)).getAdapter().notifyItemInserted(seminarsIntervals.size() - 1);
+                adapter = (ClassIntervalItemAdapter) ((RecyclerView) findViewById(R.id.classSeminars_activity_add_subject)).getAdapter();
+
+                if (adapter != null) {
+                    adapter.notifyItemInserted(seminarsIntervals.size() - 1);
+                }
 
                 return;
             case R.id.newClassLaboratories_activity_add_subject:
                 laboratoriesIntervals.add(classInterval);
-                ((RecyclerView) findViewById(R.id.classLaboratories_activity_add_subject)).getAdapter().notifyItemInserted(laboratoriesIntervals.size() - 1);
+                adapter = (ClassIntervalItemAdapter) ((RecyclerView) findViewById(R.id.classLaboratories_activity_add_subject)).getAdapter();
+
+                if(adapter != null) {
+                    adapter.notifyItemInserted(laboratoriesIntervals.size() - 1);
+                }
 
                 return;
             case R.id.newClassOthers_activity_add_subject:
                 othersIntervals.add(classInterval);
-                ((RecyclerView) findViewById(R.id.classOthers_activity_add_subject)).getAdapter().notifyItemInserted(othersIntervals.size() - 1);
+                adapter = (ClassIntervalItemAdapter) ((RecyclerView) findViewById(R.id.classOthers_activity_add_subject)).getAdapter();
+
+                if (adapter != null) {
+                    adapter.notifyItemInserted(othersIntervals.size() - 1);
+                }
         }
     }
 
@@ -297,6 +324,8 @@ public class AddSubjectActivity extends AppCompatActivity {
         Subject newSubject = collectDataFromUI();
 
         //TODO add newSubject to database
+
+        finish();
     }
 
     private boolean validData() {
@@ -328,9 +357,7 @@ public class AddSubjectActivity extends AppCompatActivity {
             String location = ((TextView) findViewById(R.id.locationLectures_activity_add_subject)).getText().toString();
             String description = ((TextView) findViewById(R.id.infoLectures_activity_add_subject)).getText().toString();
 
-            SubjectComponent lectures = new SubjectComponent(SubjectComponentType.LECTURE, color, teacher, location, description);
-
-            //TODO add intervals
+            SubjectComponent lectures = new SubjectComponent(SubjectComponentType.LECTURE, lecturesIntervals, color, teacher, location, description);
 
             components.add(lectures);
         }
@@ -340,9 +367,7 @@ public class AddSubjectActivity extends AppCompatActivity {
             String location = ((TextView) findViewById(R.id.locationSeminars_activity_add_subject)).getText().toString();
             String description = ((TextView) findViewById(R.id.infoSeminars_activity_add_subject)).getText().toString();
 
-            SubjectComponent seminars = new SubjectComponent(SubjectComponentType.SEMINAR, color, teacher, location, description);
-
-            //TODO add intervals
+            SubjectComponent seminars = new SubjectComponent(SubjectComponentType.SEMINAR, seminarsIntervals, color, teacher, location, description);
 
             components.add(seminars);
         }
@@ -352,9 +377,7 @@ public class AddSubjectActivity extends AppCompatActivity {
             String location = ((TextView) findViewById(R.id.locationLaboratories_activity_add_subject)).getText().toString();
             String description = ((TextView) findViewById(R.id.infoLaboratories_activity_add_subject)).getText().toString();
 
-            SubjectComponent laboratories = new SubjectComponent(SubjectComponentType.LABORATORY, color, teacher, location, description);
-
-            //TODO add intervals
+            SubjectComponent laboratories = new SubjectComponent(SubjectComponentType.LABORATORY, laboratoriesIntervals, color, teacher, location, description);
 
             components.add(laboratories);
         }
@@ -364,9 +387,7 @@ public class AddSubjectActivity extends AppCompatActivity {
             String location = ((TextView) findViewById(R.id.locationOthers_activity_add_subject)).getText().toString();
             String description = ((TextView) findViewById(R.id.infoOthers_activity_add_subject)).getText().toString();
 
-            SubjectComponent others = new SubjectComponent(SubjectComponentType.OTHER, color, teacher, location, description);
-
-            //TODO add intervals
+            SubjectComponent others = new SubjectComponent(SubjectComponentType.OTHER, othersIntervals, color, teacher, location, description);
 
             components.add(others);
         }
