@@ -15,6 +15,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.timetable.R;
+import com.timetable.database.subjects.Subject;
+import com.timetable.database.subjects.SubjectComponent;
+import com.timetable.database.subjects.SubjectComponentType;
+
+import java.util.ArrayList;
 
 public class AddSubjectActivity extends AppCompatActivity {
 
@@ -181,14 +186,10 @@ public class AddSubjectActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
+            public void onStartTrackingTouch(SeekBar seekBar) {}
 
             @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
+            public void onStopTrackingTouch(SeekBar seekBar) {}
         });
 
         Button save = dialogView.findViewById(R.id.save_dialog_add_class);
@@ -199,5 +200,69 @@ public class AddSubjectActivity extends AppCompatActivity {
                 alertDialog.dismiss();
             }
         });
+    }
+
+    public void saveSubjectToDatabase(View view) {
+        if (!validData()) {
+            return;
+        }
+
+        Subject newSubject = collectDataFromUI();
+
+        //TODO add newSubject to database
+    }
+
+    private boolean validData() {
+        TextView textView = findViewById(R.id.subjectName_activity_add_subject);
+
+        if (textView.getText().toString().isEmpty()) {
+            textView.setError(getResources().getString(R.string.subjectName_activity_add_subject_error));
+
+            return false;
+        }
+
+        return true;
+    }
+
+    private Subject collectDataFromUI() {
+        String subjectName = ((TextView) findViewById(R.id.subjectName_activity_add_subject)).getText().toString();
+        String subjectDescription = ((TextView) findViewById(R.id.subjectInfo_activity_add_subject)).getText().toString();
+        boolean differentOnEvenWeeks = ((CheckBox) findViewById(R.id.differentTimetableEvenWeekCheckBox_activity_add_subject)).isChecked();
+        ArrayList<SubjectComponent> components = new ArrayList<>();
+
+        boolean hasLectures = ((CheckBox) findViewById(R.id.lecturesCheckBox_activity_add_subject)).isChecked();
+        boolean hasSeminars = ((CheckBox) findViewById(R.id.seminarsCheckBox_activity_add_subject)).isChecked();
+        boolean hasLaboratories = ((CheckBox) findViewById(R.id.laboratoriesCheckBox_activity_add_subject)).isChecked();
+        boolean hasOthers = ((CheckBox) findViewById(R.id.othersCheckBox_activity_add_subject)).isChecked();
+
+        /*
+
+        if (hasLectures) {
+            SubjectComponent lectures = new SubjectComponent(SubjectComponentType.LECTURE, );
+
+            components.add(lectures);
+        }
+
+        if (hasSeminars) {
+            SubjectComponent seminars = new SubjectComponent();
+
+            components.add(seminars);
+        }
+
+        if (hasLaboratories) {
+            SubjectComponent laboratories = new SubjectComponent();
+
+            components.add(laboratories);
+        }
+
+        if (hasOthers) {
+            SubjectComponent others = new SubjectComponent();
+
+            components.add(others);
+        }
+        
+         */
+
+        return new Subject(subjectName, subjectDescription, differentOnEvenWeeks, components);
     }
 }

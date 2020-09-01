@@ -30,7 +30,8 @@
         <item>Sunday</item>
     </string-array>
 
-    <string name="subjectName_activity_add_subject_hint">Subject\'s name</string>
+    <string name="subjectName_activity_add_subject_hint">Subject\'s name (required)</string>
+    <string name="subjectName_activity_add_subject_error">Field required!</string>
     <string name="subjectInfo_activity_add_subject_hint">Subject\'s description</string>
 
     <string name="teacherNameLectures_activity_add_subject_hint">Lecture Teacher\'s name</string>

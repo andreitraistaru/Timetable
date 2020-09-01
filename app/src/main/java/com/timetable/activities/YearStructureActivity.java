@@ -66,7 +66,7 @@ public class YearStructureActivity extends AppCompatActivity {
 
         semesterStart.setText(getResources().getString(R.string.starting_date_year_structure,
                 sharedPreferences.getInt("semester_start_day", Constants.getSemesterStartDefault(0)),
-                sharedPreferences.getInt("semester_start_month", Constants.getSemesterStartDefault(1) + 1),
+                sharedPreferences.getInt("semester_start_month", Constants.getSemesterStartDefault(1)) + 1,
                 sharedPreferences.getInt("semester_start_year", Constants.getSemesterStartDefault(2))));
         updateSemesterEnd();
     }
