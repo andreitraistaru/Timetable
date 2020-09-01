@@ -9,7 +9,7 @@
     tools:context=".activities.addSubjectActivity.AddSubjectActivity">
 
     <ScrollView
-        android:id="@+id/scrollView"
+        android:id="@+id/scrollView_add_subject_activity"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"

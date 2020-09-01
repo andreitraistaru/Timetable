@@ -1,7 +1,6 @@
 package com.timetable.activities.viewTimetableActivity;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -26,8 +25,8 @@ public class ViewTimetableActivity extends AppCompatActivity {
             getSupportActionBar().hide();
         }
 
-        tabLayout = findViewById(R.id.tabLayout);
-        viewPager = findViewById(R.id.viewPager);
+        tabLayout = findViewById(R.id.tabLayout_view_timetable_activity);
+        viewPager = findViewById(R.id.viewPager_view_timetable_activity);
         viewPager.setAdapter(new TimetableFragmentAdapter(this));
 
         new TabLayoutMediator(tabLayout, viewPager, new TabLayoutMediator.TabConfigurationStrategy() {

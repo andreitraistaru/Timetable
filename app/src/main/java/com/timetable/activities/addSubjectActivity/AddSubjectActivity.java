@@ -4,15 +4,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.os.Bundle;
+import android.view.FocusFinder;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioGroup;
+import android.widget.ScrollView;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -76,6 +80,10 @@ public class AddSubjectActivity extends AppCompatActivity {
     }
 
     public void showFields(View view) {
+        if (getCurrentFocus() != null) {
+            getCurrentFocus().clearFocus();
+        }
+
         switch (view.getId()) {
             case R.id.lecturesCheckBox_activity_add_subject:
             {
@@ -332,6 +340,8 @@ public class AddSubjectActivity extends AppCompatActivity {
         TextView textView = findViewById(R.id.subjectName_activity_add_subject);
 
         if (textView.getText().toString().isEmpty()) {
+            textView.requestFocus();
+
             textView.setError(getResources().getString(R.string.subjectName_activity_add_subject_error));
 
             return false;
