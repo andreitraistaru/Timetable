@@ -1,6 +1,5 @@
 package com.timetable.activities.addSubjectActivity;
 
-import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -67,8 +66,8 @@ public class ClassIntervalItemAdapter extends RecyclerView.Adapter<RecyclerView.
         ClassInterval classInterval = intervals.get(position);
 
         ((ClassIntervalItemViewHolder) holder).setWeekDay(Constants.getWeekDay(context, classInterval.getDay()));
-        ((ClassIntervalItemViewHolder) holder).setStartHour(context.getResources().getString(R.string.startingHour_item_class_interval, classInterval.getStartingHour()));
-        ((ClassIntervalItemViewHolder) holder).setEndHour(context.getResources().getString(R.string.endingHour_item_class_interval, classInterval.getEndingHour()));
+        ((ClassIntervalItemViewHolder) holder).setStartHour(context.getResources().getString(R.string.starting_hour_item_class_interval, classInterval.getStartingHour()));
+        ((ClassIntervalItemViewHolder) holder).setEndHour(context.getResources().getString(R.string.ending_hour_item_class_interval, classInterval.getEndingHour()));
         ((ClassIntervalItemViewHolder) holder).setFrequency(Constants.getFrequency(context, classInterval.getFrequency()));
     }
 

@@ -12,13 +12,11 @@ public class Subject {
 
     private String name;
     private String description;
-    private boolean differentOnEvenWeeks;
     private ArrayList<SubjectComponent> components;
 
-    public Subject(String name, String description, boolean differentOnEvenWeeks, ArrayList<SubjectComponent> components) {
+    public Subject(String name, String description, ArrayList<SubjectComponent> components) {
         this.name = name;
         this.description = description;
-        this.differentOnEvenWeeks = differentOnEvenWeeks;
         this.components = components;
     }
 
@@ -30,9 +28,6 @@ public class Subject {
     }
     public String getDescription() {
         return description;
-    }
-    public boolean isDifferentOnEvenWeeks() {
-        return differentOnEvenWeeks;
     }
     public ArrayList<SubjectComponent> getComponents() {
         return components;
@@ -46,9 +41,6 @@ public class Subject {
     }
     public void setDescription(String description) {
         this.description = description;
-    }
-    public void setDifferentOnEvenWeeks(boolean differentOnEvenWeeks) {
-        this.differentOnEvenWeeks = differentOnEvenWeeks;
     }
     public void setComponents(ArrayList<SubjectComponent> components) {
         this.components = components;

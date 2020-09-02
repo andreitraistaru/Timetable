@@ -65,9 +65,9 @@
     <string name="save_dialog_add_class">Save</string>
     <string name="wrong_starting_ending_hours">Bad input! Ending hour before starting hour!</string>
 
-    <string name="start_day_default_dialog_add_holiday">Choose the first day of the holiday:\n\t\t\tundefined</string>
+    <string name="button_select_date_description">Select date</string>
+
     <string name="start_day_dialog_add_holiday">Choose the first day of the holiday:\n\t\t\t%02d.%02d.%d</string>
-    <string name="end_day_default_dialog_add_holiday">Choose the last day of the holiday:\n\t\t\tundefined</string>
     <string name="end_day_dialog_add_holiday">Choose the last day of the holiday:\n\t\t\t%02d.%02d.%d</string>
     <string name="working_week_dialog_add_holiday">Holiday during working week</string>
     <string name="save_dialog_add_holiday">Save</string>
@@ -82,6 +82,13 @@
     <string name="holidays_year_structure">Holidays during the semester:</string>
     <string name="add_holidays_year_structure">Add new holiday</string>
 
-    <string name="startingHour_item_class_interval">Starts at: %d</string>
-    <string name="endingHour_item_class_interval">Ends at: %d</string>
+    <string name="starting_hour_item_class_interval">Starts at: %d</string>
+    <string name="ending_hour_item_class_interval">Ends at: %d</string>
+
+    <string name="working_week_item_holiday">Working week</string>
+    <string name="holiday_week_item_holiday">Holiday week</string>
+    <string name="start_date_item_holiday">Starts at: %02d.%02d.%d</string>
+    <string name="end_date_item_holiday">Ends at: %02d.%02d.%d</string>
+    <string name="wrong_starting_ending_dates">Bad input! Ending date before starting date!</string>
+
 </resources>

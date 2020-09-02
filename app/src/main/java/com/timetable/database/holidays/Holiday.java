@@ -14,6 +14,7 @@ public class Holiday {
     private Date firstDay;
     private Date lastDay;
 
+    public Holiday() {}
     public Holiday(boolean workingWeek, Date firstDay, Date lastDay) {
         this.workingWeek = workingWeek;
         this.firstDay = firstDay;
@@ -44,5 +45,9 @@ public class Holiday {
     }
     public void setLastDay(Date lastDay) {
         this.lastDay = lastDay;
+    }
+
+    public boolean isValid() {
+        return firstDay.before(lastDay);
     }
 }

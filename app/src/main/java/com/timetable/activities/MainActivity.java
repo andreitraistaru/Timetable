@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.timetable.R;
 import com.timetable.activities.addSubjectActivity.AddSubjectActivity;
 import com.timetable.activities.viewTimetableActivity.ViewTimetableActivity;
+import com.timetable.activities.yearStructureActivity.YearStructureActivity;
 
 public class MainActivity extends AppCompatActivity {
 

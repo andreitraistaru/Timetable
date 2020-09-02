@@ -57,16 +57,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/subjectName_activity_add_subject" />
 
             <CheckBox
-                android:id="@+id/differentTimetableEvenWeekCheckBox_activity_add_subject"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="@string/differentTimetableEvenWeekCheckBox_activity_add_subject"
-                android:visibility="visible"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/subjectInfo_activity_add_subject" />
-
-            <CheckBox
                 android:id="@+id/lecturesCheckBox_activity_add_subject"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -76,13 +66,14 @@
                 android:text="@string/lecturesCheckBox_activity_add_subject"
                 android:visibility="visible"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/differentTimetableEvenWeekCheckBox_activity_add_subject" />
+                app:layout_constraintTop_toBottomOf="@+id/subjectInfo_activity_add_subject" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/classLectures_activity_add_subject"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:nestedScrollingEnabled="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/lecturesCheckBox_activity_add_subject"
                 app:layout_constraintTop_toBottomOf="@+id/lecturesCheckBox_activity_add_subject" />
@@ -175,6 +166,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:nestedScrollingEnabled="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/seminarsCheckBox_activity_add_subject">
@@ -270,6 +262,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:nestedScrollingEnabled="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/laboratoriesCheckBox_activity_add_subject" />
@@ -363,6 +356,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:nestedScrollingEnabled="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/othersCheckBox_activity_add_subject" />

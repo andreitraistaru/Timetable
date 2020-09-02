@@ -14,7 +14,7 @@ public class SubjectComponent {
 
     public SubjectComponent(SubjectComponentType type, ArrayList<ClassInterval> intervals, int color, String teacher, String location, String description) {
         this.type = type;
-        this.intervals = new ArrayList<>();
+        this.intervals = intervals;
         this.color = color;
         this.teacher = teacher;
         this.location = location;

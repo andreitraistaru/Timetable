@@ -4,19 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.os.Bundle;
-import android.view.FocusFinder;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioGroup;
-import android.widget.ScrollView;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -28,6 +24,7 @@ import com.timetable.database.subjects.ClassInterval;
 import com.timetable.database.subjects.Subject;
 import com.timetable.database.subjects.SubjectComponent;
 import com.timetable.database.subjects.SubjectComponentType;
+import com.timetable.database.subjects.SubjectsDatabase;
 import com.timetable.utils.Constants;
 
 import java.util.ArrayList;
@@ -329,9 +326,14 @@ public class AddSubjectActivity extends AppCompatActivity {
             return;
         }
 
-        Subject newSubject = collectDataFromUI();
+        final Subject newSubject = collectDataFromUI();
 
-        //TODO add newSubject to database
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                SubjectsDatabase.getDatabase(getApplicationContext()).getSubjectDao().insertSubject(newSubject);
+            }
+        }).start();
 
         finish();
     }
@@ -353,7 +355,6 @@ public class AddSubjectActivity extends AppCompatActivity {
     private Subject collectDataFromUI() {
         String subjectName = ((TextView) findViewById(R.id.subjectName_activity_add_subject)).getText().toString();
         String subjectDescription = ((TextView) findViewById(R.id.subjectInfo_activity_add_subject)).getText().toString();
-        boolean differentOnEvenWeeks = ((CheckBox) findViewById(R.id.differentTimetableEvenWeekCheckBox_activity_add_subject)).isChecked();
         ArrayList<SubjectComponent> components = new ArrayList<>();
 
         boolean hasLectures = ((CheckBox) findViewById(R.id.lecturesCheckBox_activity_add_subject)).isChecked();
@@ -402,6 +403,6 @@ public class AddSubjectActivity extends AppCompatActivity {
             components.add(others);
         }
 
-        return new Subject(subjectName, subjectDescription, differentOnEvenWeeks, components);
+        return new Subject(subjectName, subjectDescription, components);
     }
 }
