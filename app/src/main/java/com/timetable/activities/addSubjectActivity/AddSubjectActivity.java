@@ -88,7 +88,6 @@ public class AddSubjectActivity extends AppCompatActivity {
                 Button button = findViewById(R.id.newClassLectures_activity_add_subject);
                 ColorSeekBar colorSeekBar = findViewById(R.id.colorPickerLectures_activity_add_subject);
                 EditText teacher = findViewById(R.id.teacherNameLectures_activity_add_subject);
-                EditText location = findViewById(R.id.locationLectures_activity_add_subject);
                 EditText info = findViewById(R.id.infoLectures_activity_add_subject);
 
                 if (!((CheckBox) view).isChecked()) {
@@ -96,14 +95,12 @@ public class AddSubjectActivity extends AppCompatActivity {
                     button.setVisibility(View.GONE);
                     colorSeekBar.setVisibility(View.GONE);
                     teacher.setVisibility(View.GONE);
-                    location.setVisibility(View.GONE);
                     info.setVisibility(View.GONE);
                 } else {
                     recyclerView.setVisibility(View.VISIBLE);
                     button.setVisibility(View.VISIBLE);
                     colorSeekBar.setVisibility(View.VISIBLE);
                     teacher.setVisibility(View.VISIBLE);
-                    location.setVisibility(View.VISIBLE);
                     info.setVisibility(View.VISIBLE);
                 }
 
@@ -116,7 +113,6 @@ public class AddSubjectActivity extends AppCompatActivity {
                 Button button = findViewById(R.id.newClassSeminars_activity_add_subject);
                 ColorSeekBar colorSeekBar = findViewById(R.id.colorPickerSeminars_activity_add_subject);
                 EditText teacher = findViewById(R.id.teacherNameSeminars_activity_add_subject);
-                EditText location = findViewById(R.id.locationSeminars_activity_add_subject);
                 EditText info = findViewById(R.id.infoSeminars_activity_add_subject);
 
                 if (!((CheckBox) view).isChecked()) {
@@ -124,14 +120,12 @@ public class AddSubjectActivity extends AppCompatActivity {
                     button.setVisibility(View.GONE);
                     colorSeekBar.setVisibility(View.GONE);
                     teacher.setVisibility(View.GONE);
-                    location.setVisibility(View.GONE);
                     info.setVisibility(View.GONE);
                 } else {
                     recyclerView.setVisibility(View.VISIBLE);
                     button.setVisibility(View.VISIBLE);
                     colorSeekBar.setVisibility(View.VISIBLE);
                     teacher.setVisibility(View.VISIBLE);
-                    location.setVisibility(View.VISIBLE);
                     info.setVisibility(View.VISIBLE);
                 }
 
@@ -144,7 +138,6 @@ public class AddSubjectActivity extends AppCompatActivity {
                 Button button = findViewById(R.id.newClassLaboratories_activity_add_subject);
                 ColorSeekBar colorSeekBar = findViewById(R.id.colorPickerLaboratories_activity_add_subject);
                 EditText teacher = findViewById(R.id.teacherNameLaboratories_activity_add_subject);
-                EditText location = findViewById(R.id.locationLaboratories_activity_add_subject);
                 EditText info = findViewById(R.id.infoLaboratories_activity_add_subject);
 
                 if (!((CheckBox) view).isChecked()) {
@@ -152,14 +145,12 @@ public class AddSubjectActivity extends AppCompatActivity {
                     button.setVisibility(View.GONE);
                     colorSeekBar.setVisibility(View.GONE);
                     teacher.setVisibility(View.GONE);
-                    location.setVisibility(View.GONE);
                     info.setVisibility(View.GONE);
                 } else {
                     recyclerView.setVisibility(View.VISIBLE);
                     button.setVisibility(View.VISIBLE);
                     colorSeekBar.setVisibility(View.VISIBLE);
                     teacher.setVisibility(View.VISIBLE);
-                    location.setVisibility(View.VISIBLE);
                     info.setVisibility(View.VISIBLE);
                 }
 
@@ -172,7 +163,6 @@ public class AddSubjectActivity extends AppCompatActivity {
                 Button button = findViewById(R.id.newClassOthers_activity_add_subject);
                 ColorSeekBar colorSeekBar = findViewById(R.id.colorPickerOthers_activity_add_subject);
                 EditText teacher = findViewById(R.id.teacherNameOthers_activity_add_subject);
-                EditText location = findViewById(R.id.locationOthers_activity_add_subject);
                 EditText info = findViewById(R.id.infoOthers_activity_add_subject);
 
                 if (!((CheckBox) view).isChecked()) {
@@ -180,14 +170,12 @@ public class AddSubjectActivity extends AppCompatActivity {
                     button.setVisibility(View.GONE);
                     colorSeekBar.setVisibility(View.GONE);
                     teacher.setVisibility(View.GONE);
-                    location.setVisibility(View.GONE);
                     info.setVisibility(View.GONE);
                 } else {
                     recyclerView.setVisibility(View.VISIBLE);
                     button.setVisibility(View.VISIBLE);
                     colorSeekBar.setVisibility(View.VISIBLE);
                     teacher.setVisibility(View.VISIBLE);
-                    location.setVisibility(View.VISIBLE);
                     info.setVisibility(View.VISIBLE);
                 }
 
@@ -247,12 +235,20 @@ public class AddSubjectActivity extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String location = ((TextView) dialogView.findViewById(R.id.location_dialog_add_class)).getText().toString();
+
+                if (location.isEmpty()) {
+                    ((TextView) dialogView.findViewById(R.id.location_dialog_add_class)).setError(dialogView.getContext().getResources().getString(R.string.no_location_error));
+
+                    return;
+                }
+
                 int weekDay = ((Spinner) dialogView.findViewById(R.id.spinner_dialog_add_class)).getSelectedItemPosition();
                 int startHour = ((SeekBar) dialogView.findViewById(R.id.startHour_dialog_add_class)).getProgress();
                 int endHour = ((SeekBar) dialogView.findViewById(R.id.finishHour_dialog_add_class)).getProgress();
 
                 if (startHour >= endHour) {
-                    Toast.makeText(dialogView.getContext(), dialogView.getContext().getResources().getString(R.string.wrong_starting_ending_hours), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(dialogView.getContext(), dialogView.getContext().getResources().getString(R.string.wrong_starting_ending_hours_error), Toast.LENGTH_SHORT).show();
 
                     return;
                 }
@@ -273,7 +269,7 @@ public class AddSubjectActivity extends AppCompatActivity {
                         frequency = -1;
                 }
 
-                addNewClassInterval(new ClassInterval(weekDay, startHour, endHour, frequency), dialogViewOpener.getId());
+                addNewClassInterval(new ClassInterval(location, weekDay, startHour, endHour, frequency), dialogViewOpener.getId());
 
                 alertDialog.dismiss();
             }
@@ -365,40 +361,36 @@ public class AddSubjectActivity extends AppCompatActivity {
         if (hasLectures) {
             int color = ((ColorSeekBar) findViewById(R.id.colorPickerLectures_activity_add_subject)).getColor();
             String teacher = ((TextView) findViewById(R.id.teacherNameLectures_activity_add_subject)).getText().toString();
-            String location = ((TextView) findViewById(R.id.locationLectures_activity_add_subject)).getText().toString();
             String description = ((TextView) findViewById(R.id.infoLectures_activity_add_subject)).getText().toString();
 
-            SubjectComponent lectures = new SubjectComponent(SubjectComponentType.LECTURE, lecturesIntervals, color, teacher, location, description);
+            SubjectComponent lectures = new SubjectComponent(SubjectComponentType.LECTURE, lecturesIntervals, color, teacher, description);
 
             components.add(lectures);
         }
         if (hasSeminars) {
             int color = ((ColorSeekBar) findViewById(R.id.colorPickerSeminars_activity_add_subject)).getColor();
             String teacher = ((TextView) findViewById(R.id.teacherNameSeminars_activity_add_subject)).getText().toString();
-            String location = ((TextView) findViewById(R.id.locationSeminars_activity_add_subject)).getText().toString();
             String description = ((TextView) findViewById(R.id.infoSeminars_activity_add_subject)).getText().toString();
 
-            SubjectComponent seminars = new SubjectComponent(SubjectComponentType.SEMINAR, seminarsIntervals, color, teacher, location, description);
+            SubjectComponent seminars = new SubjectComponent(SubjectComponentType.SEMINAR, seminarsIntervals, color, teacher, description);
 
             components.add(seminars);
         }
         if (hasLaboratories) {
             int color = ((ColorSeekBar) findViewById(R.id.colorPickerLaboratories_activity_add_subject)).getColor();
             String teacher = ((TextView) findViewById(R.id.teacherNameLaboratories_activity_add_subject)).getText().toString();
-            String location = ((TextView) findViewById(R.id.locationLaboratories_activity_add_subject)).getText().toString();
             String description = ((TextView) findViewById(R.id.infoLaboratories_activity_add_subject)).getText().toString();
 
-            SubjectComponent laboratories = new SubjectComponent(SubjectComponentType.LABORATORY, laboratoriesIntervals, color, teacher, location, description);
+            SubjectComponent laboratories = new SubjectComponent(SubjectComponentType.LABORATORY, laboratoriesIntervals, color, teacher, description);
 
             components.add(laboratories);
         }
         if (hasOthers) {
             int color = ((ColorSeekBar) findViewById(R.id.colorPickerOthers_activity_add_subject)).getColor();
             String teacher = ((TextView) findViewById(R.id.teacherNameOthers_activity_add_subject)).getText().toString();
-            String location = ((TextView) findViewById(R.id.locationOthers_activity_add_subject)).getText().toString();
             String description = ((TextView) findViewById(R.id.infoOthers_activity_add_subject)).getText().toString();
 
-            SubjectComponent others = new SubjectComponent(SubjectComponentType.OTHER, othersIntervals, color, teacher, location, description);
+            SubjectComponent others = new SubjectComponent(SubjectComponentType.OTHER, othersIntervals, color, teacher, description);
 
             components.add(others);
         }

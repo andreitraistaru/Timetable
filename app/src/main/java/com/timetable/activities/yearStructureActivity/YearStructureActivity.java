@@ -189,7 +189,7 @@ public class YearStructureActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (!newHoliday.isValid()) {
-                    Toast.makeText(dialogView.getContext(), getResources().getString(R.string.wrong_starting_ending_dates), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(dialogView.getContext(), getResources().getString(R.string.wrong_starting_ending_dates_error), Toast.LENGTH_SHORT).show();
 
                     return;
                 }

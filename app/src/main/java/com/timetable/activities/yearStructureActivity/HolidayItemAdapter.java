@@ -1,16 +1,21 @@
 package com.timetable.activities.yearStructureActivity;
 
 import android.content.Context;
+import android.text.Layout;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.timetable.R;
 import com.timetable.database.holidays.Holiday;
+import com.timetable.database.holidays.HolidaysDatabase;
 
 import java.util.Calendar;
 import java.util.List;
@@ -20,6 +25,7 @@ public class HolidayItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         private TextView workingWeek;
         private TextView startDate;
         private TextView endDate;
+        private CardView cardView;
 
         public HolidayItemViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -27,6 +33,11 @@ public class HolidayItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             this.workingWeek = itemView.findViewById(R.id.workingWeek_item_holiday);
             this.startDate = itemView.findViewById(R.id.startingDate_item_holiday);
             this.endDate = itemView.findViewById(R.id.endingDate_item_holiday);
+            this.cardView = itemView.findViewById(R.id.cardView_item_holiday);
+        }
+
+        public CardView getCardView() {
+            return cardView;
         }
 
         public void setWorkingWeek(String text) {
@@ -61,8 +72,8 @@ public class HolidayItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        Holiday holiday = holidays.get(position);
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
+        final Holiday holiday = holidays.get(position);
         Calendar calendar = Calendar.getInstance();
 
         if (holiday.isWorkingWeek()) {
@@ -76,6 +87,23 @@ public class HolidayItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
         calendar.setTime(holiday.getLastDay());
         ((HolidayItemViewHolder) holder).setEndDate(context.getResources().getString(R.string.end_date_item_holiday, calendar.get(Calendar.DAY_OF_MONTH), calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.YEAR)));
+
+        ((HolidayItemViewHolder) holder).getCardView().setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        HolidaysDatabase.getDatabase(context).getHolidayDao().deleteHoliday(holiday);
+                    }
+                }).start();
+
+                holidays.remove(position);
+                notifyDataSetChanged();
+
+                return true;
+            }
+        });
     }
 
     @Override

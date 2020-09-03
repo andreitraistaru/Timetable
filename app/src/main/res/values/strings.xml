@@ -55,6 +55,7 @@
     <string name="laboratoriesCheckBox_activity_add_subject">Add Laboratories Time</string>
     <string name="othersCheckBox_activity_add_subject">Add Other Activities Time</string>
 
+    <string name="location_dialog_add_class">Type in location (required):</string>
     <string name="day_dialog_add_class">Choose the day of week for the activity:</string>
     <string name="start_hour_dialog_add_class">Choose a start hour for the activity: %d</string>
     <string name="finish_hour_dialog_add_class">Choose a finish hour for the activity: %d</string>
@@ -63,7 +64,8 @@
     <string name="frequency_odd_dialog_add_class">For odd weeks only</string>
     <string name="frequency_both_dialog_add_class">Each week</string>
     <string name="save_dialog_add_class">Save</string>
-    <string name="wrong_starting_ending_hours">Bad input! Ending hour before starting hour!</string>
+    <string name="wrong_starting_ending_hours_error">Bad input! Ending hour before starting hour!</string>
+    <string name="no_location_error">No location provided!</string>
 
     <string name="button_select_date_description">Select date</string>
 
@@ -82,6 +84,7 @@
     <string name="holidays_year_structure">Holidays during the semester:</string>
     <string name="add_holidays_year_structure">Add new holiday</string>
 
+    <string name="location_item_class_interval">Location: %s</string>
     <string name="starting_hour_item_class_interval">Starts at: %d</string>
     <string name="ending_hour_item_class_interval">Ends at: %d</string>
 
@@ -89,6 +92,6 @@
     <string name="holiday_week_item_holiday">Holiday week</string>
     <string name="start_date_item_holiday">Starts at: %02d.%02d.%d</string>
     <string name="end_date_item_holiday">Ends at: %02d.%02d.%d</string>
-    <string name="wrong_starting_ending_dates">Bad input! Ending date before starting date!</string>
+    <string name="wrong_starting_ending_dates_error">Bad input! Ending date before starting date!</string>
 
 </resources>

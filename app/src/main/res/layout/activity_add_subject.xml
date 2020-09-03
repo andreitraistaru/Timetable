@@ -120,21 +120,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/colorPickerLectures_activity_add_subject" />
 
             <EditText
-                android:id="@+id/locationLectures_activity_add_subject"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:ems="10"
-                android:hint="@string/locationLectures_activity_add_subject_hint"
-                android:importantForAutofill="no"
-                android:inputType="textPersonName"
-                android:textColor="@color/textColor"
-                android:visibility="visible"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/teacherNameLectures_activity_add_subject" />
-
-            <EditText
                 android:id="@+id/infoLectures_activity_add_subject"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -148,7 +133,7 @@
                 android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/locationLectures_activity_add_subject" />
+                app:layout_constraintTop_toBottomOf="@+id/teacherNameLectures_activity_add_subject" />
 
             <CheckBox
                 android:id="@+id/seminarsCheckBox_activity_add_subject"
@@ -216,21 +201,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/colorPickerSeminars_activity_add_subject" />
 
             <EditText
-                android:id="@+id/locationSeminars_activity_add_subject"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:ems="10"
-                android:hint="@string/locationSeminars_activity_add_subject_hint"
-                android:importantForAutofill="no"
-                android:inputType="textPersonName"
-                android:textColor="@color/textColor"
-                android:visibility="visible"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/teacherNameSeminars_activity_add_subject" />
-
-            <EditText
                 android:id="@+id/infoSeminars_activity_add_subject"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -244,7 +214,7 @@
                 android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/locationSeminars_activity_add_subject" />
+                app:layout_constraintTop_toBottomOf="@+id/teacherNameSeminars_activity_add_subject" />
 
             <CheckBox
                 android:id="@+id/laboratoriesCheckBox_activity_add_subject"
@@ -310,21 +280,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/colorPickerLaboratories_activity_add_subject" />
 
             <EditText
-                android:id="@+id/locationLaboratories_activity_add_subject"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:ems="10"
-                android:hint="@string/locationLaboratories_activity_add_subject_hint"
-                android:importantForAutofill="no"
-                android:inputType="textPersonName"
-                android:textColor="@color/textColor"
-                android:visibility="visible"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/teacherNameLaboratories_activity_add_subject" />
-
-            <EditText
                 android:id="@+id/infoLaboratories_activity_add_subject"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -338,7 +293,7 @@
                 android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/locationLaboratories_activity_add_subject" />
+                app:layout_constraintTop_toBottomOf="@+id/teacherNameLaboratories_activity_add_subject" />
 
             <CheckBox
                 android:id="@+id/othersCheckBox_activity_add_subject"
@@ -404,21 +359,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/colorPickerOthers_activity_add_subject" />
 
             <EditText
-                android:id="@+id/locationOthers_activity_add_subject"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:ems="10"
-                android:hint="@string/locationOthers_activity_add_subject_hint"
-                android:importantForAutofill="no"
-                android:inputType="textPersonName"
-                android:textColor="@color/textColor"
-                android:visibility="visible"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/teacherNameOthers_activity_add_subject" />
-
-            <EditText
                 android:id="@+id/infoOthers_activity_add_subject"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -432,7 +372,7 @@
                 android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/locationOthers_activity_add_subject" />
+                app:layout_constraintTop_toBottomOf="@+id/teacherNameOthers_activity_add_subject" />
 
             <Button
                 android:id="@+id/save_activity_add_subject"

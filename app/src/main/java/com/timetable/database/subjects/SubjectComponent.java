@@ -1,7 +1,5 @@
 package com.timetable.database.subjects;
 
-import android.graphics.Color;
-
 import java.util.ArrayList;
 
 public class SubjectComponent {
@@ -9,15 +7,13 @@ public class SubjectComponent {
     private ArrayList<ClassInterval> intervals;
     private int color;
     private String teacher;
-    private String location;
     private String description;
 
-    public SubjectComponent(SubjectComponentType type, ArrayList<ClassInterval> intervals, int color, String teacher, String location, String description) {
+    public SubjectComponent(SubjectComponentType type, ArrayList<ClassInterval> intervals, int color, String teacher, String description) {
         this.type = type;
         this.intervals = intervals;
         this.color = color;
         this.teacher = teacher;
-        this.location = location;
         this.description = description;
     }
 
@@ -33,9 +29,6 @@ public class SubjectComponent {
     public String getTeacher() {
         return teacher;
     }
-    public String getLocation() {
-        return location;
-    }
     public String getDescription() {
         return description;
     }
@@ -45,9 +38,6 @@ public class SubjectComponent {
     }
     public void setTeacher(String teacher) {
         this.teacher = teacher;
-    }
-    public void setLocation(String location) {
-        this.location = location;
     }
     public void setDescription(String description) {
         this.description = description;
