@@ -419,6 +419,11 @@ public class AddSubjectActivity extends AppCompatActivity {
         CheckBox laboratories = findViewById(R.id.laboratoriesCheckBox_activity_add_subject);
         CheckBox others = findViewById(R.id.othersCheckBox_activity_add_subject);
 
+        lectures.setChecked(true);
+        seminars.setChecked(false);
+        laboratories.setChecked(false);
+        others.setChecked(false);
+
         showFields(lectures);
         showFields(seminars);
         showFields(laboratories);
@@ -497,6 +502,21 @@ public class AddSubjectActivity extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle(R.string.edit_subject_activity_title);
         }
+
+        CheckBox lectures = findViewById(R.id.lecturesCheckBox_activity_add_subject);
+        CheckBox seminars = findViewById(R.id.seminarsCheckBox_activity_add_subject);
+        CheckBox laboratories = findViewById(R.id.laboratoriesCheckBox_activity_add_subject);
+        CheckBox others = findViewById(R.id.othersCheckBox_activity_add_subject);
+
+        lectures.setChecked(false);
+        seminars.setChecked(false);
+        laboratories.setChecked(false);
+        others.setChecked(false);
+
+        showFields(lectures);
+        showFields(seminars);
+        showFields(laboratories);
+        showFields(others);
 
         setUpRecyclerViewsAdapters();
 

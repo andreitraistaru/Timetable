@@ -61,7 +61,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:checked="true"
+                android:checked="false"
                 android:onClick="showFields"
                 android:text="@string/lecturesCheckBox_activity_add_subject"
                 android:visibility="visible"
