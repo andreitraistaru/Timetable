@@ -1,12 +1,16 @@
 package com.timetable.activities.addSubjectActivity;
 
 import android.content.Context;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.timetable.R;
@@ -22,6 +26,7 @@ public class ClassIntervalItemAdapter extends RecyclerView.Adapter<RecyclerView.
         private TextView startHour;
         private TextView endHour;
         private TextView frequency;
+        private CardView cardView;
 
         public ClassIntervalItemViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -31,6 +36,11 @@ public class ClassIntervalItemAdapter extends RecyclerView.Adapter<RecyclerView.
             startHour = itemView.findViewById(R.id.startingHour_item_class_interval);
             endHour = itemView.findViewById(R.id.endingHour_item_class_interval);
             frequency = itemView.findViewById(R.id.frequency_item_class_interval);
+            cardView = itemView.findViewById(R.id.cardView_item_class_interval);
+        }
+
+        public CardView getCardView() {
+            return cardView;
         }
 
         public void setWeekDay(String text) {
@@ -67,7 +77,7 @@ public class ClassIntervalItemAdapter extends RecyclerView.Adapter<RecyclerView.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
         ClassInterval classInterval = intervals.get(position);
 
         ((ClassIntervalItemViewHolder) holder).setWeekDay(Constants.getWeekDay(context, classInterval.getDay()));
@@ -75,6 +85,30 @@ public class ClassIntervalItemAdapter extends RecyclerView.Adapter<RecyclerView.
         ((ClassIntervalItemViewHolder) holder).setStartHour(context.getResources().getString(R.string.starting_hour_item_class_interval, classInterval.getStartingHour()));
         ((ClassIntervalItemViewHolder) holder).setEndHour(context.getResources().getString(R.string.ending_hour_item_class_interval, classInterval.getEndingHour()));
         ((ClassIntervalItemViewHolder) holder).setFrequency(Constants.getFrequency(context, classInterval.getFrequency()));
+
+        ((ClassIntervalItemViewHolder) holder).getCardView().setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                Context popupContext = new ContextThemeWrapper(context, R.style.popupMenu);
+                PopupMenu popupMenu = new PopupMenu(popupContext, view);
+                popupMenu.getMenuInflater().inflate(R.menu.popup_class_intervals_list_year_structure, popupMenu.getMenu());
+
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem menuItem) {
+                        if (menuItem.getItemId() == R.id.delete_popup_class_intervals_option) {
+                            intervals.remove(position);
+                            notifyDataSetChanged();
+                        }
+
+                        return true;
+                    }
+                });
+
+                popupMenu.show();
+                return true;
+            }
+        });
     }
 
     @Override
