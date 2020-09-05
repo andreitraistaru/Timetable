@@ -179,8 +179,6 @@ public class YearStructureActivity extends AppCompatActivity {
         ((TextView) dialogView.findViewById(R.id.chooseHolidayStart_dialog_add_holiday)).setText(getResources().getString(R.string.start_day_dialog_add_holiday, calendar.get(Calendar.DAY_OF_MONTH), calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.YEAR)));
         newHoliday.setFirstDay(calendar.getTime());
 
-        calendar.add(Calendar.WEEK_OF_YEAR, 1);
-        calendar.add(Calendar.DATE, -1);
         ((TextView) dialogView.findViewById(R.id.chooseHolidayEnd_dialog_add_holiday)).setText(getResources().getString(R.string.end_day_dialog_add_holiday, calendar.get(Calendar.DAY_OF_MONTH), calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.YEAR)));
         newHoliday.setLastDay(calendar.getTime());
 
@@ -226,8 +224,6 @@ public class YearStructureActivity extends AppCompatActivity {
 
         if (view.getId() == R.id.endingDate_dialog_add_holiday) {
             Calendar initialDate = Calendar.getInstance();
-            initialDate.add(Calendar.WEEK_OF_YEAR, 1);
-            initialDate.add(Calendar.DATE, -1);
 
             calendar.setDate(initialDate.getTimeInMillis());
         }

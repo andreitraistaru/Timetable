@@ -1,6 +1,7 @@
 package com.timetable.activities.yearStructureActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -14,9 +15,10 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.timetable.R;
-import com.timetable.database.holidays.HolidaysDatabase;
+import com.timetable.activities.addSubjectActivity.AddSubjectActivity;
 import com.timetable.database.subjects.Subject;
 import com.timetable.database.subjects.SubjectsDatabase;
+import com.timetable.utils.GlobalVariables;
 
 import java.util.List;
 
@@ -79,7 +81,10 @@ public class SubjectItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                     public boolean onMenuItemClick(MenuItem menuItem) {
                         switch (menuItem.getItemId()) {
                             case R.id.edit_popup_subjects_option:
-                                //TODO implement edit subject
+                                Intent intent = new Intent(context, AddSubjectActivity.class);
+                                intent.putExtra(GlobalVariables.getSubjectIdExtra(), String.valueOf(subject.getId()));
+
+                                context.startActivity(intent);
 
                                 break;
                             case R.id.delete_popup_subjects_option:

@@ -10,6 +10,7 @@
     <string name="year_structure_activity_title">Year\'s structure</string>
     <string name="events_activity_title">Events</string>
     <string name="add_subject_activity_title">New Subject</string>
+    <string name="edit_subject_activity_title">Edit Subject</string>
 
     <string name="action_settings">actionSettings</string>
     <string name="title_activity_settings">SettingsActivity</string>

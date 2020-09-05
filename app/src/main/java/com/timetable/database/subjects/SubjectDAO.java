@@ -18,4 +18,7 @@ public interface SubjectDAO {
 
     @Query("SELECT * FROM subjects")
     LiveData<List<Subject>> getAllSubjects();
+
+    @Query("SELECT * FROM subjects WHERE id = :id")
+    Subject getSubjectWithId(int id);
 }

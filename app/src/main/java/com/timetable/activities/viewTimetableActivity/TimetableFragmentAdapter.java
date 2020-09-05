@@ -21,6 +21,6 @@ public class TimetableFragmentAdapter extends FragmentStateAdapter {
 
     @Override
     public int getItemCount() {
-        return GlobalVariables.numberOfDays;
+        return GlobalVariables.getNumberOfDays();
     }
 }

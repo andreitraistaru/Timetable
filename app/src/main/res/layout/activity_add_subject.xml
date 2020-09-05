@@ -94,12 +94,13 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/classLectures_activity_add_subject" />
 
-            <com.divyanshu.colorseekbar.ColorSeekBar
+            <com.rtugeek.android.colorseekbar.ColorSeekBar
                 android:id="@+id/colorPickerLectures_activity_add_subject"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 app:barHeight="12dp"
+                app:barRadius="4dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/newClassLectures_activity_add_subject" />
@@ -175,12 +176,13 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/classSeminars_activity_add_subject" />
 
-            <com.divyanshu.colorseekbar.ColorSeekBar
+            <com.rtugeek.android.colorseekbar.ColorSeekBar
                 android:id="@+id/colorPickerSeminars_activity_add_subject"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 app:barHeight="12dp"
+                app:barRadius="4dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/newClassSeminars_activity_add_subject" />
@@ -254,12 +256,13 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/classLaboratories_activity_add_subject" />
 
-            <com.divyanshu.colorseekbar.ColorSeekBar
+            <com.rtugeek.android.colorseekbar.ColorSeekBar
                 android:id="@+id/colorPickerLaboratories_activity_add_subject"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 app:barHeight="12dp"
+                app:barRadius="4dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/newClassLaboratories_activity_add_subject" />
@@ -333,12 +336,13 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/classOthers_activity_add_subject" />
 
-            <com.divyanshu.colorseekbar.ColorSeekBar
+            <com.rtugeek.android.colorseekbar.ColorSeekBar
                 android:id="@+id/colorPickerOthers_activity_add_subject"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 app:barHeight="12dp"
+                app:barRadius="4dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/newClassOthers_activity_add_subject" />

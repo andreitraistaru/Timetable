@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +19,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.divyanshu.colorseekbar.ColorSeekBar;
+import com.rtugeek.android.colorseekbar.ColorSeekBar;
 import com.timetable.R;
 import com.timetable.database.subjects.ClassInterval;
 import com.timetable.database.subjects.Subject;
@@ -26,10 +27,12 @@ import com.timetable.database.subjects.SubjectComponent;
 import com.timetable.database.subjects.SubjectComponentType;
 import com.timetable.database.subjects.SubjectsDatabase;
 import com.timetable.utils.Constants;
+import com.timetable.utils.GlobalVariables;
 
 import java.util.ArrayList;
 
 public class AddSubjectActivity extends AppCompatActivity {
+    Subject subjectToEdit;
     private ArrayList<ClassInterval> lecturesIntervals;
     private ArrayList<ClassInterval> seminarsIntervals;
     private ArrayList<ClassInterval> laboratoriesIntervals;
@@ -40,40 +43,25 @@ public class AddSubjectActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_subject);
 
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle(R.string.add_subject_activity_title);
-        }
+        subjectToEdit = null;
 
         lecturesIntervals = new ArrayList<>();
         seminarsIntervals = new ArrayList<>();
         laboratoriesIntervals = new ArrayList<>();
         othersIntervals = new ArrayList<>();
 
-        CheckBox lectures = findViewById(R.id.lecturesCheckBox_activity_add_subject);
-        CheckBox seminars = findViewById(R.id.seminarsCheckBox_activity_add_subject);
-        CheckBox laboratories = findViewById(R.id.laboratoriesCheckBox_activity_add_subject);
-        CheckBox others = findViewById(R.id.othersCheckBox_activity_add_subject);
+        Intent intent = getIntent();
+        String subjectId = intent.getStringExtra(GlobalVariables.getSubjectIdExtra());
 
-        showFields(lectures);
-        showFields(seminars);
-        showFields(laboratories);
-        showFields(others);
+        if (subjectId != null) {
+            // use this activity for edit an existing subject
 
-        RecyclerView lecturesRecyclerView = findViewById(R.id.classLectures_activity_add_subject);
-        lecturesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        lecturesRecyclerView.setAdapter(new ClassIntervalItemAdapter(this, lecturesIntervals));
+            setUpActivityForEditSubject(Integer.parseInt(subjectId));
 
-        RecyclerView seminarsRecyclerView = findViewById(R.id.classSeminars_activity_add_subject);
-        seminarsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        seminarsRecyclerView.setAdapter(new ClassIntervalItemAdapter(this, seminarsIntervals));
+            return;
+        }
 
-        RecyclerView laboratoriesRecyclerView = findViewById(R.id.classLaboratories_activity_add_subject);
-        laboratoriesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        laboratoriesRecyclerView.setAdapter(new ClassIntervalItemAdapter(this, laboratoriesIntervals));
-
-        RecyclerView othersRecyclerView = findViewById(R.id.classOthers_activity_add_subject);
-        othersRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        othersRecyclerView.setAdapter(new ClassIntervalItemAdapter(this, othersIntervals));
+        setUpActivityForNewSubject();
     }
 
     public void showFields(View view) {
@@ -327,6 +315,11 @@ public class AddSubjectActivity extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
+                if (subjectToEdit != null) {
+                    SubjectsDatabase.getDatabase(getApplicationContext()).getSubjectDao().deleteSubject(subjectToEdit);
+                    subjectToEdit = null;
+                }
+
                 SubjectsDatabase.getDatabase(getApplicationContext()).getSubjectDao().insertSubject(newSubject);
             }
         }).start();
@@ -396,5 +389,134 @@ public class AddSubjectActivity extends AppCompatActivity {
         }
 
         return new Subject(subjectName, subjectDescription, components);
+    }
+
+    private void setUpRecyclerViewsAdapters() {
+        RecyclerView lecturesRecyclerView = findViewById(R.id.classLectures_activity_add_subject);
+        lecturesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        lecturesRecyclerView.setAdapter(new ClassIntervalItemAdapter(this, lecturesIntervals));
+
+        RecyclerView seminarsRecyclerView = findViewById(R.id.classSeminars_activity_add_subject);
+        seminarsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        seminarsRecyclerView.setAdapter(new ClassIntervalItemAdapter(this, seminarsIntervals));
+
+        RecyclerView laboratoriesRecyclerView = findViewById(R.id.classLaboratories_activity_add_subject);
+        laboratoriesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        laboratoriesRecyclerView.setAdapter(new ClassIntervalItemAdapter(this, laboratoriesIntervals));
+
+        RecyclerView othersRecyclerView = findViewById(R.id.classOthers_activity_add_subject);
+        othersRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        othersRecyclerView.setAdapter(new ClassIntervalItemAdapter(this, othersIntervals));
+    }
+
+    private void setUpActivityForNewSubject() {
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(R.string.add_subject_activity_title);
+        }
+
+        CheckBox lectures = findViewById(R.id.lecturesCheckBox_activity_add_subject);
+        CheckBox seminars = findViewById(R.id.seminarsCheckBox_activity_add_subject);
+        CheckBox laboratories = findViewById(R.id.laboratoriesCheckBox_activity_add_subject);
+        CheckBox others = findViewById(R.id.othersCheckBox_activity_add_subject);
+
+        showFields(lectures);
+        showFields(seminars);
+        showFields(laboratories);
+        showFields(others);
+
+        setUpRecyclerViewsAdapters();
+    }
+
+    private void setUpSubjectComponentsForEditSubject(SubjectComponent component) {
+        switch (component.getType()) {
+            case LECTURE:
+                CheckBox lecturesCheckbox = findViewById(R.id.lecturesCheckBox_activity_add_subject);
+                lecturesCheckbox.setChecked(true);
+                showFields(lecturesCheckbox);
+
+                ((ColorSeekBar) findViewById(R.id.colorPickerLectures_activity_add_subject)).setColor(component.getColor());
+
+                for (ClassInterval interval : component.getIntervals()) {
+                    addNewClassInterval(interval, R.id.newClassLectures_activity_add_subject);
+                }
+
+                ((TextView) findViewById(R.id.teacherNameLectures_activity_add_subject)).setText(component.getTeacher());
+                ((TextView) findViewById(R.id.infoLectures_activity_add_subject)).setText(component.getDescription());
+
+                return;
+            case SEMINAR:
+                CheckBox seminarsCheckbox = findViewById(R.id.seminarsCheckBox_activity_add_subject);
+                seminarsCheckbox.setChecked(true);
+                showFields(seminarsCheckbox);
+
+                ((ColorSeekBar) findViewById(R.id.colorPickerSeminars_activity_add_subject)).setColor(component.getColor());
+
+                for (ClassInterval interval : component.getIntervals()) {
+                    addNewClassInterval(interval, R.id.newClassSeminars_activity_add_subject);
+                }
+
+                ((TextView) findViewById(R.id.teacherNameSeminars_activity_add_subject)).setText(component.getTeacher());
+                ((TextView) findViewById(R.id.infoSeminars_activity_add_subject)).setText(component.getDescription());
+
+                return;
+            case LABORATORY:
+                CheckBox laboratoriesCheckbox = findViewById(R.id.laboratoriesCheckBox_activity_add_subject);
+                laboratoriesCheckbox.setChecked(true);
+                showFields(laboratoriesCheckbox);
+
+                ((ColorSeekBar) findViewById(R.id.colorPickerLaboratories_activity_add_subject)).setColor(component.getColor());
+
+                for (ClassInterval interval : component.getIntervals()) {
+                    addNewClassInterval(interval, R.id.newClassLaboratories_activity_add_subject);
+                }
+
+                ((TextView) findViewById(R.id.teacherNameLaboratories_activity_add_subject)).setText(component.getTeacher());
+                ((TextView) findViewById(R.id.infoLaboratories_activity_add_subject)).setText(component.getDescription());
+
+                return;
+            case OTHER:
+                CheckBox othersCheckbox = findViewById(R.id.othersCheckBox_activity_add_subject);
+                othersCheckbox.setChecked(true);
+                showFields(othersCheckbox);
+
+                ((ColorSeekBar) findViewById(R.id.colorPickerOthers_activity_add_subject)).setColor(component.getColor());
+
+                for (ClassInterval interval : component.getIntervals()) {
+                    addNewClassInterval(interval, R.id.newClassOthers_activity_add_subject);
+                }
+
+                ((TextView) findViewById(R.id.teacherNameOthers_activity_add_subject)).setText(component.getTeacher());
+                ((TextView) findViewById(R.id.infoOthers_activity_add_subject)).setText(component.getDescription());
+
+                return;
+            default:
+        }
+    }
+
+    private void setUpActivityForEditSubject(final int subjectId) {
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(R.string.edit_subject_activity_title);
+        }
+
+        setUpRecyclerViewsAdapters();
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                subjectToEdit = SubjectsDatabase.getDatabase(AddSubjectActivity.this).getSubjectDao().getSubjectWithId(subjectId);
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ((TextView) findViewById(R.id.subjectName_activity_add_subject)).setText(subjectToEdit.getName());
+                        ((TextView) findViewById(R.id.subjectInfo_activity_add_subject)).setText(subjectToEdit.getDescription());
+                    }
+                });
+
+                for (SubjectComponent component : subjectToEdit.getComponents()) {
+                    setUpSubjectComponentsForEditSubject(component);
+                }
+            }
+        }).start();
     }
 }
