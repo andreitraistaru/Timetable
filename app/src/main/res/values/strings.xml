@@ -94,4 +94,6 @@
     <string name="end_date_item_holiday">Ends at: %02d.%02d.%d</string>
     <string name="wrong_starting_ending_dates_error">Bad input! Ending date before starting date!</string>
 
+    <string name="popup_edit">Edit</string>
+    <string name="popup_delete">Delete</string>
 </resources>

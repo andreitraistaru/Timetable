@@ -1,12 +1,12 @@
 package com.timetable.activities.yearStructureActivity;
 
 import android.content.Context;
-import android.text.Layout;
-import android.view.ContextMenu;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
-import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -91,16 +91,30 @@ public class HolidayItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         ((HolidayItemViewHolder) holder).getCardView().setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                new Thread(new Runnable() {
+                Context popupContext = new ContextThemeWrapper(context, R.style.popupMenu);
+                PopupMenu popupMenu = new PopupMenu(popupContext, view);
+                popupMenu.getMenuInflater().inflate(R.menu.popup_holidays_list_year_structure, popupMenu.getMenu());
+
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
-                    public void run() {
-                        HolidaysDatabase.getDatabase(context).getHolidayDao().deleteHoliday(holiday);
+                    public boolean onMenuItemClick(MenuItem menuItem) {
+                        if (menuItem.getItemId() == R.id.delete_popup_holidays_option) {
+                            new Thread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    HolidaysDatabase.getDatabase(context).getHolidayDao().deleteHoliday(holiday);
+                                }
+                            }).start();
+
+                            holidays.remove(position);
+                            notifyDataSetChanged();
+                        }
+
+                        return true;
                     }
-                }).start();
+                });
 
-                holidays.remove(position);
-                notifyDataSetChanged();
-
+                popupMenu.show();
                 return true;
             }
         });

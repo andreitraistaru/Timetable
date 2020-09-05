@@ -81,7 +81,7 @@ public class YearStructureActivity extends AppCompatActivity {
 
         RecyclerView subjects = findViewById(R.id.subjects_year_structure_activity);
         subjects.setLayoutManager(new LinearLayoutManager(this));
-        final SubjectItemAdapter subjectAdapter = new SubjectItemAdapter();
+        final SubjectItemAdapter subjectAdapter = new SubjectItemAdapter(this);
         subjects.setAdapter(subjectAdapter);
 
         SubjectsDatabase.getDatabase(this).getSubjectDao().getAllSubjects().observe(this, new Observer<List<Subject>>() {
@@ -169,7 +169,7 @@ public class YearStructureActivity extends AppCompatActivity {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         ViewGroup viewGroup = findViewById(android.R.id.content);
-        final View dialogView = LayoutInflater.from(view.getContext()).inflate(R.layout.dialog_add_holiday, viewGroup, false);
+        final View dialogView = LayoutInflater.from(YearStructureActivity.this).inflate(R.layout.dialog_add_holiday, viewGroup, false);
 
         builder.setView(dialogView);
         final AlertDialog alertDialog = builder.create();
