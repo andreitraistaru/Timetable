@@ -97,4 +97,6 @@
 
     <string name="popup_edit">Edit</string>
     <string name="popup_delete">Delete</string>
+
+    <string name="view_timetable_activity_title">Timetable (week %d)</string>
 </resources>

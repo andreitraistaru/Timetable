@@ -11,7 +11,7 @@
         android:id="@+id/tabLayout_view_timetable_activity"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
+        android:background="@color/backgroundColorDark"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,7 +20,7 @@
         app:tabIndicatorHeight="7dp"
         app:tabMode="scrollable"
         app:tabTextAppearance="@style/TextAppearance.AppCompat.Large"
-        app:tabTextColor="@color/textTabsViewTimetableActivity"/>
+        app:tabTextColor="@color/textTabsViewTimetableActivity" />
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager_view_timetable_activity"

@@ -22,6 +22,8 @@ public class Constants {
 
     public static final int SEMESTER_DURATION_DEFAULT = 14;
 
+    private static final String sharedPreferenceName = "YearStructureSharedPreferences";
+
     public static int getSemesterStartDefault(int returnValue) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date());
@@ -70,5 +72,9 @@ public class Constants {
             default:
                 return context.getResources().getString(R.string.nothing);
         }
+    }
+
+    public static String getSharedPreferenceName() {
+        return sharedPreferenceName;
     }
 }

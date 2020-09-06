@@ -34,8 +34,6 @@ import java.util.Calendar;
 import java.util.List;
 
 public class YearStructureActivity extends AppCompatActivity {
-
-    private final String sharedPreferenceName = "YearStructureSharedPreferences";
     private Holiday newHoliday;
 
     @Override
@@ -49,7 +47,7 @@ public class YearStructureActivity extends AppCompatActivity {
             getSupportActionBar().setTitle(R.string.year_structure_activity_title);
         }
 
-        final SharedPreferences sharedPreferences = getSharedPreferences(sharedPreferenceName, MODE_PRIVATE);
+        final SharedPreferences sharedPreferences = getSharedPreferences(Constants.getSharedPreferenceName(), MODE_PRIVATE);
         final EditText semesterDuration = findViewById(R.id.semesterDuration_year_structure_activity);
         TextView semesterStart = findViewById(R.id.startingDateInfo_year_structure_activity);
 
@@ -132,7 +130,7 @@ public class YearStructureActivity extends AppCompatActivity {
                 semesterBegin.setText(getResources().getString(R.string.starting_date_year_structure,
                         selectedDate.get(Calendar.DAY_OF_MONTH), selectedDate.get(Calendar.MONTH) + 1, selectedDate.get(Calendar.YEAR)));
 
-                SharedPreferences sharedPreferences = getSharedPreferences(sharedPreferenceName, MODE_PRIVATE);
+                SharedPreferences sharedPreferences = getSharedPreferences(Constants.getSharedPreferenceName(), MODE_PRIVATE);
                 sharedPreferences.edit().putInt("semester_start_day", selectedDate.get(Calendar.DAY_OF_MONTH))
                                         .putInt("semester_start_month", selectedDate.get(Calendar.MONTH))
                                         .putInt("semester_start_year", selectedDate.get(Calendar.YEAR)).apply();
@@ -145,7 +143,7 @@ public class YearStructureActivity extends AppCompatActivity {
     }
 
     private void updateSemesterEnd() {
-        SharedPreferences sharedPreferences = getSharedPreferences(sharedPreferenceName, MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences(Constants.getSharedPreferenceName(), MODE_PRIVATE);
         TextView semesterEnd = findViewById(R.id.endingDateInfo_year_structure_activity);
         Calendar calendar = Calendar.getInstance();
 

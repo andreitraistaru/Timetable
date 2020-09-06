@@ -31,7 +31,7 @@ public class ClassIntervalItemAdapter extends RecyclerView.Adapter<RecyclerView.
         public ClassIntervalItemViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            weekDay = itemView.findViewById(R.id.weekDay_item_class_interval);
+            weekDay = itemView.findViewById(R.id.className_item_timetable);
             location = itemView.findViewById(R.id.location_item_class_interval);
             startHour = itemView.findViewById(R.id.startingHour_item_class_interval);
             endHour = itemView.findViewById(R.id.endingHour_item_class_interval);
