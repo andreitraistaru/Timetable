@@ -2,30 +2,37 @@ package com.timetable.activities.viewTimetableActivity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
+import androidx.lifecycle.LiveData;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.ContextThemeWrapper;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.timetable.R;
+import com.timetable.activities.addSubjectActivity.AddSubjectActivity;
+import com.timetable.database.holidays.HolidaysDatabase;
 import com.timetable.utils.Constants;
 import com.timetable.utils.GlobalVariables;
 
-import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
 import java.util.Date;
 
 import static java.time.temporal.ChronoUnit.DAYS;
-import static java.time.temporal.ChronoUnit.WEEKS;
 
 public class ViewTimetableActivity extends AppCompatActivity {
     private long weekNumber;
     private TabLayout tabLayout;
     private ViewPager2 viewPager;
+    private TimetableFragmentAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,12 +52,13 @@ public class ViewTimetableActivity extends AppCompatActivity {
         weekNumber = 1 + ((DAYS.between(semesterStartDate.toInstant(), currentDate.toInstant())) / GlobalVariables.getNumberOfDays());
 
         if (getSupportActionBar() != null) {
-            setTitle(getResources().getString(R.string.view_timetable_activity_title, weekNumber));
+            setTitle(getResources().getString(R.string.view_timetable_activity_title_current_week, weekNumber));
         }
 
         tabLayout = findViewById(R.id.tabLayout_view_timetable_activity);
         viewPager = findViewById(R.id.viewPager_view_timetable_activity);
-        viewPager.setAdapter(new TimetableFragmentAdapter(this, weekNumber));
+        adapter = new TimetableFragmentAdapter(this, weekNumber, this);
+        viewPager.setAdapter(adapter);
 
         new TabLayoutMediator(tabLayout, viewPager, new TabLayoutMediator.TabConfigurationStrategy() {
             @Override
@@ -58,5 +66,57 @@ public class ViewTimetableActivity extends AppCompatActivity {
                 tab.setText(Constants.getWeekDay(tabLayout.getContext(), position));
             }
         }).attach();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_view_timetable_activity, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        final Context popupContext = new ContextThemeWrapper(this, R.style.popupMenu);
+        PopupMenu popupMenu = new PopupMenu(popupContext, findViewById(R.id.choose_timetable_view_timetable_activity));
+        popupMenu.getMenuInflater().inflate(R.menu.popup_timetable_displayed, popupMenu.getMenu());
+
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                switch (menuItem.getItemId()) {
+                    case R.id.current_week_option:
+                        if (getSupportActionBar() != null) {
+                            setTitle(getResources().getString(R.string.view_timetable_activity_title_current_week, weekNumber));
+                        }
+
+                        adapter.setWeekNumber(weekNumber);
+
+                        break;
+                    case R.id.even_week_option:
+                        if (getSupportActionBar() != null) {
+                            setTitle(getResources().getString(R.string.view_timetable_activity_title_even_week));
+                        }
+
+                        adapter.setWeekNumber(Constants.EVEN_WEEK);
+
+                        break;
+                    case R.id.odd_week_option:
+                        if (getSupportActionBar() != null) {
+                            setTitle(getResources().getString(R.string.view_timetable_activity_title_odd_week));
+                        }
+
+                        adapter.setWeekNumber(Constants.ODD_WEEK);
+
+                        break;
+                }
+
+                return true;
+            }
+        });
+
+        popupMenu.show();
+
+        return true;
     }
 }

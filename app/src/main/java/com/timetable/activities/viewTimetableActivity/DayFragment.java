@@ -1,8 +1,6 @@
 package com.timetable.activities.viewTimetableActivity;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,10 +8,8 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -27,7 +23,6 @@ import com.timetable.database.subjects.SubjectsDatabase;
 import com.timetable.utils.Constants;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class DayFragment extends Fragment {
@@ -48,7 +43,7 @@ public class DayFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_day, container, false);
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView_fragment_day);
 
@@ -60,7 +55,7 @@ public class DayFragment extends Fragment {
             @Override
             public void onChanged(List<Holiday> data) {
                 holidays = data;
-                updateTimetable();
+                updateTimetable(getContext());
             }
         });
 
@@ -68,11 +63,17 @@ public class DayFragment extends Fragment {
             @Override
             public void onChanged(List<Subject> data) {
                 subjects = data;
-                updateTimetable();
+                updateTimetable(getContext());
             }
         });
 
         return view;
+    }
+
+    public void setWeekNumber(long weekNumber, Context context) {
+        this.weekNumber = weekNumber;
+
+        updateTimetable(context);
     }
 
     private boolean checkWeek(int frequency) {
@@ -88,7 +89,7 @@ public class DayFragment extends Fragment {
         }
     }
 
-    private void updateTimetable () {
+    private void updateTimetable (Context context) {
         if (subjects == null || holidays == null) {
             return;
         }
@@ -102,11 +103,11 @@ public class DayFragment extends Fragment {
                         TimetableEntry entry = new TimetableEntry(false,
                                 interval.getStartingHour(),
                                 subject.getName(),
-                                Constants.getSubjectComponentType(getContext(), component.getType()),
-                                getString(R.string.location_timetable_entry,interval.getLocation()),
+                                Constants.getSubjectComponentType(context, component.getType()),
+                                context.getResources().getString(R.string.location_timetable_entry,interval.getLocation()),
                                 interval.getEndingHour(),
                                 component.getColor(),
-                                getContext());
+                                context);
 
                         timetableEntries.add(entry);
                     }
@@ -114,8 +115,10 @@ public class DayFragment extends Fragment {
             }
         }
 
-        TimetableEntry.fillBreakTimes(timetableEntries, getContext());
+        TimetableEntry.fillBreakTimes(timetableEntries, context);
 
-        adapter.setTimetable(timetableEntries);
+        if (adapter != null) {
+            adapter.setTimetable(timetableEntries);
+        }
     }
 }

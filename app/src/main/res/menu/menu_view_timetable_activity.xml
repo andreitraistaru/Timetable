@@ -4,9 +4,9 @@
     tools:context="com.timetable.activities.MainActivity">
 
     <item
-        android:id="@+id/actionSettings"
+        android:id="@+id/choose_timetable_view_timetable_activity"
         android:orderInCategory="100"
-        android:title="@string/action_settings"
-        android:icon="@drawable/settings_menu_icon"
-        app:showAsAction="ifRoom" />
+        android:title="@string/choose_timetable_view_timetable"
+        android:icon="@drawable/choose_timetable"
+        app:showAsAction="always" />
 </menu>

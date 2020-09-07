@@ -101,9 +101,11 @@
                 android:layout_marginTop="8dp"
                 app:barHeight="12dp"
                 app:barRadius="4dp"
+                app:colorBarPosition="16"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/newClassLectures_activity_add_subject" />
+                app:layout_constraintTop_toBottomOf="@+id/newClassLectures_activity_add_subject"
+                app:maxPosition="20" />
 
             <EditText
                 android:id="@+id/teacherNameLectures_activity_add_subject"
@@ -183,9 +185,11 @@
                 android:layout_marginTop="8dp"
                 app:barHeight="12dp"
                 app:barRadius="4dp"
+                app:colorBarPosition="14"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/newClassSeminars_activity_add_subject" />
+                app:layout_constraintTop_toBottomOf="@+id/newClassSeminars_activity_add_subject"
+                app:maxPosition="20" />
 
             <EditText
                 android:id="@+id/teacherNameSeminars_activity_add_subject"
@@ -263,9 +267,11 @@
                 android:layout_marginTop="8dp"
                 app:barHeight="12dp"
                 app:barRadius="4dp"
+                app:colorBarPosition="8"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/newClassLaboratories_activity_add_subject" />
+                app:layout_constraintTop_toBottomOf="@+id/newClassLaboratories_activity_add_subject"
+                app:maxPosition="20" />
 
             <EditText
                 android:id="@+id/teacherNameLaboratories_activity_add_subject"
@@ -343,9 +349,11 @@
                 android:layout_marginTop="8dp"
                 app:barHeight="12dp"
                 app:barRadius="4dp"
+                app:colorBarPosition="6"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/newClassOthers_activity_add_subject" />
+                app:layout_constraintTop_toBottomOf="@+id/newClassOthers_activity_add_subject"
+                app:maxPosition="20" />
 
             <EditText
                 android:id="@+id/teacherNameOthers_activity_add_subject"

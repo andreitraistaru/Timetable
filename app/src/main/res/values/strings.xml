@@ -12,7 +12,7 @@
     <string name="add_subject_activity_title">New Subject</string>
     <string name="edit_subject_activity_title">Edit Subject</string>
 
-    <string name="action_settings">actionSettings</string>
+    <string name="choose_timetable_view_timetable">Choose timetable</string>
     <string name="title_activity_settings">SettingsActivity</string>
 
     <string name="monday">Monday</string>
@@ -103,8 +103,13 @@
 
     <string name="popup_edit">Edit</string>
     <string name="popup_delete">Delete</string>
+    <string name="popup_current_week">Current week</string>
+    <string name="popup_even_week">Even weeks</string>
+    <string name="popup_odd_week">Odd weeks</string>
 
-    <string name="view_timetable_activity_title">Timetable (week %d)</string>
+    <string name="view_timetable_activity_title_current_week">Timetable (Week %d)</string>
+    <string name="view_timetable_activity_title_even_week">Timetable (Even Weeks)</string>
+    <string name="view_timetable_activity_title_odd_week">Timetable (Odd Weeks)</string>
 
     <string name="start_timetable_entry">%02d:00</string>
     <string name="type_timetable_entry">(%s)</string>

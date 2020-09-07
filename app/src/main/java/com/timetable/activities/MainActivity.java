@@ -23,22 +23,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        Toast.makeText(this, "Settings clicked!", Toast.LENGTH_SHORT).show();
-
-        startActivity(new Intent(this, AddSubjectActivity.class));
-
-        return true;
-    }
-
     public void viewTimetable(View view) {
         startActivity(new Intent(this, ViewTimetableActivity.class));
     }

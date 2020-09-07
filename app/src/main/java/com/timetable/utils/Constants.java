@@ -9,13 +9,13 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class Constants {
-    public static final int MONDAY = 0;
-    public static final int TUESDAY = 1;
-    public static final int WEDNESDAY = 2;
-    public static final int THURSDAY = 3;
-    public static final int FRIDAY = 4;
-    public static final int SATURDAY = 5;
-    public static final int SUNDAY = 6;
+    private static final int MONDAY = 0;
+    private static final int TUESDAY = 1;
+    private static final int WEDNESDAY = 2;
+    private static final int THURSDAY = 3;
+    private static final int FRIDAY = 4;
+    private static final int SATURDAY = 5;
+    private static final int SUNDAY = 6;
 
     public static final int EVEN_ONLY = 0;
     public static final int ODD_ONLY = 1;
@@ -25,6 +25,9 @@ public class Constants {
     public static final int SEMINAR = 1;
     public static final int LABORATORY = 2;
     public static final int OTHER = 3;
+
+    public static final int EVEN_WEEK = 0;
+    public static final int ODD_WEEK = 1;
 
     public static final int SEMESTER_DURATION_DEFAULT = 14;
 
@@ -83,13 +86,13 @@ public class Constants {
     public static String getSubjectComponentType(Context context, int type) {
         switch (type) {
             case LECTURE:
-                return context.getString(R.string.lecture);
+                return context.getResources().getString(R.string.lecture);
             case SEMINAR:
-                return context.getString(R.string.seminar);
+                return context.getResources().getString(R.string.seminar);
             case LABORATORY:
-                return context.getString(R.string.laboratory);
+                return context.getResources().getString(R.string.laboratory);
             case OTHER:
-                return context.getString(R.string.other);
+                return context.getResources().getString(R.string.other);
             default:
                 return null;
         }

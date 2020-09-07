@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="0dp"
+    android:layout_width="0dp">
+
+    <item android:id="@+id/current_week_option"
+        android:title="@string/popup_current_week"
+        android:orderInCategory="100"/>
+
+    <item android:id="@+id/even_week_option"
+        android:title="@string/popup_even_week"
+        android:orderInCategory="200"/>
+
+    <item android:id="@+id/odd_week_option"
+        android:title="@string/popup_odd_week"
+        android:orderInCategory="300"/>
+</menu>

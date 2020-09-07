@@ -5,5 +5,5 @@
 
     <item android:id="@+id/delete_popup_class_intervals_option"
         android:title="@string/popup_delete"
-        android:orderInCategory="200"/>
+        android:orderInCategory="100"/>
 </menu>
