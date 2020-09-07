@@ -24,7 +24,6 @@ import com.timetable.R;
 import com.timetable.database.subjects.ClassInterval;
 import com.timetable.database.subjects.Subject;
 import com.timetable.database.subjects.SubjectComponent;
-import com.timetable.database.subjects.SubjectComponentType;
 import com.timetable.database.subjects.SubjectsDatabase;
 import com.timetable.utils.Constants;
 import com.timetable.utils.GlobalVariables;
@@ -356,7 +355,7 @@ public class AddSubjectActivity extends AppCompatActivity {
             String teacher = ((TextView) findViewById(R.id.teacherNameLectures_activity_add_subject)).getText().toString();
             String description = ((TextView) findViewById(R.id.infoLectures_activity_add_subject)).getText().toString();
 
-            SubjectComponent lectures = new SubjectComponent(SubjectComponentType.LECTURE, lecturesIntervals, color, teacher, description);
+            SubjectComponent lectures = new SubjectComponent(Constants.LECTURE, lecturesIntervals, color, teacher, description);
 
             components.add(lectures);
         }
@@ -365,7 +364,7 @@ public class AddSubjectActivity extends AppCompatActivity {
             String teacher = ((TextView) findViewById(R.id.teacherNameSeminars_activity_add_subject)).getText().toString();
             String description = ((TextView) findViewById(R.id.infoSeminars_activity_add_subject)).getText().toString();
 
-            SubjectComponent seminars = new SubjectComponent(SubjectComponentType.SEMINAR, seminarsIntervals, color, teacher, description);
+            SubjectComponent seminars = new SubjectComponent(Constants.SEMINAR, seminarsIntervals, color, teacher, description);
 
             components.add(seminars);
         }
@@ -374,7 +373,7 @@ public class AddSubjectActivity extends AppCompatActivity {
             String teacher = ((TextView) findViewById(R.id.teacherNameLaboratories_activity_add_subject)).getText().toString();
             String description = ((TextView) findViewById(R.id.infoLaboratories_activity_add_subject)).getText().toString();
 
-            SubjectComponent laboratories = new SubjectComponent(SubjectComponentType.LABORATORY, laboratoriesIntervals, color, teacher, description);
+            SubjectComponent laboratories = new SubjectComponent(Constants.LABORATORY, laboratoriesIntervals, color, teacher, description);
 
             components.add(laboratories);
         }
@@ -383,7 +382,7 @@ public class AddSubjectActivity extends AppCompatActivity {
             String teacher = ((TextView) findViewById(R.id.teacherNameOthers_activity_add_subject)).getText().toString();
             String description = ((TextView) findViewById(R.id.infoOthers_activity_add_subject)).getText().toString();
 
-            SubjectComponent others = new SubjectComponent(SubjectComponentType.OTHER, othersIntervals, color, teacher, description);
+            SubjectComponent others = new SubjectComponent(Constants.OTHER, othersIntervals, color, teacher, description);
 
             components.add(others);
         }
@@ -434,7 +433,7 @@ public class AddSubjectActivity extends AppCompatActivity {
 
     private void setUpSubjectComponentsForEditSubject(SubjectComponent component) {
         switch (component.getType()) {
-            case LECTURE:
+            case Constants.LECTURE:
                 CheckBox lecturesCheckbox = findViewById(R.id.lecturesCheckBox_activity_add_subject);
                 lecturesCheckbox.setChecked(true);
                 showFields(lecturesCheckbox);
@@ -449,7 +448,7 @@ public class AddSubjectActivity extends AppCompatActivity {
                 ((TextView) findViewById(R.id.infoLectures_activity_add_subject)).setText(component.getDescription());
 
                 return;
-            case SEMINAR:
+            case Constants.SEMINAR:
                 CheckBox seminarsCheckbox = findViewById(R.id.seminarsCheckBox_activity_add_subject);
                 seminarsCheckbox.setChecked(true);
                 showFields(seminarsCheckbox);
@@ -464,7 +463,7 @@ public class AddSubjectActivity extends AppCompatActivity {
                 ((TextView) findViewById(R.id.infoSeminars_activity_add_subject)).setText(component.getDescription());
 
                 return;
-            case LABORATORY:
+            case Constants.LABORATORY:
                 CheckBox laboratoriesCheckbox = findViewById(R.id.laboratoriesCheckBox_activity_add_subject);
                 laboratoriesCheckbox.setChecked(true);
                 showFields(laboratoriesCheckbox);
@@ -479,7 +478,7 @@ public class AddSubjectActivity extends AppCompatActivity {
                 ((TextView) findViewById(R.id.infoLaboratories_activity_add_subject)).setText(component.getDescription());
 
                 return;
-            case OTHER:
+            case Constants.OTHER:
                 CheckBox othersCheckbox = findViewById(R.id.othersCheckBox_activity_add_subject);
                 othersCheckbox.setChecked(true);
                 showFields(othersCheckbox);

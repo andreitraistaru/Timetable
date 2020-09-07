@@ -27,6 +27,12 @@
     <string name="odd_only">Odd weeks only</string>
     <string name="both">Both even and odd weeks</string>
 
+    <string name="lecture">Lecture</string>
+    <string name="seminar">Seminar</string>
+    <string name="laboratory">Laboratory</string>
+    <string name="other">Other</string>
+    <string name="break_time">Break Time</string>
+
     <string name="subjectName_activity_add_subject_hint">Subject\'s name (required)</string>
     <string name="subjectName_activity_add_subject_error">Field required!</string>
     <string name="subjectInfo_activity_add_subject_hint">Subject\'s description</string>
@@ -99,4 +105,9 @@
     <string name="popup_delete">Delete</string>
 
     <string name="view_timetable_activity_title">Timetable (week %d)</string>
+
+    <string name="start_timetable_entry">%02d:00</string>
+    <string name="type_timetable_entry">(%s)</string>
+    <string name="location_timetable_entry">Location: %s</string>
+    <string name="end_timetable_entry">%02d:00</string>
 </resources>

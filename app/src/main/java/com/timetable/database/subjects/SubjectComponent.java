@@ -3,13 +3,13 @@ package com.timetable.database.subjects;
 import java.util.ArrayList;
 
 public class SubjectComponent {
-    private SubjectComponentType type;
+    private int type;
     private ArrayList<ClassInterval> intervals;
     private int color;
     private String teacher;
     private String description;
 
-    public SubjectComponent(SubjectComponentType type, ArrayList<ClassInterval> intervals, int color, String teacher, String description) {
+    public SubjectComponent(int type, ArrayList<ClassInterval> intervals, int color, String teacher, String description) {
         this.type = type;
         this.intervals = intervals;
         this.color = color;
@@ -17,7 +17,7 @@ public class SubjectComponent {
         this.description = description;
     }
 
-    public SubjectComponentType getType() {
+    public int getType() {
         return type;
     }
     public ArrayList<ClassInterval> getIntervals() {

@@ -33,6 +33,10 @@ public class TimetableItemAdapter extends RecyclerView.Adapter<RecyclerView.View
             cardView = itemView.findViewById(R.id.cardView_item_timetable);
         }
 
+        public CardView getCardView() {
+            return cardView;
+        }
+
         public void setStart(String text) {
             start.setText(text);
         }
@@ -50,6 +54,10 @@ public class TimetableItemAdapter extends RecyclerView.Adapter<RecyclerView.View
         }
         public void setColor(int color) {
             cardView.setCardBackgroundColor(color);
+        }
+        public void setDuration(int duration) {
+            cardView.getLayoutParams().height = (int) ((duration * cardView.getContext().getResources().getDimension(R.dimen.item_timetable_hour_height)) +
+                    ((duration - 1) * cardView.getContext().getResources().getDimension(R.dimen.item_timetable_hour_padding)));
         }
     }
 
@@ -69,12 +77,13 @@ public class TimetableItemAdapter extends RecyclerView.Adapter<RecyclerView.View
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         TimetableEntry entry = timetable.get(position);
 
-        ((TimetableItemViewHolder) holder).setStart(entry.getStart());
+        ((TimetableItemViewHolder) holder).setStart(entry.getStartHour());
         ((TimetableItemViewHolder) holder).setName(entry.getName());
         ((TimetableItemViewHolder) holder).setType(entry.getType());
         ((TimetableItemViewHolder) holder).setLocation(entry.getLocation());
-        ((TimetableItemViewHolder) holder).setEnd(entry.getEnd());
+        ((TimetableItemViewHolder) holder).setEnd(entry.getEndHour());
         ((TimetableItemViewHolder) holder).setColor(entry.getColor());
+        ((TimetableItemViewHolder) holder).setDuration(entry.getDuration());
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.timetable.activities.viewTimetableActivity;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -19,16 +20,23 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.timetable.R;
 import com.timetable.database.holidays.Holiday;
 import com.timetable.database.holidays.HolidaysDatabase;
+import com.timetable.database.subjects.ClassInterval;
 import com.timetable.database.subjects.Subject;
+import com.timetable.database.subjects.SubjectComponent;
 import com.timetable.database.subjects.SubjectsDatabase;
+import com.timetable.utils.Constants;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class DayFragment extends Fragment {
     private int day;
     private long weekNumber;
+    private List<Subject> subjects = null;
+    private List<Holiday> holidays = null;
     private ArrayList<TimetableEntry> timetableEntries;
+    private TimetableItemAdapter adapter;
 
     public DayFragment(int day, long weekNumber) {
         super();
@@ -44,42 +52,70 @@ public class DayFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_day, container, false);
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView_fragment_day);
 
-        Drawable divider = ContextCompat.getDrawable(view.getContext(), R.drawable.timetable_items_divider);
-        DividerItemDecoration itemDecoration1 = new DividerItemDecoration(view.getContext(), DividerItemDecoration.VERTICAL);
-        DividerItemDecoration itemDecoration2 = new DividerItemDecoration(view.getContext(), DividerItemDecoration.HORIZONTAL);
-
-        if (divider != null) {
-            itemDecoration1.setDrawable(divider);
-            itemDecoration2.setDrawable(divider);
-        }
-
-        recyclerView.addItemDecoration(itemDecoration1);
-        recyclerView.addItemDecoration(itemDecoration2);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        final TimetableItemAdapter adapter = new TimetableItemAdapter();
+        adapter = new TimetableItemAdapter();
         recyclerView.setAdapter(adapter);
 
         HolidaysDatabase.getDatabase(getContext()).getHolidayDao().getAllHolidays().observe(getViewLifecycleOwner(), new Observer<List<Holiday>>() {
             @Override
-            public void onChanged(List<Holiday> holidays) {
-                updateTimetable(null, holidays, adapter);
+            public void onChanged(List<Holiday> data) {
+                holidays = data;
+                updateTimetable();
             }
         });
 
         SubjectsDatabase.getDatabase(getContext()).getSubjectDao().getAllSubjects().observe(getViewLifecycleOwner(), new Observer<List<Subject>>() {
             @Override
-            public void onChanged(List<Subject> subjects) {
-                updateTimetable(subjects, null, adapter);
+            public void onChanged(List<Subject> data) {
+                subjects = data;
+                updateTimetable();
             }
         });
 
         return view;
     }
 
-    private void updateTimetable (List<Subject> subjects, List<Holiday> holidays, TimetableItemAdapter adapter) {
-        if (subjects == null)
+    private boolean checkWeek(int frequency) {
+        switch (frequency) {
+            case Constants.BOTH:
+                return true;
+            case Constants.EVEN_ONLY:
+                return (weekNumber % 2 == 0);
+            case Constants.ODD_ONLY:
+                return (weekNumber % 2 == 1);
+            default:
+                return false;
+        }
+    }
+
+    private void updateTimetable () {
+        if (subjects == null || holidays == null) {
             return;
-        timetableEntries.add(new TimetableEntry("08:00", "Analiza", "(Lecture)", "Leu", "10:00", subjects.get(0).getComponents().get(0).getColor()));
+        }
+
+        timetableEntries = new ArrayList<>();
+
+        for (Subject subject : subjects) {
+            for (SubjectComponent component : subject.getComponents()) {
+                for (ClassInterval interval : component.getIntervals()) {
+                    if (day == interval.getDay() && checkWeek(interval.getFrequency())) {
+                        TimetableEntry entry = new TimetableEntry(false,
+                                interval.getStartingHour(),
+                                subject.getName(),
+                                Constants.getSubjectComponentType(getContext(), component.getType()),
+                                getString(R.string.location_timetable_entry,interval.getLocation()),
+                                interval.getEndingHour(),
+                                component.getColor(),
+                                getContext());
+
+                        timetableEntries.add(entry);
+                    }
+                }
+            }
+        }
+
+        TimetableEntry.fillBreakTimes(timetableEntries, getContext());
+
         adapter.setTimetable(timetableEntries);
     }
 }

@@ -1,6 +1,7 @@
 package com.timetable.utils;
 
 import android.content.Context;
+import android.content.res.Resources;
 
 import com.timetable.R;
 
@@ -20,9 +21,14 @@ public class Constants {
     public static final int ODD_ONLY = 1;
     public static final int BOTH = 2;
 
+    public static final int LECTURE = 0;
+    public static final int SEMINAR = 1;
+    public static final int LABORATORY = 2;
+    public static final int OTHER = 3;
+
     public static final int SEMESTER_DURATION_DEFAULT = 14;
 
-    private static final String sharedPreferenceName = "YearStructureSharedPreferences";
+    private static final String SHARED_PREFERENCE_NAME = "YearStructureSharedPreferences";
 
     public static int getSemesterStartDefault(int returnValue) {
         Calendar calendar = Calendar.getInstance();
@@ -74,7 +80,22 @@ public class Constants {
         }
     }
 
+    public static String getSubjectComponentType(Context context, int type) {
+        switch (type) {
+            case LECTURE:
+                return context.getString(R.string.lecture);
+            case SEMINAR:
+                return context.getString(R.string.seminar);
+            case LABORATORY:
+                return context.getString(R.string.laboratory);
+            case OTHER:
+                return context.getString(R.string.other);
+            default:
+                return null;
+        }
+    }
+
     public static String getSharedPreferenceName() {
-        return sharedPreferenceName;
+        return SHARED_PREFERENCE_NAME;
     }
 }
