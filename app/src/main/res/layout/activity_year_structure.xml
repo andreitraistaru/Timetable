@@ -93,7 +93,7 @@
             app:layout_constraintTop_toBottomOf="@+id/startingDate_year_structure_activity" />
 
         <View
-            android:id="@+id/view"
+            android:id="@+id/divider_year_structure_activity"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginStart="8dp"
@@ -114,7 +114,7 @@
             android:textColor="@color/textColor"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view" />
+            app:layout_constraintTop_toBottomOf="@+id/divider_year_structure_activity" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/subjects_year_structure_activity"

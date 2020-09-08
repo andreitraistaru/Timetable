@@ -100,14 +100,7 @@ public class DayFragment extends Fragment {
             for (SubjectComponent component : subject.getComponents()) {
                 for (ClassInterval interval : component.getIntervals()) {
                     if (day == interval.getDay() && checkWeek(interval.getFrequency())) {
-                        TimetableEntry entry = new TimetableEntry(false,
-                                interval.getStartingHour(),
-                                subject.getName(),
-                                Constants.getSubjectComponentType(context, component.getType()),
-                                context.getResources().getString(R.string.location_timetable_entry,interval.getLocation()),
-                                interval.getEndingHour(),
-                                component.getColor(),
-                                context);
+                        TimetableEntry entry = new TimetableEntry(subject, component, interval, context);
 
                         timetableEntries.add(entry);
                     }

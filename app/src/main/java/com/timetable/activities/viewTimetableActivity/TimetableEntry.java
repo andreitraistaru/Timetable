@@ -3,6 +3,10 @@ package com.timetable.activities.viewTimetableActivity;
 import android.content.Context;
 
 import com.timetable.R;
+import com.timetable.database.subjects.ClassInterval;
+import com.timetable.database.subjects.Subject;
+import com.timetable.database.subjects.SubjectComponent;
+import com.timetable.utils.Constants;
 import com.timetable.utils.GlobalVariables;
 
 import java.util.ArrayList;
@@ -10,25 +14,30 @@ import java.util.Collections;
 
 public class TimetableEntry implements Comparable<TimetableEntry> {
     private boolean breakTime;
-    private int start;
-    private String name;
-    private String type;
-    private String location;
-    private int end;
-    private int color;
-    private int duration;
+    private Subject subject;
+    private SubjectComponent component;
+    private ClassInterval interval;
     private Context context;
+    private int start;
+    private int end;
 
-    public TimetableEntry(boolean breakTime, int start, String name, String type, String location, int end, int color, Context context) {
-        this.breakTime = breakTime;
-        this.start = start;
-        this.name = name;
-        this.type = type;
-        this.location = location;
-        this.end = end;
-        this.color = color;
-        this.duration = end - start;
+    public TimetableEntry(Subject subject, SubjectComponent component, ClassInterval interval, Context context) {
+        this.breakTime = false;
+        this.subject = subject;
+        this.component = component;
+        this.interval = interval;
         this.context = context;
+        this.start = interval.getStartingHour();
+        this.end = interval.getEndingHour();
+    }
+    public TimetableEntry(int start, int end, Context context) {
+        this.breakTime = true;
+        this.subject = null;
+        this.component = null;
+        this.interval = null;
+        this.context = context;
+        this.start = start;
+        this.end = end;
     }
 
     public boolean isBreakTime() {
@@ -38,71 +47,92 @@ public class TimetableEntry implements Comparable<TimetableEntry> {
         return start;
     }
     public String getStartHour() {
-        return context.getResources().getString(R.string.start_timetable_entry, start);
+        return context.getResources().getString(R.string.start_timetable_entry, getStart());
     }
     public String getName() {
-        return name;
+        if (breakTime) {
+            return context.getString(R.string.break_time);
+        }
+
+        return subject.getName();
     }
     public String getType() {
-        return type;
+        if (breakTime) {
+            return "";
+        }
+
+        return Constants.getSubjectComponentType(context, component.getType());
     }
     public String getLocation() {
-        return location;
+        if (breakTime) {
+            return "";
+        }
+
+        return interval.getLocation();
     }
     public int getEnd() {
         return end;
     }
     public String getEndHour() {
-        return context.getResources().getString(R.string.end_timetable_entry, end);
+        return context.getResources().getString(R.string.end_timetable_entry, getEnd());
     }
     public int getColor() {
-        return color;
+        if (breakTime) {
+            return GlobalVariables.getBreakTimeColor();
+        }
+
+        return component.getColor();
     }
     public int getDuration() {
-        return duration;
+        return getEnd() - getStart();
     }
     public Context getContext() {
         return context;
     }
+    public String getSubjectDescription() {
+        if (breakTime) {
+            return "";
+        }
 
-    public void setBreakTime(boolean breakTime) {
-        this.breakTime = breakTime;
+        return subject.getDescription();
     }
-    public void setStart(int start) {
-        this.start = start;
+    public String getTeacher() {
+        if (breakTime) {
+            return "";
+        }
+
+        return component.getTeacher();
     }
-    public void setName(String name) {
-        this.name = name;
+    public String getActivityDescription() {
+        if (breakTime) {
+            return "";
+        }
+
+        return component.getDescription();
     }
-    public void setType(String type) {
-        this.type = type;
+    public String getDay() {
+        if (breakTime) {
+            return "";
+        }
+
+        return Constants.getWeekDay(context, interval.getDay());
     }
-    public void setLocation(String location) {
-        this.location = location;
-    }
-    public void setEnd(int end) {
-        this.end = end;
-    }
-    public void setColor(int color) {
-        this.color = color;
-    }
-    public void setDuration(int duration) {
-        this.duration = duration;
-    }
-    public void setContext(Context context) {
-        this.context = context;
+    public String getFrequency() {
+        if (breakTime) {
+            return "";
+        }
+
+        return Constants.getFrequency(context, interval.getFrequency());
     }
 
     @Override
     public int compareTo(TimetableEntry entry) {
-        return start - entry.getStart();
+        return getStart() - entry.getStart();
     }
 
     public static void fillBreakTimes(ArrayList<TimetableEntry> timetable, Context context) {
         if (timetable.isEmpty()) {
-            timetable.add(new TimetableEntry(true, GlobalVariables.getStartingHour(),
-                    context.getString(R.string.break_time), "", "", GlobalVariables.getEndingHour(),
-                    GlobalVariables.getBreakTimeColor(), context));
+            timetable.add(new TimetableEntry(GlobalVariables.getStartingHour(), GlobalVariables.getEndingHour(), context));
 
             return;
         }
@@ -113,9 +143,7 @@ public class TimetableEntry implements Comparable<TimetableEntry> {
 
         for (int i = 0; i < timetable.size() - 1; i++) {
             if (timetable.get(i).getEnd() < timetable.get(i + 1).getStart()) {
-                breaks.add(new TimetableEntry(true, timetable.get(i).getEnd(),
-                        context.getString(R.string.break_time), "", "", timetable.get(i + 1).getStart(),
-                        GlobalVariables.getBreakTimeColor(), context));
+                breaks.add(new TimetableEntry(timetable.get(i).getEnd(), timetable.get(i + 1).getStart(), context));
             }
         }
 

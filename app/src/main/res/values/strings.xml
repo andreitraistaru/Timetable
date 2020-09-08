@@ -115,4 +115,14 @@
     <string name="type_timetable_entry">(%s)</string>
     <string name="location_timetable_entry">Location: %s</string>
     <string name="end_timetable_entry">%02d:00</string>
+
+    <string name="type_timetable_entry_dialog">(%s)</string>
+    <string name="subject_description_timetable_entry_dialog">Subject info: %s</string>
+    <string name="teacher_timetable_entry_dialog">Teacher: %s</string>
+    <string name="activity_description_timetable_entry_dialog">Activity info: %s</string>
+    <string name="location_timetable_entry_dialog">Location: %s</string>
+    <string name="day_timetable_entry_dialog">Day: %s</string>
+    <string name="start_timetable_entry_dialog">Starts at: %02d:00</string>
+    <string name="end_timetable_entry_dialog">Ends at: %02d:00</string>
+    <string name="frequency_timetable_entry_dialog">Frequency: %s</string>
 </resources>

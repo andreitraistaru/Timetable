@@ -1,5 +1,9 @@
 package com.timetable.activities.viewTimetableActivity;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,9 +11,11 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.timetable.R;
+import com.timetable.activities.yearStructureActivity.YearStructureActivity;
 
 import java.util.ArrayList;
 
@@ -75,7 +81,7 @@ public class TimetableItemAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        TimetableEntry entry = timetable.get(position);
+        final TimetableEntry entry = timetable.get(position);
 
         ((TimetableItemViewHolder) holder).setStart(entry.getStartHour());
         ((TimetableItemViewHolder) holder).setName(entry.getName());
@@ -84,6 +90,33 @@ public class TimetableItemAdapter extends RecyclerView.Adapter<RecyclerView.View
         ((TimetableItemViewHolder) holder).setEnd(entry.getEndHour());
         ((TimetableItemViewHolder) holder).setColor(entry.getColor());
         ((TimetableItemViewHolder) holder).setDuration(entry.getDuration());
+
+        if (!entry.isBreakTime()) {
+            ((TimetableItemViewHolder) holder).getCardView().setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+                    ViewGroup viewGroup = view.findViewById(android.R.id.content);
+                    final View dialogView = LayoutInflater.from(view.getContext()).inflate(R.layout.dialog_view_class_interval, viewGroup, false);
+
+                    builder.setView(dialogView);
+                    final AlertDialog alertDialog = builder.create();
+                    alertDialog.show();
+
+                    ((ConstraintLayout) dialogView.findViewById(R.id.constraintLayout_dialog_view_class_interval)).setBackgroundColor(entry.getColor());
+                    ((TextView) dialogView.findViewById(R.id.subject_dialog_view_class_interval)).setText(entry.getName());
+                    ((TextView) dialogView.findViewById(R.id.activityType_dialog_view_class_interval)).setText(view.getResources().getString(R.string.type_timetable_entry_dialog, entry.getType()));
+                    ((TextView) dialogView.findViewById(R.id.subjectDescription_dialog_view_class_interval)).setText(view.getResources().getString(R.string.subject_description_timetable_entry_dialog, entry.getSubjectDescription()));
+                    ((TextView) dialogView.findViewById(R.id.teacher_dialog_view_class_interval)).setText(view.getResources().getString(R.string.teacher_timetable_entry_dialog, entry.getTeacher()));
+                    ((TextView) dialogView.findViewById(R.id.activityDescription_dialog_view_class_interval)).setText(view.getResources().getString(R.string.activity_description_timetable_entry_dialog, entry.getActivityDescription()));
+                    ((TextView) dialogView.findViewById(R.id.location_dialog_view_class_interval)).setText(view.getResources().getString(R.string.location_timetable_entry_dialog, entry.getLocation()));
+                    ((TextView) dialogView.findViewById(R.id.day_dialog_view_class_interval)).setText(view.getResources().getString(R.string.day_timetable_entry_dialog, entry.getDay()));
+                    ((TextView) dialogView.findViewById(R.id.startHour_dialog_view_class_interval)).setText(view.getResources().getString(R.string.start_timetable_entry_dialog, entry.getStart()));
+                    ((TextView) dialogView.findViewById(R.id.endHour_dialog_view_class_interval)).setText(view.getResources().getString(R.string.end_timetable_entry_dialog, entry.getEnd()));
+                    ((TextView) dialogView.findViewById(R.id.frequency_dialog_view_class_interval)).setText(view.getResources().getString(R.string.frequency_timetable_entry_dialog, entry.getFrequency()));
+                }
+            });
+        }
     }
 
     @Override
