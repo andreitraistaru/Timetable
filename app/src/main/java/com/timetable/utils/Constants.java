@@ -26,8 +26,8 @@ public class Constants {
     public static final int LABORATORY = 2;
     public static final int OTHER = 3;
 
-    public static final int EVEN_WEEK = 0;
-    public static final int ODD_WEEK = 1;
+    public static final int EVEN_WEEK = -2;
+    public static final int ODD_WEEK = -1;
 
     public static final int SEMESTER_DURATION_DEFAULT = 14;
 

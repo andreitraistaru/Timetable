@@ -81,9 +81,9 @@ public class DayFragment extends Fragment {
             case Constants.BOTH:
                 return true;
             case Constants.EVEN_ONLY:
-                return (weekNumber % 2 == 0);
+                return (weekNumber == Constants.EVEN_WEEK || weekNumber % 2 == 0);
             case Constants.ODD_ONLY:
-                return (weekNumber % 2 == 1);
+                return (weekNumber == Constants.ODD_WEEK || weekNumber % 2 == 1);
             default:
                 return false;
         }

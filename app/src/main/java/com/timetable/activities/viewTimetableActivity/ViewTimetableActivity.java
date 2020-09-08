@@ -31,7 +31,6 @@ import static java.time.temporal.ChronoUnit.DAYS;
 public class ViewTimetableActivity extends AppCompatActivity {
     private long weekNumber;
     private TabLayout tabLayout;
-    private ViewPager2 viewPager;
     private TimetableFragmentAdapter adapter;
 
     @Override
@@ -39,24 +38,11 @@ public class ViewTimetableActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_timetable);
 
-        SharedPreferences sharedPreferences = getSharedPreferences(Constants.getSharedPreferenceName(), MODE_PRIVATE);
-        Calendar semesterStart = Calendar.getInstance();
-        Date currentDate = new Date();
-        Date semesterStartDate;
-
-        semesterStart.set(sharedPreferences.getInt("semester_start_year", Constants.getSemesterStartDefault(2)),
-                sharedPreferences.getInt("semester_start_month", Constants.getSemesterStartDefault(1)),
-                sharedPreferences.getInt("semester_start_day", Constants.getSemesterStartDefault(0)));
-        semesterStartDate = semesterStart.getTime();
-
-        weekNumber = 1 + ((DAYS.between(semesterStartDate.toInstant(), currentDate.toInstant())) / GlobalVariables.getNumberOfDays());
-
-        if (getSupportActionBar() != null) {
-            setTitle(getResources().getString(R.string.view_timetable_activity_title_current_week, weekNumber));
-        }
+        getWeekNumber();
+        setTitle();
 
         tabLayout = findViewById(R.id.tabLayout_view_timetable_activity);
-        viewPager = findViewById(R.id.viewPager_view_timetable_activity);
+        ViewPager2 viewPager = findViewById(R.id.viewPager_view_timetable_activity);
         adapter = new TimetableFragmentAdapter(this, weekNumber, this);
         viewPager.setAdapter(adapter);
 
@@ -86,30 +72,20 @@ public class ViewTimetableActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.current_week_option:
-                        if (getSupportActionBar() != null) {
-                            setTitle(getResources().getString(R.string.view_timetable_activity_title_current_week, weekNumber));
-                        }
-
-                        adapter.setWeekNumber(weekNumber);
-
+                        getWeekNumber();
+                        setTitle();
                         break;
                     case R.id.even_week_option:
-                        if (getSupportActionBar() != null) {
-                            setTitle(getResources().getString(R.string.view_timetable_activity_title_even_week));
-                        }
-
-                        adapter.setWeekNumber(Constants.EVEN_WEEK);
-
+                        weekNumber = Constants.EVEN_WEEK;
+                        setTitle();
                         break;
                     case R.id.odd_week_option:
-                        if (getSupportActionBar() != null) {
-                            setTitle(getResources().getString(R.string.view_timetable_activity_title_odd_week));
-                        }
-
-                        adapter.setWeekNumber(Constants.ODD_WEEK);
-
+                        weekNumber = Constants.ODD_WEEK;
+                        setTitle();
                         break;
                 }
+
+                adapter.setWeekNumber(weekNumber);
 
                 return true;
             }
@@ -118,5 +94,42 @@ public class ViewTimetableActivity extends AppCompatActivity {
         popupMenu.show();
 
         return true;
+    }
+
+    private void getWeekNumber() {
+        SharedPreferences sharedPreferences = getSharedPreferences(Constants.getSharedPreferenceName(), MODE_PRIVATE);
+        Calendar semesterStart = Calendar.getInstance();
+        Date currentDate = new Date();
+        Date semesterStartDate;
+
+        semesterStart.set(sharedPreferences.getInt("semester_start_year", Constants.getSemesterStartDefault(2)),
+                sharedPreferences.getInt("semester_start_month", Constants.getSemesterStartDefault(1)),
+                sharedPreferences.getInt("semester_start_day", Constants.getSemesterStartDefault(0)));
+        semesterStartDate = semesterStart.getTime();
+
+        weekNumber = 1 + ((DAYS.between(semesterStartDate.toInstant(), currentDate.toInstant())) / GlobalVariables.getNumberOfDays());
+
+        if (weekNumber <= 0) {
+            weekNumber *= -1;
+            if (weekNumber % 2 == 0) {
+                weekNumber = Constants.EVEN_WEEK;
+            } else {
+                weekNumber = Constants.ODD_WEEK;
+            }
+        }
+    }
+
+    private void setTitle() {
+        if (getSupportActionBar() == null) {
+            return;
+        }
+
+        if (weekNumber == Constants.EVEN_WEEK) {
+            setTitle(getResources().getString(R.string.view_timetable_activity_title_even_week));
+        } else if (weekNumber == Constants.ODD_WEEK) {
+            setTitle(getResources().getString(R.string.view_timetable_activity_title_odd_week));
+        } else {
+            setTitle(getResources().getString(R.string.view_timetable_activity_title_current_week, weekNumber));
+        }
     }
 }
