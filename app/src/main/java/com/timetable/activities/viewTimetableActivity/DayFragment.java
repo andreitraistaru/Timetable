@@ -1,6 +1,7 @@
 package com.timetable.activities.viewTimetableActivity;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,9 +22,14 @@ import com.timetable.database.subjects.Subject;
 import com.timetable.database.subjects.SubjectComponent;
 import com.timetable.database.subjects.SubjectsDatabase;
 import com.timetable.utils.Constants;
+import com.timetable.utils.GlobalVariables;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+
+import static java.time.temporal.ChronoUnit.DAYS;
 
 public class DayFragment extends Fragment {
     private int day;
@@ -76,6 +82,16 @@ public class DayFragment extends Fragment {
         updateTimetable(context);
     }
 
+    private boolean checkHoliday() {
+        if (weekNumber == Constants.ODD_WEEK || weekNumber == Constants.EVEN_WEEK) {
+            return false;
+        }
+
+
+
+        return true;
+    }
+
     private boolean checkWeek(int frequency) {
         switch (frequency) {
             case Constants.BOTH:
@@ -96,19 +112,21 @@ public class DayFragment extends Fragment {
 
         timetableEntries = new ArrayList<>();
 
-        for (Subject subject : subjects) {
-            for (SubjectComponent component : subject.getComponents()) {
-                for (ClassInterval interval : component.getIntervals()) {
-                    if (day == interval.getDay() && checkWeek(interval.getFrequency())) {
-                        TimetableEntry entry = new TimetableEntry(subject, component, interval, context);
-
-                        timetableEntries.add(entry);
+        if (checkHoliday()) {
+            timetableEntries.add(new TimetableEntry(context));
+        } else {
+            for (Subject subject : subjects) {
+                for (SubjectComponent component : subject.getComponents()) {
+                    for (ClassInterval interval : component.getIntervals()) {
+                        if (day == interval.getDay() && checkWeek(interval.getFrequency())) {
+                            timetableEntries.add(new TimetableEntry(subject, component, interval, context));
+                        }
                     }
                 }
             }
-        }
 
-        TimetableEntry.fillBreakTimes(timetableEntries, context);
+            TimetableEntry.fillBreakTimes(timetableEntries, context);
+        }
 
         if (adapter != null) {
             adapter.setTimetable(timetableEntries);

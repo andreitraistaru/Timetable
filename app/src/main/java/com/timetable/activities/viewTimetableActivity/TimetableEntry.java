@@ -14,6 +14,7 @@ import java.util.Collections;
 
 public class TimetableEntry implements Comparable<TimetableEntry> {
     private boolean breakTime;
+    private boolean holidayTime;
     private Subject subject;
     private SubjectComponent component;
     private ClassInterval interval;
@@ -23,6 +24,7 @@ public class TimetableEntry implements Comparable<TimetableEntry> {
 
     public TimetableEntry(Subject subject, SubjectComponent component, ClassInterval interval, Context context) {
         this.breakTime = false;
+        this.holidayTime = false;
         this.subject = subject;
         this.component = component;
         this.interval = interval;
@@ -32,6 +34,7 @@ public class TimetableEntry implements Comparable<TimetableEntry> {
     }
     public TimetableEntry(int start, int end, Context context) {
         this.breakTime = true;
+        this.holidayTime = false;
         this.subject = null;
         this.component = null;
         this.interval = null;
@@ -39,18 +42,39 @@ public class TimetableEntry implements Comparable<TimetableEntry> {
         this.start = start;
         this.end = end;
     }
+    public TimetableEntry(Context context) {
+        this.breakTime = true;
+        this.holidayTime = true;
+        this.subject = null;
+        this.component = null;
+        this.interval = null;
+        this.context = context;
+        this.start = GlobalVariables.getStartingHour();
+        this.end = GlobalVariables.getEndingHour();
+    }
 
     public boolean isBreakTime() {
         return breakTime;
+    }
+    public boolean isHolidayTime() {
+        return holidayTime;
     }
     public int getStart() {
         return start;
     }
     public String getStartHour() {
+        if (holidayTime) {
+            return "";
+        }
+
         return context.getResources().getString(R.string.start_timetable_entry, getStart());
     }
     public String getName() {
         if (breakTime) {
+            if (holidayTime) {
+                return context.getString(R.string.holiday_time);
+            }
+
             return context.getString(R.string.break_time);
         }
 
@@ -74,10 +98,18 @@ public class TimetableEntry implements Comparable<TimetableEntry> {
         return end;
     }
     public String getEndHour() {
+        if (holidayTime) {
+            return "";
+        }
+
         return context.getResources().getString(R.string.end_timetable_entry, getEnd());
     }
     public int getColor() {
         if (breakTime) {
+            if (holidayTime) {
+                return GlobalVariables.getHolidayTimeColor();
+            }
+
             return GlobalVariables.getBreakTimeColor();
         }
 

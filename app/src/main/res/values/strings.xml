@@ -32,6 +32,7 @@
     <string name="laboratory">Laboratory</string>
     <string name="other">Other</string>
     <string name="break_time">Break Time</string>
+    <string name="holiday_time">Holiday Time</string>
 
     <string name="subjectName_activity_add_subject_hint">Subject\'s name (required)</string>
     <string name="subjectName_activity_add_subject_error">Field required!</string>
