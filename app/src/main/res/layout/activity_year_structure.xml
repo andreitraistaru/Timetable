@@ -9,187 +9,146 @@
     tools:context=".activities.yearStructureActivity.YearStructureActivity">
 
     <ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" >
-
-    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
 
-        <TextView
-            android:id="@+id/semesterDurationInfo_year_structure_activity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:labelFor="@id/semesterDuration_year_structure_activity"
-            android:text="@string/semester_duration_year_structure"
-            android:textColor="@color/textColor"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="@+id/semesterDuration_year_structure_activity"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/semesterDuration_year_structure_activity" />
-
-        <EditText
-            android:id="@+id/semesterDuration_year_structure_activity"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:autofillHints=""
-            android:ems="10"
-            android:inputType="number"
-            android:textColor="@color/textColor"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/semesterDurationInfo_year_structure_activity"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/startingDateInfo_year_structure_activity"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:text="@string/starting_date_year_structure"
-            android:textColor="@color/textColor"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="@+id/startingDate_year_structure_activity"
-            app:layout_constraintEnd_toStartOf="@+id/startingDate_year_structure_activity"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/startingDate_year_structure_activity" />
-
-        <ImageButton
-            android:id="@+id/startingDate_year_structure_activity"
-            style="@android:style/Widget.Holo.Light.Button.Inset"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="8dp"
-            android:contentDescription="@string/button_select_date_description"
-            android:onClick="chooseSemesterStart"
-            android:padding="0dp"
-            android:paddingStart="0dp"
-            android:paddingTop="0dp"
-            android:paddingEnd="0dp"
-            android:paddingBottom="0dp"
-            android:scaleType="fitXY"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/semesterDuration_year_structure_activity"
-            app:srcCompat="@android:drawable/ic_menu_my_calendar" />
-
-        <TextView
-            android:id="@+id/endingDateInfo_year_structure_activity"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:text="@string/ending_date_year_structure"
-            android:textAlignment="center"
-            android:textColor="@color/textColor"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/startingDate_year_structure_activity" />
-
-        <View
-            android:id="@+id/divider_year_structure_activity"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
-            android:background="@color/backgroundColorDark"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/endingDateInfo_year_structure_activity" />
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/subjectsInfo_year_structure_activity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:text="@string/subjects_year_structure"
-            android:textColor="@color/textColor"
-            android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/divider_year_structure_activity" />
+            <TextView
+                android:id="@+id/startingDateInfo_year_structure_activity"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:text="@string/starting_date_year_structure"
+                android:textColor="@color/textColor"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/startingDate_year_structure_activity"
+                app:layout_constraintEnd_toStartOf="@+id/startingDate_year_structure_activity"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/startingDate_year_structure_activity" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/subjects_year_structure_activity"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:nestedScrollingEnabled="false"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/subjectsInfo_year_structure_activity">
+            <ImageButton
+                android:id="@+id/startingDate_year_structure_activity"
+                style="@android:style/Widget.Holo.Light.Button.Inset"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:contentDescription="@string/button_select_date_description"
+                android:onClick="chooseSemesterStart"
+                android:padding="0dp"
+                android:paddingStart="0dp"
+                android:paddingTop="0dp"
+                android:paddingEnd="0dp"
+                android:paddingBottom="0dp"
+                android:scaleType="fitXY"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@android:drawable/ic_menu_my_calendar" />
 
-        </androidx.recyclerview.widget.RecyclerView>
+            <View
+                android:id="@+id/divider_year_structure_activity"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="@color/backgroundColorDark"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/startingDate_year_structure_activity" />
 
-        <Button
-            android:id="@+id/addSubject_year_structure_activity"
-            style="@android:style/Widget.Holo.Light.Button.Inset"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:drawableStart="@android:drawable/ic_menu_add"
-            android:onClick="addSubject"
-            android:text="@string/add_subjects_year_structure"
-            android:textAllCaps="false"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/subjects_year_structure_activity" />
+            <TextView
+                android:id="@+id/subjectsInfo_year_structure_activity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/subjects_year_structure"
+                android:textColor="@color/textColor"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/divider_year_structure_activity" />
 
-        <TextView
-            android:id="@+id/holidayInfo_year_structure_activity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="32dp"
-            android:text="@string/holidays_year_structure"
-            android:textColor="@color/textColor"
-            android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/addSubject_year_structure_activity" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/subjects_year_structure_activity"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:nestedScrollingEnabled="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/subjectsInfo_year_structure_activity">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/holiday_year_structure_activity"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:longClickable="false"
-            android:nestedScrollingEnabled="false"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/holidayInfo_year_structure_activity">
+            </androidx.recyclerview.widget.RecyclerView>
 
-        </androidx.recyclerview.widget.RecyclerView>
+            <Button
+                android:id="@+id/addSubject_year_structure_activity"
+                style="@android:style/Widget.Holo.Light.Button.Inset"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:drawableStart="@android:drawable/ic_menu_add"
+                android:onClick="addSubject"
+                android:text="@string/add_subjects_year_structure"
+                android:textAllCaps="false"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/subjects_year_structure_activity" />
 
-        <Button
-            android:id="@+id/addHoliday_year_structures_activity"
-            style="@android:style/Widget.Holo.Light.Button.Inset"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:drawableStart="@android:drawable/ic_menu_add"
-            android:onClick="addHoliday"
-            android:text="@string/add_holidays_year_structure"
-            android:textAllCaps="false"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/holiday_year_structure_activity" />
+            <TextView
+                android:id="@+id/holidayInfo_year_structure_activity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="32dp"
+                android:text="@string/holidays_year_structure"
+                android:textColor="@color/textColor"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/addSubject_year_structure_activity" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/holiday_year_structure_activity"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:longClickable="false"
+                android:nestedScrollingEnabled="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/holidayInfo_year_structure_activity">
 
-</ScrollView>
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <Button
+                android:id="@+id/addHoliday_year_structures_activity"
+                style="@android:style/Widget.Holo.Light.Button.Inset"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:drawableStart="@android:drawable/ic_menu_add"
+                android:onClick="addHoliday"
+                android:text="@string/add_holidays_year_structure"
+                android:textAllCaps="false"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/holiday_year_structure_activity" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

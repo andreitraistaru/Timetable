@@ -83,19 +83,13 @@ public class TimetableItemAdapter extends RecyclerView.Adapter<RecyclerView.View
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         final TimetableEntry entry = timetable.get(position);
 
-        if (entry.isHolidayTime()) {
-            ((TimetableItemViewHolder) holder).setName(entry.getName());
-            ((TimetableItemViewHolder) holder).setColor(entry.getColor());
-            ((TimetableItemViewHolder) holder).setDuration(entry.getDuration());
-        } else {
-            ((TimetableItemViewHolder) holder).setStart(entry.getStartHour());
-            ((TimetableItemViewHolder) holder).setName(entry.getName());
-            ((TimetableItemViewHolder) holder).setType(entry.getType());
-            ((TimetableItemViewHolder) holder).setLocation(entry.getLocation());
-            ((TimetableItemViewHolder) holder).setEnd(entry.getEndHour());
-            ((TimetableItemViewHolder) holder).setColor(entry.getColor());
-            ((TimetableItemViewHolder) holder).setDuration(entry.getDuration());
-        }
+        ((TimetableItemViewHolder) holder).setStart(entry.getStartHour());
+        ((TimetableItemViewHolder) holder).setName(entry.getName());
+        ((TimetableItemViewHolder) holder).setType(entry.getType());
+        ((TimetableItemViewHolder) holder).setLocation(entry.getLocation());
+        ((TimetableItemViewHolder) holder).setEnd(entry.getEndHour());
+        ((TimetableItemViewHolder) holder).setColor(entry.getColor());
+        ((TimetableItemViewHolder) holder).setDuration(entry.getDuration());
 
         if (!entry.isBreakTime() || !entry.isHolidayTime()) {
             ((TimetableItemViewHolder) holder).getCardView().setOnClickListener(new View.OnClickListener() {

@@ -73,18 +73,16 @@ public class ViewTimetableActivity extends AppCompatActivity {
                 switch (menuItem.getItemId()) {
                     case R.id.current_week_option:
                         getWeekNumber();
-                        setTitle();
                         break;
                     case R.id.even_week_option:
                         weekNumber = Constants.EVEN_WEEK;
-                        setTitle();
                         break;
                     case R.id.odd_week_option:
                         weekNumber = Constants.ODD_WEEK;
-                        setTitle();
                         break;
                 }
 
+                setTitle();
                 adapter.setWeekNumber(weekNumber);
 
                 return true;
@@ -104,13 +102,16 @@ public class ViewTimetableActivity extends AppCompatActivity {
 
         semesterStart.set(sharedPreferences.getInt("semester_start_year", Constants.getSemesterStartDefault(2)),
                 sharedPreferences.getInt("semester_start_month", Constants.getSemesterStartDefault(1)),
-                sharedPreferences.getInt("semester_start_day", Constants.getSemesterStartDefault(0)));
+                sharedPreferences.getInt("semester_start_day", Constants.getSemesterStartDefault(0)), 0, 0, 0);
         semesterStartDate = semesterStart.getTime();
 
         weekNumber = 1 + ((DAYS.between(semesterStartDate.toInstant(), currentDate.toInstant())) / GlobalVariables.getNumberOfDays());
 
-        if (weekNumber <= 0) {
+        if (weekNumber == 1 && currentDate.before(semesterStartDate)) {
+            weekNumber = Constants.ODD_WEEK;
+        } else if (weekNumber <= 0) {
             weekNumber *= -1;
+
             if (weekNumber % 2 == 0) {
                 weekNumber = Constants.EVEN_WEEK;
             } else {
