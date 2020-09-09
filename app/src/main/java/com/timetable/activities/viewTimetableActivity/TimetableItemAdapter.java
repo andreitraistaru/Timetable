@@ -91,7 +91,7 @@ public class TimetableItemAdapter extends RecyclerView.Adapter<RecyclerView.View
         ((TimetableItemViewHolder) holder).setColor(entry.getColor());
         ((TimetableItemViewHolder) holder).setDuration(entry.getDuration());
 
-        if (!entry.isBreakTime() || !entry.isHolidayTime()) {
+        if (!entry.isBreakTime() && !entry.isHolidayTime()) {
             ((TimetableItemViewHolder) holder).getCardView().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -116,6 +116,8 @@ public class TimetableItemAdapter extends RecyclerView.Adapter<RecyclerView.View
                     ((TextView) dialogView.findViewById(R.id.frequency_dialog_view_class_interval)).setText(view.getResources().getString(R.string.frequency_timetable_entry_dialog, entry.getFrequency()));
                 }
             });
+        } else {
+            ((TimetableItemViewHolder) holder).getCardView().setOnClickListener(null);
         }
     }
 

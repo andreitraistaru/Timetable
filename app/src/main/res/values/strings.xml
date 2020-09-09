@@ -77,10 +77,12 @@
 
     <string name="button_select_date_description">Select date</string>
 
-    <string name="start_day_dialog_add_holiday">Choose the first day of the holiday:\n\t\t\t%02d.%02d.%d</string>
-    <string name="end_day_dialog_add_holiday">Choose the last day of the holiday:\n\t\t\t%02d.%02d.%d</string>
-    <string name="working_week_dialog_add_holiday">Holiday during working week</string>
+    <string name="start_day_dialog_add_holiday">Choose the first day of the holiday (must be a monday):\n\n\t\t\t%02d.%02d.%d</string>
+    <string name="end_day_dialog_add_holiday">Choose the last day of the holiday (must be a sunday):\n\n\t\t\t%02d.%02d.%d</string>
+    <string name="working_week_dialog_add_holiday">Holiday during working week\n(this holiday DOES NOT alter week numbering)</string>
     <string name="save_dialog_add_holiday">Save</string>
+    <string name="error_not_monday_add_holiday">Must be a Monday!</string>
+    <string name="error_not_sunday_add_holiday">Must be a Sunday!</string>
 
     <string name="choose_dialog_add_holiday">Choose selected date</string>
 

@@ -22,14 +22,10 @@ import com.timetable.database.subjects.Subject;
 import com.timetable.database.subjects.SubjectComponent;
 import com.timetable.database.subjects.SubjectsDatabase;
 import com.timetable.utils.Constants;
-import com.timetable.utils.GlobalVariables;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
-import static java.time.temporal.ChronoUnit.DAYS;
 
 public class DayFragment extends Fragment {
     private int day;
