@@ -10,24 +10,20 @@ import java.util.Locale;
 
 public class HolidayConverters {
     @TypeConverter
-    public static Date toDate (String string) {
-        DateFormat dateFormat = new SimpleDateFormat("dd.mm.yyyy", Locale.getDefault());
-
-        try {
-            return dateFormat.parse(string);
-        } catch (ParseException e) {
+    public static Date toDate (long data) {
+        if (data == -1) {
             return null;
         }
+
+        return new Date(data);
     }
 
     @TypeConverter
-    public static String fromDate(Date date) {
-        if (date == null) {
-            return null;
+    public static long fromDate(Date data) {
+        if (data == null) {
+            return -1;
         }
 
-        DateFormat dateFormat = new SimpleDateFormat("dd.mm.yyyy", Locale.getDefault());
-
-        return dateFormat.format(date);
+        return data.getTime();
     }
 }

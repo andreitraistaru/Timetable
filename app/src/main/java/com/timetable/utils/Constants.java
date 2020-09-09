@@ -28,12 +28,17 @@ public class Constants {
 
     public static final long EVEN_WEEK = -2;
     public static final long ODD_WEEK = -1;
+    public static final long HOLIDAY_WEEK = -3;
 
     private static final String SHARED_PREFERENCE_NAME = "YearStructureSharedPreferences";
 
     public static int getSemesterStartDefault(int returnValue) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date());
+
+        while (calendar.get(Calendar.DAY_OF_WEEK) != Calendar.MONDAY) {
+            calendar.add(Calendar.DATE, 1);
+        }
 
         switch (returnValue) {
             case 0:

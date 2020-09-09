@@ -2,29 +2,29 @@ package com.timetable.activities.viewTimetableActivity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.ContextThemeWrapper;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.PopupMenu;
-import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.timetable.R;
-import com.timetable.activities.addSubjectActivity.AddSubjectActivity;
+import com.timetable.database.holidays.Holiday;
 import com.timetable.database.holidays.HolidaysDatabase;
 import com.timetable.utils.Constants;
 import com.timetable.utils.GlobalVariables;
 
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
@@ -96,7 +96,7 @@ public class ViewTimetableActivity extends AppCompatActivity {
 
     private void getWeekNumber() {
         SharedPreferences sharedPreferences = getSharedPreferences(Constants.getSharedPreferenceName(), MODE_PRIVATE);
-        Calendar semesterStart = Calendar.getInstance();
+        final Calendar semesterStart = Calendar.getInstance();
         Date currentDate = new Date();
         Date semesterStartDate;
 
@@ -118,6 +118,28 @@ public class ViewTimetableActivity extends AppCompatActivity {
                 weekNumber = Constants.ODD_WEEK;
             }
         }
+
+        HolidaysDatabase.getDatabase(this).getHolidayDao().getAllHolidays().observe(this, new Observer<List<Holiday>>() {
+            @Override
+            public void onChanged(List<Holiday> data) {
+                Calendar now = Calendar.getInstance();
+                now.setTime(new Date());
+
+                for (Holiday holiday : data) {
+                    if (holiday.isHolidayAtDate(now)) {
+                        weekNumber = Constants.HOLIDAY_WEEK;
+                        break;
+                    }
+
+                    if (!holiday.isWorkingWeek() && holiday.isPastHoliday(now)) {
+                        weekNumber-= holiday.getDurationInWeeksAfterDate(semesterStart);
+                    }
+                }
+
+                setTitle();
+                adapter.setWeekNumber(weekNumber);
+            }
+        });
     }
 
     private void setTitle() {
@@ -129,6 +151,8 @@ public class ViewTimetableActivity extends AppCompatActivity {
             setTitle(getResources().getString(R.string.view_timetable_activity_title_even_week));
         } else if (weekNumber == Constants.ODD_WEEK) {
             setTitle(getResources().getString(R.string.view_timetable_activity_title_odd_week));
+        } else if (weekNumber == Constants.HOLIDAY_WEEK) {
+            setTitle(getResources().getString(R.string.view_timetable_activity_title_holiday_week));
         } else {
             setTitle(getResources().getString(R.string.view_timetable_activity_title_current_week, weekNumber));
         }

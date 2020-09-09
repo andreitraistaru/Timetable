@@ -95,10 +95,24 @@ public class YearStructureActivity extends AppCompatActivity {
         final CalendarView calendar = dialogView.findViewById(R.id.calendarView_dialog_calendar);
         final Calendar selectedDate = Calendar.getInstance();
 
+        while (selectedDate.get(Calendar.DAY_OF_WEEK) != Calendar.MONDAY) {
+            selectedDate.add(Calendar.DATE, 1);
+        }
+
+        calendar.setDate(selectedDate.getTimeInMillis());
+
         calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView calendarView, int year, int month, int day) {
-                selectedDate.set(year, month, day);
+                Calendar newDate = Calendar.getInstance();
+                newDate.set(year, month, day);
+
+                if (newDate.get(Calendar.DAY_OF_WEEK) == Calendar.MONDAY) {
+                    selectedDate.set(year, month, day);
+                } else {
+                    calendar.setDate(selectedDate.getTimeInMillis());
+                    Toast.makeText(YearStructureActivity.this, getResources().getString(R.string.error_not_monday_starting_date_year_structure), Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -205,7 +219,7 @@ public class YearStructureActivity extends AppCompatActivity {
                     if (newDate.get(Calendar.DAY_OF_WEEK) == Calendar.MONDAY) {
                         selectedDate.set(year, month, day);
                     } else {
-                        calendarView.setDate(selectedDate.getTimeInMillis());
+                        calendar.setDate(selectedDate.getTimeInMillis());
                         Toast.makeText(YearStructureActivity.this, getResources().getString(R.string.error_not_monday_add_holiday), Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -230,7 +244,7 @@ public class YearStructureActivity extends AppCompatActivity {
                     if (newDate.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
                         selectedDate.set(year, month, day);
                     } else {
-                        calendarView.setDate(selectedDate.getTimeInMillis());
+                        calendar.setDate(selectedDate.getTimeInMillis());
                         Toast.makeText(YearStructureActivity.this, getResources().getString(R.string.error_not_monday_add_holiday), Toast.LENGTH_SHORT).show();
                     }
                 }

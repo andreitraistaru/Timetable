@@ -77,8 +77,8 @@
 
     <string name="button_select_date_description">Select date</string>
 
-    <string name="start_day_dialog_add_holiday">Choose the first day of the holiday (must be a monday):\n\n\t\t\t%02d.%02d.%d</string>
-    <string name="end_day_dialog_add_holiday">Choose the last day of the holiday (must be a sunday):\n\n\t\t\t%02d.%02d.%d</string>
+    <string name="start_day_dialog_add_holiday">Choose the first day of the holiday (must be a Monday):\n\n\t\t\t%02d.%02d.%d</string>
+    <string name="end_day_dialog_add_holiday">Choose the last day of the holiday (must be a Sunday):\n\n\t\t\t%02d.%02d.%d</string>
     <string name="working_week_dialog_add_holiday">Holiday during working week\n(this holiday DOES NOT alter week numbering)</string>
     <string name="save_dialog_add_holiday">Save</string>
     <string name="error_not_monday_add_holiday">Must be a Monday!</string>
@@ -87,8 +87,8 @@
     <string name="choose_dialog_add_holiday">Choose selected date</string>
 
     <string name="semester_duration_year_structure">Number of weeks in semester:</string>
-    <string name="starting_date_year_structure">First day of the semester:\n\t\t\t%02d.%02d.%d</string>
-    <string name="ending_date_year_structure">(Last day of the semester:\t%02d.%02d.%d)</string>
+    <string name="starting_date_year_structure">First day of the semester\n(must be a Monday):\n\n\t\t\t%02d.%02d.%d</string>
+    <string name="error_not_monday_starting_date_year_structure">Must be a Monday!</string>
     <string name="subjects_year_structure">Subjects during the semester:</string>
     <string name="add_subjects_year_structure">Add new subject</string>
     <string name="holidays_year_structure">Holidays during the semester:</string>
@@ -113,6 +113,7 @@
     <string name="view_timetable_activity_title_current_week">Timetable (Week %d)</string>
     <string name="view_timetable_activity_title_even_week">Timetable (Even Weeks)</string>
     <string name="view_timetable_activity_title_odd_week">Timetable (Odd Weeks)</string>
+    <string name="view_timetable_activity_title_holiday_week">Timetable (Holiday)</string>
 
     <string name="start_timetable_entry">%02d:00</string>
     <string name="type_timetable_entry">(%s)</string>

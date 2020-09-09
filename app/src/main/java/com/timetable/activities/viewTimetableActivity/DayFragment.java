@@ -79,13 +79,7 @@ public class DayFragment extends Fragment {
     }
 
     private boolean checkHoliday() {
-        if (weekNumber == Constants.ODD_WEEK || weekNumber == Constants.EVEN_WEEK) {
-            return false;
-        }
-
-
-
-        return true;
+        return weekNumber == Constants.HOLIDAY_WEEK;
     }
 
     private boolean checkWeek(int frequency) {
