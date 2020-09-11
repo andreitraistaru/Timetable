@@ -1,9 +1,6 @@
 package com.timetable.activities.viewTimetableActivity;
 
 import android.app.AlertDialog;
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,11 +8,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.timetable.R;
-import com.timetable.activities.yearStructureActivity.YearStructureActivity;
 
 import java.util.ArrayList;
 
@@ -103,7 +98,7 @@ public class TimetableItemAdapter extends RecyclerView.Adapter<RecyclerView.View
                     final AlertDialog alertDialog = builder.create();
                     alertDialog.show();
 
-                    ((ConstraintLayout) dialogView.findViewById(R.id.constraintLayout_dialog_view_class_interval)).setBackgroundColor(entry.getColor());
+                    dialogView.findViewById(R.id.constraintLayout_dialog_view_class_interval).setBackgroundColor(entry.getColor());
                     ((TextView) dialogView.findViewById(R.id.subject_dialog_view_class_interval)).setText(entry.getName());
                     ((TextView) dialogView.findViewById(R.id.activityType_dialog_view_class_interval)).setText(view.getResources().getString(R.string.type_timetable_entry_dialog, entry.getType()));
                     ((TextView) dialogView.findViewById(R.id.subjectDescription_dialog_view_class_interval)).setText(view.getResources().getString(R.string.subject_description_timetable_entry_dialog, entry.getSubjectDescription()));

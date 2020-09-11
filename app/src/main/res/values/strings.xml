@@ -13,6 +13,7 @@
     <string name="edit_subject_activity_title">Edit Subject</string>
 
     <string name="choose_timetable_view_timetable">Choose timetable</string>
+    <string name="year_structure_view_timetable">Change year\'s structure</string>
     <string name="title_activity_settings">SettingsActivity</string>
 
     <string name="monday">Monday</string>

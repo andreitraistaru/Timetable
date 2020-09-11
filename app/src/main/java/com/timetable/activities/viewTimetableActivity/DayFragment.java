@@ -1,7 +1,6 @@
 package com.timetable.activities.viewTimetableActivity;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,6 +34,7 @@ public class DayFragment extends Fragment {
     private ArrayList<TimetableEntry> timetableEntries;
     private TimetableItemAdapter adapter;
 
+    public DayFragment() {}
     public DayFragment(int day, long weekNumber) {
         super();
 
@@ -48,6 +48,12 @@ public class DayFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_day, container, false);
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView_fragment_day);
+
+        if (savedInstanceState != null) {
+            day = savedInstanceState.getInt("day");
+            weekNumber = savedInstanceState.getLong("weekNumber");
+            timetableEntries = new ArrayList<>();
+        }
 
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         adapter = new TimetableItemAdapter();

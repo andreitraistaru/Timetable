@@ -1,28 +1,30 @@
 package com.timetable.activities.viewTimetableActivity;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
-import androidx.viewpager2.widget.ViewPager2;
-
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.ContextThemeWrapper;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.PopupMenu;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.viewpager2.widget.ViewPager2;
+
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.timetable.R;
+import com.timetable.activities.yearStructureActivity.YearStructureActivity;
 import com.timetable.database.holidays.Holiday;
 import com.timetable.database.holidays.HolidaysDatabase;
 import com.timetable.utils.Constants;
 import com.timetable.utils.GlobalVariables;
 
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -63,33 +65,43 @@ public class ViewTimetableActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        final Context popupContext = new ContextThemeWrapper(this, R.style.popupMenu);
-        PopupMenu popupMenu = new PopupMenu(popupContext, findViewById(R.id.choose_timetable_view_timetable_activity));
-        popupMenu.getMenuInflater().inflate(R.menu.popup_timetable_displayed, popupMenu.getMenu());
+        switch (item.getItemId()) {
+            case R.id.choose_timetable_view_timetable_activity:
+                final Context popupContext = new ContextThemeWrapper(this, R.style.popupMenu);
+                PopupMenu popupMenu = new PopupMenu(popupContext, findViewById(R.id.choose_timetable_view_timetable_activity));
+                popupMenu.getMenuInflater().inflate(R.menu.popup_timetable_displayed, popupMenu.getMenu());
 
-        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem menuItem) {
-                switch (menuItem.getItemId()) {
-                    case R.id.current_week_option:
-                        getWeekNumber();
-                        break;
-                    case R.id.even_week_option:
-                        weekNumber = Constants.EVEN_WEEK;
-                        break;
-                    case R.id.odd_week_option:
-                        weekNumber = Constants.ODD_WEEK;
-                        break;
-                }
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem menuItem) {
+                        switch (menuItem.getItemId()) {
+                            case R.id.current_week_option:
+                                getWeekNumber();
+                                break;
+                            case R.id.even_week_option:
+                                weekNumber = Constants.EVEN_WEEK;
+                                break;
+                            case R.id.odd_week_option:
+                                weekNumber = Constants.ODD_WEEK;
+                                break;
+                        }
 
-                setTitle();
-                adapter.setWeekNumber(weekNumber);
+                        setTitle();
+                        adapter.setWeekNumber(weekNumber);
 
-                return true;
-            }
-        });
+                        return true;
+                    }
+                });
 
-        popupMenu.show();
+                popupMenu.show();
+
+                break;
+            case R.id.year_structure_view_timetable_activity:
+                startActivity(new Intent(this, YearStructureActivity.class));
+
+                break;
+            default:
+        }
 
         return true;
     }
@@ -156,5 +168,10 @@ public class ViewTimetableActivity extends AppCompatActivity {
         } else {
             setTitle(getResources().getString(R.string.view_timetable_activity_title_current_week, weekNumber));
         }
+    }
+
+    @Override
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+
     }
 }
