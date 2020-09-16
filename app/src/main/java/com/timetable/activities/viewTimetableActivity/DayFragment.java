@@ -49,12 +49,6 @@ public class DayFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_day, container, false);
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView_fragment_day);
 
-        if (savedInstanceState != null) {
-            day = savedInstanceState.getInt("day");
-            weekNumber = savedInstanceState.getLong("weekNumber");
-            timetableEntries = new ArrayList<>();
-        }
-
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         adapter = new TimetableItemAdapter();
         recyclerView.setAdapter(adapter);

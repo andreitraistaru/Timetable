@@ -3,7 +3,6 @@ package com.timetable.activities.viewTimetableActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.ContextThemeWrapper;
 import android.view.Menu;
@@ -168,10 +167,5 @@ public class ViewTimetableActivity extends AppCompatActivity {
         } else {
             setTitle(getResources().getString(R.string.view_timetable_activity_title_current_week, weekNumber));
         }
-    }
-
-    @Override
-    public void onConfigurationChanged(@NonNull Configuration newConfig) {
-
     }
 }
