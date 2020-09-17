@@ -182,7 +182,7 @@ public class YearStructureActivity extends AppCompatActivity {
             }
         });
     }
-    
+
     public void chooseHolidayPeriod(View view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
         ViewGroup viewGroup = findViewById(android.R.id.content);
