@@ -1,9 +1,5 @@
 package com.timetable.activities.addSubjectActivity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,11 +15,17 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.rtugeek.android.colorseekbar.ColorSeekBar;
 import com.timetable.R;
 import com.timetable.database.subjects.ClassInterval;
 import com.timetable.database.subjects.Subject;
 import com.timetable.database.subjects.SubjectComponent;
+import com.timetable.database.subjects.SubjectConverters;
 import com.timetable.database.subjects.SubjectsDatabase;
 import com.timetable.utils.Constants;
 import com.timetable.utils.GlobalVariables;
@@ -31,7 +33,9 @@ import com.timetable.utils.GlobalVariables;
 import java.util.ArrayList;
 
 public class AddSubjectActivity extends AppCompatActivity {
-    Subject subjectToEdit;
+    private final String subjectComponentsBundleKey = "subjectComponents";
+    private final String subjectToEditIdBundleKey = "subjectToEditId";
+    private Subject subjectToEdit = null;
     private ArrayList<ClassInterval> lecturesIntervals;
     private ArrayList<ClassInterval> seminarsIntervals;
     private ArrayList<ClassInterval> laboratoriesIntervals;
@@ -49,6 +53,12 @@ public class AddSubjectActivity extends AppCompatActivity {
         laboratoriesIntervals = new ArrayList<>();
         othersIntervals = new ArrayList<>();
 
+        if (savedInstanceState != null) {
+            setUpRecyclerViewsAdapters();
+
+            return;
+        }
+
         Intent intent = getIntent();
         String subjectId = intent.getStringExtra(GlobalVariables.getSubjectIdExtra());
 
@@ -61,6 +71,45 @@ public class AddSubjectActivity extends AppCompatActivity {
         }
 
         setUpActivityForNewSubject();
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putString(subjectComponentsBundleKey, SubjectConverters.fromArraySubjectComponents(collectDataFromUI().getComponents()));
+        if (subjectToEdit != null) {
+            outState.putString(subjectToEditIdBundleKey, String.valueOf(subjectToEdit.getId()));
+        } else {
+            outState.putString(subjectToEditIdBundleKey, "");
+        }
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        showFields(findViewById(R.id.lecturesCheckBox_activity_add_subject));
+        showFields(findViewById(R.id.seminarsCheckBox_activity_add_subject));
+        showFields(findViewById(R.id.laboratoriesCheckBox_activity_add_subject));
+        showFields(findViewById(R.id.othersCheckBox_activity_add_subject));
+
+        ArrayList<SubjectComponent> components = SubjectConverters.toArraySubjectComponents(savedInstanceState.getString(subjectComponentsBundleKey));
+
+        for (SubjectComponent component : components) {
+            setUpSubjectComponentsForEditSubject(component);
+        }
+
+        final String subjectToEditId = savedInstanceState.getString(subjectToEditIdBundleKey);
+
+        if (subjectToEditId != null && !subjectToEditId.isEmpty()) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    subjectToEdit = SubjectsDatabase.getDatabase(AddSubjectActivity.this).getSubjectDao().getSubjectWithId(Integer.parseInt(subjectToEditId));
+                }
+            }).start();
+        }
     }
 
     public void showFields(View view) {
