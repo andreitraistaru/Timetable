@@ -30,6 +30,9 @@ import java.util.List;
 import static java.time.temporal.ChronoUnit.DAYS;
 
 public class ViewTimetableActivity extends AppCompatActivity {
+    private final String weekNumberBundleKey = "weekNumber";
+    private boolean deepUpdateOnResume = true;  // this is used to auto-update timetable after year structure
+                                                // is changed and ViewTimetableActivity is resumed
     private long weekNumber;
     private TabLayout tabLayout;
     private TimetableFragmentAdapter adapter;
@@ -39,8 +42,13 @@ public class ViewTimetableActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_timetable);
 
-        getWeekNumber();
-        setTitle();
+        if (savedInstanceState != null) {
+            weekNumber = savedInstanceState.getLong(weekNumberBundleKey);
+            deepUpdateOnResume = false;
+        } else {
+            weekNumber = Constants.ODD_WEEK;
+            deepUpdateOnResume = true;
+        }
 
         tabLayout = findViewById(R.id.tabLayout_view_timetable_activity);
         ViewPager2 viewPager = findViewById(R.id.viewPager_view_timetable_activity);
@@ -53,6 +61,21 @@ public class ViewTimetableActivity extends AppCompatActivity {
                 tab.setText(Constants.getWeekDay(tabLayout.getContext(), position));
             }
         }).attach();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        updateWeekNumber(deepUpdateOnResume);
+        deepUpdateOnResume = true;
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putLong(weekNumberBundleKey, weekNumber);
     }
 
     @Override
@@ -75,18 +98,17 @@ public class ViewTimetableActivity extends AppCompatActivity {
                     public boolean onMenuItemClick(MenuItem menuItem) {
                         switch (menuItem.getItemId()) {
                             case R.id.current_week_option:
-                                getWeekNumber();
+                                updateWeekNumber(true);
                                 break;
                             case R.id.even_week_option:
                                 weekNumber = Constants.EVEN_WEEK;
+                                updateWeekNumber(false);
                                 break;
                             case R.id.odd_week_option:
                                 weekNumber = Constants.ODD_WEEK;
+                                updateWeekNumber(false);
                                 break;
                         }
-
-                        setTitle();
-                        adapter.setWeekNumber(weekNumber);
 
                         return true;
                     }
@@ -105,52 +127,57 @@ public class ViewTimetableActivity extends AppCompatActivity {
         return true;
     }
 
-    private void getWeekNumber() {
-        SharedPreferences sharedPreferences = getSharedPreferences(Constants.getSharedPreferenceName(), MODE_PRIVATE);
-        final Calendar semesterStart = Calendar.getInstance();
-        Date currentDate = new Date();
-        Date semesterStartDate;
+    private void updateWeekNumber(boolean deepUpdate) {
+        if (deepUpdate) {
+            SharedPreferences sharedPreferences = getSharedPreferences(Constants.getSharedPreferenceName(), MODE_PRIVATE);
+            final Calendar semesterStart = Calendar.getInstance();
+            Date currentDate = new Date();
+            Date semesterStartDate;
 
-        semesterStart.set(sharedPreferences.getInt("semester_start_year", Constants.getSemesterStartDefault(2)),
-                sharedPreferences.getInt("semester_start_month", Constants.getSemesterStartDefault(1)),
-                sharedPreferences.getInt("semester_start_day", Constants.getSemesterStartDefault(0)), 0, 0, 0);
-        semesterStartDate = semesterStart.getTime();
+            semesterStart.set(sharedPreferences.getInt("semester_start_year", Constants.getSemesterStartDefault(2)),
+                    sharedPreferences.getInt("semester_start_month", Constants.getSemesterStartDefault(1)),
+                    sharedPreferences.getInt("semester_start_day", Constants.getSemesterStartDefault(0)), 0, 0, 0);
+            semesterStartDate = semesterStart.getTime();
 
-        weekNumber = 1 + ((DAYS.between(semesterStartDate.toInstant(), currentDate.toInstant())) / GlobalVariables.getNumberOfDays());
+            weekNumber = 1 + ((DAYS.between(semesterStartDate.toInstant(), currentDate.toInstant())) / GlobalVariables.getNumberOfDays());
 
-        if (weekNumber == 1 && currentDate.before(semesterStartDate)) {
-            weekNumber = Constants.ODD_WEEK;
-        } else if (weekNumber <= 0) {
-            weekNumber *= -1;
-
-            if (weekNumber % 2 == 0) {
-                weekNumber = Constants.EVEN_WEEK;
-            } else {
+            if (weekNumber == 1 && currentDate.before(semesterStartDate)) {
                 weekNumber = Constants.ODD_WEEK;
-            }
-        }
+            } else if (weekNumber <= 0) {
+                weekNumber *= -1;
 
-        HolidaysDatabase.getDatabase(this).getHolidayDao().getAllHolidays().observe(this, new Observer<List<Holiday>>() {
-            @Override
-            public void onChanged(List<Holiday> data) {
-                Calendar now = Calendar.getInstance();
-                now.setTime(new Date());
-
-                for (Holiday holiday : data) {
-                    if (holiday.isHolidayAtDate(now)) {
-                        weekNumber = Constants.HOLIDAY_WEEK;
-                        break;
-                    }
-
-                    if (!holiday.isWorkingWeek() && holiday.isPastHoliday(now)) {
-                        weekNumber-= holiday.getDurationInWeeksAfterDate(semesterStart);
-                    }
+                if (weekNumber % 2 == 0) {
+                    weekNumber = Constants.EVEN_WEEK;
+                } else {
+                    weekNumber = Constants.ODD_WEEK;
                 }
-
-                setTitle();
-                adapter.setWeekNumber(weekNumber);
             }
-        });
+
+            HolidaysDatabase.getDatabase(this).getHolidayDao().getAllHolidays().observe(this, new Observer<List<Holiday>>() {
+                @Override
+                public void onChanged(List<Holiday> data) {
+                    Calendar now = Calendar.getInstance();
+                    now.setTime(new Date());
+
+                    for (Holiday holiday : data) {
+                        if (holiday.isHolidayAtDate(now)) {
+                            weekNumber = Constants.HOLIDAY_WEEK;
+                            break;
+                        }
+
+                        if (!holiday.isWorkingWeek() && holiday.isPastHoliday(now)) {
+                            weekNumber-= holiday.getDurationInWeeksAfterDate(semesterStart);
+                        }
+                    }
+
+                    setTitle();
+                    adapter.setWeekNumber(weekNumber);
+                }
+            });
+        } else {
+            setTitle();
+            adapter.setWeekNumber(weekNumber);
+        }
     }
 
     private void setTitle() {

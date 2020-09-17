@@ -21,31 +21,51 @@ import com.timetable.database.subjects.Subject;
 import com.timetable.database.subjects.SubjectComponent;
 import com.timetable.database.subjects.SubjectsDatabase;
 import com.timetable.utils.Constants;
+import com.timetable.utils.GlobalVariables;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class DayFragment extends Fragment {
+    private final String dayBundleKey = "day";
+    private static ArrayList<DayFragment> instances = null;
+    private static long weekNumber;
     private int day;
-    private long weekNumber;
-    private List<Subject> subjects = null;
-    private List<Holiday> holidays = null;
+    private static List<Subject> subjects = null;
+    private static List<Holiday> holidays = null;
     private ArrayList<TimetableEntry> timetableEntries;
-    private TimetableItemAdapter adapter;
+    private TimetableItemAdapter adapter = null;
 
     public DayFragment() {}
-    public DayFragment(int day, long weekNumber) {
+    private DayFragment(int day) {
         super();
 
         this.day = day;
-        this.weekNumber = weekNumber;
-        this.timetableEntries = new ArrayList<>();
+    }
+
+    public static DayFragment getInstance(int day, long weekNumber) {
+        if (instances == null) {
+            DayFragment.weekNumber = weekNumber;
+            instances = new ArrayList<>(GlobalVariables.getNumberOfDays());
+
+            for (int i = 0; i < GlobalVariables.getNumberOfDays(); i++) {
+                instances.add(i, new DayFragment(i));
+            }
+        }
+
+        return instances.get(day);
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
+        if (savedInstanceState != null) {
+            day = savedInstanceState.getInt(dayBundleKey);
+            instances.remove(day);
+            instances.add(day, this);
+        }
+
         View view = inflater.inflate(R.layout.fragment_day, container, false);
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView_fragment_day);
 
@@ -72,10 +92,23 @@ public class DayFragment extends Fragment {
         return view;
     }
 
-    public void setWeekNumber(long weekNumber, Context context) {
-        this.weekNumber = weekNumber;
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
 
-        updateTimetable(context);
+        outState.putInt(dayBundleKey, day);
+    }
+
+    public static void setWeekNumber(long weekNumber, Context context) {
+        DayFragment.weekNumber = weekNumber;
+
+        if (instances == null) {
+            return;
+        }
+
+        for (DayFragment fragment : instances) {
+            fragment.updateTimetable(context);
+        }
     }
 
     private boolean checkHoliday() {

@@ -9,18 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
-        <activity android:name=".activities.addSubjectActivity.AddSubjectActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name=".activities.viewTimetableActivity.ViewTimetableActivity"
-            android:screenOrientation="portrait" >
+        <activity android:name=".activities.addSubjectActivity.AddSubjectActivity" />
+        <activity android:name=".activities.viewTimetableActivity.ViewTimetableActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.yearStructureActivity.YearStructureActivity"
-            android:screenOrientation="portrait" />
+        <activity android:name=".activities.yearStructureActivity.YearStructureActivity" />
     </application>
 
 </manifest>

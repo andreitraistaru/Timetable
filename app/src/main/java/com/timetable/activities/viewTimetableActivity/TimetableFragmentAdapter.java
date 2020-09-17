@@ -9,39 +9,31 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.timetable.utils.GlobalVariables;
 
-import java.util.ArrayList;
-
 public class TimetableFragmentAdapter extends FragmentStateAdapter {
-    private ArrayList<DayFragment> fragments;
     private Context context;
+    private long weekNumber;
 
     public TimetableFragmentAdapter(@NonNull FragmentActivity fragmentActivity, long weekNumber, Context context) {
         super(fragmentActivity);
 
-        this.fragments = new ArrayList<>(GlobalVariables.getNumberOfDays());
+        this.weekNumber = weekNumber;
         this.context = context;
-
-        for (int i = 0; i < GlobalVariables.getNumberOfDays(); i++) {
-            fragments.add(new DayFragment(i, weekNumber));
-        }
     }
 
     @NonNull
     @Override
     public Fragment createFragment(int position) {
-        return fragments.get(position);
+        return DayFragment.getInstance(position, weekNumber);
     }
 
     @Override
     public int getItemCount() {
-        return fragments.size();
+        return GlobalVariables.getNumberOfDays();
     }
 
     public void setWeekNumber(long weekNumber) {
-        for (DayFragment fragment : fragments) {
-            fragment.setWeekNumber(weekNumber, context);
-        }
+        this.weekNumber = weekNumber;
 
-        notifyDataSetChanged();
+        DayFragment.setWeekNumber(weekNumber, context);
     }
 }
