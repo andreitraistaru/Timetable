@@ -1,26 +1,23 @@
 package com.timetable.activities.yearStructureActivity;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.timetable.R;
 import com.timetable.activities.addSubjectActivity.AddSubjectActivity;
@@ -31,7 +28,6 @@ import com.timetable.database.subjects.SubjectsDatabase;
 import com.timetable.utils.Constants;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 public class YearStructureActivity extends AppCompatActivity {
@@ -186,7 +182,7 @@ public class YearStructureActivity extends AppCompatActivity {
             }
         });
     }
-
+    
     public void chooseHolidayPeriod(View view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
         ViewGroup viewGroup = findViewById(android.R.id.content);
