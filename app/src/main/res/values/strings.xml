@@ -13,6 +13,9 @@
     <string name="edit_subject_activity_title">Edit Subject</string>
 
     <string name="choose_timetable_view_timetable">Choose timetable</string>
+    <string name="new_reminder_view_reminders">New Reminder</string>
+    <string name="remainders_view_timetable">Todo lists</string>
+    <string name="overflow_view_timetable">Overflow</string>
     <string name="year_structure_view_timetable">Change year\'s structure</string>
     <string name="title_activity_settings">SettingsActivity</string>
 
@@ -64,6 +67,8 @@
     <string name="laboratoriesCheckBox_activity_add_subject">Add Laboratories Time</string>
     <string name="othersCheckBox_activity_add_subject">Add Other Activities Time</string>
 
+    <string name="titleInfo_dialog_add_reminder">Type in reminder\'s title (required):</string>
+
     <string name="location_dialog_add_class">Type in location (required):</string>
     <string name="day_dialog_add_class">Choose the day of week for the activity:</string>
     <string name="start_hour_dialog_add_class">Choose a start hour for the activity: %d</string>
@@ -99,6 +104,8 @@
     <string name="starting_hour_item_class_interval">Starts at: %d</string>
     <string name="ending_hour_item_class_interval">Ends at: %d</string>
 
+    <string name="deadline_item_reminder">Deadline: %02d.%02d.%02d %02d:%02d</string>
+
     <string name="working_week_item_holiday">Working week</string>
     <string name="holiday_week_item_holiday">Holiday week</string>
     <string name="start_date_item_holiday">Starts at: %02d.%02d.%d</string>
@@ -130,4 +137,6 @@
     <string name="start_timetable_entry_dialog">Starts at: %02d:00</string>
     <string name="end_timetable_entry_dialog">Ends at: %02d:00</string>
     <string name="frequency_timetable_entry_dialog">Frequency: %s</string>
+
+    <string name="title_view_todo_lists_activity">ToDos</string>
 </resources>

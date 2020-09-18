@@ -1,14 +1,7 @@
 package com.timetable.database.holidays;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-
 import androidx.room.Entity;
-import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
-
-import com.timetable.R;
-import com.timetable.utils.Constants;
 
 import java.util.Calendar;
 import java.util.Date;

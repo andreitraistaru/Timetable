@@ -17,6 +17,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.timetable.R;
+import com.timetable.activities.viewRemindersActivity.ViewRemindersActivity;
 import com.timetable.activities.yearStructureActivity.YearStructureActivity;
 import com.timetable.database.holidays.Holiday;
 import com.timetable.database.holidays.HolidaysDatabase;
@@ -109,6 +110,10 @@ public class ViewTimetableActivity extends AppCompatActivity {
                 });
 
                 popupMenu.show();
+
+                break;
+            case R.id.remainders_view_timetable_activity:
+                startActivity(new Intent(this, ViewRemindersActivity.class));
 
                 break;
             case R.id.year_structure_view_timetable_activity:

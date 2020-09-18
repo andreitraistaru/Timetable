@@ -11,9 +11,26 @@
         app:showAsAction="always" />
 
     <item
-        android:id="@+id/year_structure_view_timetable_activity"
-        android:orderInCategory="100"
-        android:title="@string/year_structure_view_timetable"
-        android:icon="@drawable/year_structure_menu_icon"
-        app:showAsAction="ifRoom" />
+        android:id="@+id/overflow_view_timetable_activity"
+        android:orderInCategory="200"
+        android:title="@string/overflow_view_timetable"
+        android:icon="@drawable/overflow_menu_icon"
+        app:showAsAction="always">
+
+            <menu>
+                <item
+                    android:id="@+id/remainders_view_timetable_activity"
+                    android:orderInCategory="300"
+                    android:title="@string/remainders_view_timetable"
+                    android:icon="@drawable/remainders_menu_icon"
+                    app:showAsAction="ifRoom" />
+
+                <item
+                    android:id="@+id/year_structure_view_timetable_activity"
+                    android:orderInCategory="400"
+                    android:title="@string/year_structure_view_timetable"
+                    android:icon="@drawable/year_structure_menu_icon"
+                    app:showAsAction="ifRoom" />
+            </menu>
+    </item>
 </menu>

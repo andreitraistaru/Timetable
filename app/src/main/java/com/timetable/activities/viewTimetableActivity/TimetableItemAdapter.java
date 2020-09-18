@@ -31,7 +31,7 @@ public class TimetableItemAdapter extends RecyclerView.Adapter<RecyclerView.View
             type = itemView.findViewById(R.id.classType_item_timetable);
             location = itemView.findViewById(R.id.classLocation_item_timetable);
             end = itemView.findViewById(R.id.classEndTime_item_timetable);
-            cardView = itemView.findViewById(R.id.cardView_item_timetable);
+            cardView = itemView.findViewById(R.id.cardView_item_reminder);
         }
 
         public CardView getCardView() {

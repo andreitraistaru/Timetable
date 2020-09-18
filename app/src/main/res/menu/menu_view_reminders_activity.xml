@@ -1,0 +1,12 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.timetable.activities.MainActivity">
+
+    <item
+        android:id="@+id/new_reminder_view_reminder_list_activity"
+        android:orderInCategory="100"
+        android:title="@string/new_reminder_view_reminders"
+        android:icon="@drawable/new_reminder_menu_icon"
+        app:showAsAction="always" />
+</menu>
