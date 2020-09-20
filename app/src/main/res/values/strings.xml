@@ -71,9 +71,11 @@
     <string name="detailsInfo_dialog_add_reminder">Type in reminder\'s details:</string>
     <string name="deadlineInfo_dialog_add_reminder">Set a deadline</string>
     <string name="deadline_default_dialog_add_reminder">Not set yet</string>
+    <string name="deadline_dialog_add_reminder">%02d.%02d.%d %02d:%02d</string>
     <string name="change_deadline_button_dialog_add_reminder">Change deadline</string>
     <string name="save_dialog_add_reminder">Save</string>
     <string name="no_title_error_dialog_add_reminder">No title provided!</string>
+    <string name="no_deadline_error_dialog_add_reminder">Deadline not set!</string>
 
     <string name="location_dialog_add_class">Type in location (required):</string>
     <string name="day_dialog_add_class">Choose the day of week for the activity:</string>

@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey;
 import java.util.Date;
 
 @Entity (tableName = "reminders")
-public class Reminder {
+public class Reminder implements Comparable<Reminder> {
     @PrimaryKey(autoGenerate = true)
     private int id;
 
@@ -47,5 +47,10 @@ public class Reminder {
     }
     public void setDetails(String details) {
         this.details = details;
+    }
+
+    @Override
+    public int compareTo(Reminder reminder) {
+        return Long.compare(deadline.getTime(), reminder.getDeadline().getTime());
     }
 }

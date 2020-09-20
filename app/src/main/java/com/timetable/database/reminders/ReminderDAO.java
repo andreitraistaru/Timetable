@@ -5,6 +5,7 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import java.util.List;
 
@@ -15,6 +16,9 @@ public interface ReminderDAO {
 
     @Delete
     void deleteReminder(Reminder reminder);
+
+    @Update
+    void updateReminder(Reminder reminder);
 
     @Query("SELECT * FROM reminders")
     LiveData<List<Reminder>> getAllReminders();
