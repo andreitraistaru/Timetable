@@ -35,4 +35,109 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titleInfo_dialog_add_reminder"
         android:autofillHints="" />
+
+    <com.rtugeek.android.colorseekbar.ColorSeekBar
+        android:id="@+id/color_dialog_add_reminder"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:barHeight="12dp"
+        app:barRadius="4dp"
+        app:colorBarPosition="8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_dialog_add_reminder"
+        app:maxPosition="20" />
+
+    <CheckBox
+        android:id="@+id/deadlineInfo_dialog_add_reminder"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
+        android:labelFor="@id/title_dialog_add_reminder"
+        android:text="@string/deadlineInfo_dialog_add_reminder"
+        android:textColor="@color/dialogTextColor"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/color_dialog_add_reminder" />
+
+    <TextView
+        android:id="@+id/deadline_dialog_add_reminder"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/deadline_default_dialog_add_reminder"
+        android:textColor="@color/dialogTextColor"
+        android:textSize="14sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/changeDeadline_dialog_add_reminder"
+        app:layout_constraintEnd_toStartOf="@+id/changeDeadline_dialog_add_reminder"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/changeDeadline_dialog_add_reminder" />
+
+    <ImageButton
+        android:id="@+id/changeDeadline_dialog_add_reminder"
+        style="@android:style/Widget.Holo.Light.Button.Inset"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:contentDescription="@string/change_deadline_button_dialog_add_reminder"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/deadlineInfo_dialog_add_reminder"
+        app:srcCompat="@android:drawable/ic_menu_edit" />
+
+    <TextView
+        android:id="@+id/detailsInfo_dialog_add_reminder"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="4dp"
+        android:labelFor="@id/details_dialog_add_reminder"
+        android:text="@string/detailsInfo_dialog_add_reminder"
+        android:textColor="@color/dialogTextColor"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/changeDeadline_dialog_add_reminder" />
+
+    <EditText
+        android:id="@+id/details_dialog_add_reminder"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:inputType="textMultiLine"
+        android:maxLines="3"
+        android:minLines="3"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detailsInfo_dialog_add_reminder" />
+
+    <Button
+        android:id="@+id/save_dialog_add_reminder"
+        style="@android:style/Widget.Holo.Light.Button.Inset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="4dp"
+        android:drawableStart="@android:drawable/ic_menu_save"
+        android:gravity="center"
+        android:text="@string/save_dialog_add_reminder"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/details_dialog_add_reminder" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

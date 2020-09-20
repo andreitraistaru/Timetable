@@ -29,6 +29,11 @@ public class RemainderItemAdapter extends RecyclerView.Adapter<RecyclerView.View
 
         public RemainderItemViewHolder(@NonNull View itemView) {
             super(itemView);
+
+            this.title = itemView.findViewById(R.id.title_item_reminder);
+            this.deadline = itemView.findViewById(R.id.deadline_item_reminder);
+            this.details = itemView.findViewById(R.id.details_item_reminder);
+            this.cardView = itemView.findViewById(R.id.cardView_item_reminder);
         }
 
         public CardView getCardView() {
@@ -66,13 +71,20 @@ public class RemainderItemAdapter extends RecyclerView.Adapter<RecyclerView.View
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         final Reminder reminder = reminders.get(position);
-        Calendar deadline = Calendar.getInstance();
-        deadline.setTime(reminder.getDeadline());
 
         ((RemainderItemViewHolder) holder).setTitle(reminder.getTitle());
-        ((RemainderItemViewHolder) holder).setDeadline(context.getString(R.string.deadline_item_reminder,
-                deadline.get(Calendar.DAY_OF_MONTH), deadline.get(Calendar.MONTH) + 1,
-                deadline.get(Calendar.YEAR), deadline.get(Calendar.HOUR_OF_DAY), deadline.get(Calendar.MINUTE)));
+
+        if (reminder.getDeadline() != null) {
+            Calendar deadline = Calendar.getInstance();
+            deadline.setTime(reminder.getDeadline());
+
+            ((RemainderItemViewHolder) holder).setDeadline(context.getString(R.string.deadline_item_reminder,
+                    deadline.get(Calendar.DAY_OF_MONTH), deadline.get(Calendar.MONTH) + 1,
+                    deadline.get(Calendar.YEAR), deadline.get(Calendar.HOUR_OF_DAY), deadline.get(Calendar.MINUTE)));
+        } else {
+            ((RemainderItemViewHolder) holder).setDeadline(context.getString(R.string.no_deadline_item_reminder));
+        }
+
         ((RemainderItemViewHolder) holder).setDetails(reminder.getDetails());
         ((RemainderItemViewHolder) holder).setColor(reminder.getColor());
 

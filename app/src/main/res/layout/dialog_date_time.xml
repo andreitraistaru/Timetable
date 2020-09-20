@@ -8,13 +8,23 @@
 
     <CalendarView
         android:id="@+id/calendarView_dialog_date_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="350dp"
+        android:layout_height="300dp"
         android:layout_marginTop="8dp"
         android:firstDayOfWeek="2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TimePicker
+        android:id="@+id/timePicker_dialog_date_time"
+        android:layout_width="300dp"
+        android:layout_height="170dp"
+        android:layout_marginTop="8dp"
+        android:timePickerMode="spinner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/calendarView_dialog_date_time" />
 
     <Button
         android:id="@+id/choose_dialog_date_time"
@@ -29,5 +39,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/calendarView_dialog_date_time" />
+        app:layout_constraintTop_toBottomOf="@+id/timePicker_dialog_date_time" />
 </androidx.constraintlayout.widget.ConstraintLayout>

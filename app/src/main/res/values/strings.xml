@@ -68,6 +68,12 @@
     <string name="othersCheckBox_activity_add_subject">Add Other Activities Time</string>
 
     <string name="titleInfo_dialog_add_reminder">Type in reminder\'s title (required):</string>
+    <string name="detailsInfo_dialog_add_reminder">Type in reminder\'s details:</string>
+    <string name="deadlineInfo_dialog_add_reminder">Set a deadline</string>
+    <string name="deadline_default_dialog_add_reminder">Not set yet</string>
+    <string name="change_deadline_button_dialog_add_reminder">Change deadline</string>
+    <string name="save_dialog_add_reminder">Save</string>
+    <string name="no_title_error_dialog_add_reminder">No title provided!</string>
 
     <string name="location_dialog_add_class">Type in location (required):</string>
     <string name="day_dialog_add_class">Choose the day of week for the activity:</string>
@@ -90,7 +96,7 @@
     <string name="error_not_monday_add_holiday">Must be a Monday!</string>
     <string name="error_not_sunday_add_holiday">Must be a Sunday!</string>
 
-    <string name="choose_dialog_add_holiday">Choose selected date</string>
+    <string name="choose_dialog_add_holiday">Save</string>
 
     <string name="semester_duration_year_structure">Number of weeks in semester:</string>
     <string name="starting_date_year_structure">First day of the semester\n(must be a Monday):\n\n\t\t\t%02d.%02d.%d</string>
@@ -105,6 +111,7 @@
     <string name="ending_hour_item_class_interval">Ends at: %d</string>
 
     <string name="deadline_item_reminder">Deadline: %02d.%02d.%02d %02d:%02d</string>
+    <string name="no_deadline_item_reminder">No deadline</string>
 
     <string name="working_week_item_holiday">Working week</string>
     <string name="holiday_week_item_holiday">Holiday week</string>
@@ -138,5 +145,5 @@
     <string name="end_timetable_entry_dialog">Ends at: %02d:00</string>
     <string name="frequency_timetable_entry_dialog">Frequency: %s</string>
 
-    <string name="title_view_todo_lists_activity">ToDos</string>
+    <string name="title_view_reminders_lists_activity">ToDos</string>
 </resources>

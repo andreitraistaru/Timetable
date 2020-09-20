@@ -88,7 +88,7 @@ public class YearStructureActivity extends AppCompatActivity {
         final AlertDialog alertDialog = builder.create();
         alertDialog.show();
 
-        final CalendarView calendar = dialogView.findViewById(R.id.calendarView_dialog_calendar);
+        final CalendarView calendar = dialogView.findViewById(R.id.calendarView_dialog_date_time);
         final Calendar selectedDate = Calendar.getInstance();
 
         while (selectedDate.get(Calendar.DAY_OF_WEEK) != Calendar.MONDAY) {
@@ -112,7 +112,7 @@ public class YearStructureActivity extends AppCompatActivity {
             }
         });
 
-        Button chooseDate = dialogView.findViewById(R.id.choose_date_dialog_calendar);
+        Button chooseDate = dialogView.findViewById(R.id.choose_dialog_date_time);
         chooseDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -196,7 +196,7 @@ public class YearStructureActivity extends AppCompatActivity {
         final TextView holidayBegin = view.getRootView().findViewById(R.id.chooseHolidayStart_dialog_add_holiday);
         final TextView holidayEnd = view.getRootView().findViewById(R.id.chooseHolidayEnd_dialog_add_holiday);
 
-        final CalendarView calendar = dialogView.findViewById(R.id.calendarView_dialog_calendar);
+        final CalendarView calendar = dialogView.findViewById(R.id.calendarView_dialog_date_time);
         final Calendar selectedDate = Calendar.getInstance();
 
         if (view.getId() == R.id.startingDate_dialog_add_holiday) {
@@ -247,7 +247,7 @@ public class YearStructureActivity extends AppCompatActivity {
             });
         }
 
-        Button chooseDate = dialogView.findViewById(R.id.choose_date_dialog_calendar);
+        Button chooseDate = dialogView.findViewById(R.id.choose_dialog_date_time);
         switch (view.getId()) {
             case R.id.startingDate_dialog_add_holiday:
                 chooseDate.setOnClickListener(new View.OnClickListener() {

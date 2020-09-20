@@ -105,20 +105,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/startHour_dialog_add_class" />
 
-    <TextView
-        android:id="@+id/chooseFrequency_dialog_add_class2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="@string/frequency_dialog_add_class"
-        android:textColor="@color/dialogTextColor"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/finishHour_dialog_add_class" />
-
     <SeekBar
         android:id="@+id/finishHour_dialog_add_class"
         style="@style/Widget.AppCompat.SeekBar.Discrete"
@@ -132,6 +118,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/chooseHolidayEnd_dialog_add_holiday" />
+
+    <TextView
+        android:id="@+id/chooseFrequency_dialog_add_class2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/frequency_dialog_add_class"
+        android:textColor="@color/dialogTextColor"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/finishHour_dialog_add_class" />
 
     <RadioGroup
         android:id="@+id/frequency_dialog_add_class"
