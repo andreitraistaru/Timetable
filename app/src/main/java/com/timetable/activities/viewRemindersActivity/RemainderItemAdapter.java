@@ -143,6 +143,8 @@ public class RemainderItemAdapter extends RecyclerView.Adapter<RecyclerView.View
                                     dialogView.findViewById(R.id.deadline_dialog_add_reminder).setVisibility(View.GONE);
                                     dialogView.findViewById(R.id.changeDeadline_dialog_add_reminder).setVisibility(View.GONE);
 
+                                    deadline.setTimeInMillis(0);
+
                                     ((TextView) dialogView.findViewById(R.id.deadline_dialog_add_reminder)).setText(context.getString(R.string.deadline_default_dialog_add_reminder));
                                 } else {
                                     ((CheckBox) dialogView.findViewById(R.id.deadlineInfo_dialog_add_reminder)).setChecked(true);
@@ -192,9 +194,6 @@ public class RemainderItemAdapter extends RecyclerView.Adapter<RecyclerView.View
                                                 calendar.set(Calendar.YEAR, year);
                                                 calendar.set(Calendar.MONTH, month);
                                                 calendar.set(Calendar.DAY_OF_MONTH, day);
-
-                                                ((TextView) dialogView.findViewById(R.id.deadline_dialog_add_reminder)).setText(context.getString(R.string.deadline_dialog_add_reminder, calendar.get(Calendar.DAY_OF_MONTH),
-                                                        calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.YEAR), calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE)));
                                             }
                                         });
 
@@ -203,9 +202,6 @@ public class RemainderItemAdapter extends RecyclerView.Adapter<RecyclerView.View
                                             public void onTimeChanged(TimePicker timePicker, int hour, int minutes) {
                                                 calendar.set(Calendar.HOUR_OF_DAY, hour);
                                                 calendar.set(Calendar.MINUTE, minutes);
-
-                                                ((TextView) dialogView.findViewById(R.id.deadline_dialog_add_reminder)).setText(context.getString(R.string.deadline_dialog_add_reminder, calendar.get(Calendar.DAY_OF_MONTH),
-                                                        calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.YEAR), calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE)));
                                             }
                                         });
 
@@ -213,6 +209,10 @@ public class RemainderItemAdapter extends RecyclerView.Adapter<RecyclerView.View
                                             @Override
                                             public void onClick(View view) {
                                                 deadline.setTime(calendar.getTime());
+
+                                                ((TextView) dialogView.findViewById(R.id.deadline_dialog_add_reminder)).setText(context.getString(R.string.deadline_dialog_add_reminder, calendar.get(Calendar.DAY_OF_MONTH),
+                                                        calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.YEAR), calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE)));
+
                                                 alertDialog.dismiss();
                                             }
                                         });
@@ -232,7 +232,7 @@ public class RemainderItemAdapter extends RecyclerView.Adapter<RecyclerView.View
                                         }
 
                                         if (((CheckBox) dialogView.findViewById(R.id.deadlineInfo_dialog_add_reminder)).isChecked()) {
-                                            if (((TextView) dialogView.findViewById(R.id.deadline_dialog_add_reminder)).getText().toString().equals(context.getString(R.string.deadline_default_dialog_add_reminder))) {
+                                            if (deadline.getTimeInMillis() == 0) {
                                                 Toast.makeText(context, context.getString(R.string.no_deadline_error_dialog_add_reminder), Toast.LENGTH_SHORT).show();
 
                                                 return;

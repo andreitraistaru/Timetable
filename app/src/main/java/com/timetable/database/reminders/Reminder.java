@@ -51,6 +51,12 @@ public class Reminder implements Comparable<Reminder> {
 
     @Override
     public int compareTo(Reminder reminder) {
+        if (deadline == null) {
+            return 1;
+        } else if (reminder.getDeadline() == null) {
+            return -1;
+        }
+
         return Long.compare(deadline.getTime(), reminder.getDeadline().getTime());
     }
 }

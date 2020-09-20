@@ -1,6 +1,8 @@
 package com.timetable.activities.viewRemindersActivity;
 
 import android.app.AlertDialog;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -21,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.rtugeek.android.colorseekbar.ColorSeekBar;
 import com.timetable.R;
+import com.timetable.activities.Alarms;
 import com.timetable.database.reminders.Reminder;
 import com.timetable.database.reminders.ReminderDatabase;
 
@@ -69,7 +72,7 @@ public class ViewRemindersActivity extends AppCompatActivity {
             final AlertDialog alertDialog = builder.create();
             alertDialog.show();
 
-            final Date deadline = new Date();
+            final Date deadline = new Date(0);
 
             (dialogView.findViewById(R.id.deadlineInfo_dialog_add_reminder)).setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -108,9 +111,6 @@ public class ViewRemindersActivity extends AppCompatActivity {
                             calendar.set(Calendar.YEAR, year);
                             calendar.set(Calendar.MONTH, month);
                             calendar.set(Calendar.DAY_OF_MONTH, day);
-
-                            ((TextView) dialogView.findViewById(R.id.deadline_dialog_add_reminder)).setText(getString(R.string.deadline_dialog_add_reminder, calendar.get(Calendar.DAY_OF_MONTH),
-                                    calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.YEAR), calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE)));
                         }
                     });
 
@@ -119,9 +119,6 @@ public class ViewRemindersActivity extends AppCompatActivity {
                         public void onTimeChanged(TimePicker timePicker, int hour, int minutes) {
                             calendar.set(Calendar.HOUR_OF_DAY, hour);
                             calendar.set(Calendar.MINUTE, minutes);
-
-                            ((TextView) dialogView.findViewById(R.id.deadline_dialog_add_reminder)).setText(getString(R.string.deadline_dialog_add_reminder, calendar.get(Calendar.DAY_OF_MONTH),
-                                    calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.YEAR), calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE)));
                         }
                     });
 
@@ -129,6 +126,10 @@ public class ViewRemindersActivity extends AppCompatActivity {
                         @Override
                         public void onClick(View view) {
                             deadline.setTime(calendar.getTimeInMillis());
+
+                            ((TextView) dialogView.findViewById(R.id.deadline_dialog_add_reminder)).setText(getString(R.string.deadline_dialog_add_reminder, calendar.get(Calendar.DAY_OF_MONTH),
+                                    calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.YEAR), calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE)));
+
                             alertDialog.dismiss();
                         }
                     });
@@ -153,7 +154,7 @@ public class ViewRemindersActivity extends AppCompatActivity {
                     newReminder.setColor(((ColorSeekBar) dialogView.findViewById(R.id.color_dialog_add_reminder)).getColor());
 
                     if (((CheckBox) dialogView.findViewById(R.id.deadlineInfo_dialog_add_reminder)).isChecked()) {
-                        if (((TextView) dialogView.findViewById(R.id.deadline_dialog_add_reminder)).getText().toString().equals(getString(R.string.deadline_default_dialog_add_reminder))) {
+                        if (deadline.getTime() == 0) {
                             Toast.makeText(ViewRemindersActivity.this, getString(R.string.no_deadline_error_dialog_add_reminder), Toast.LENGTH_SHORT).show();
 
                             return;
@@ -165,6 +166,14 @@ public class ViewRemindersActivity extends AppCompatActivity {
                     }
 
                     newReminder.setDetails(((TextView) dialogView.findViewById(R.id.details_dialog_add_reminder)).getText().toString());
+
+                    if (newReminder.getDeadline() != null) {
+                        Intent intent = new Intent(getApplicationContext(), Alarms.class);
+                        intent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND);
+                        PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+                        Alarms.createAlarm(getApplicationContext(), pendingIntent, System.currentTimeMillis() + 5000);
+                    }
 
                     new Thread(new Runnable() {
                         @Override
