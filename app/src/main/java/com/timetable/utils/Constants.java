@@ -1,7 +1,6 @@
 package com.timetable.utils;
 
 import android.content.Context;
-import android.content.res.Resources;
 
 import com.timetable.R;
 
@@ -30,7 +29,8 @@ public class Constants {
     public static final long ODD_WEEK = -1;
     public static final long HOLIDAY_WEEK = -3;
 
-    private static final String SHARED_PREFERENCE_NAME = "YearStructureSharedPreferences";
+    private static final String YEAR_STRUCTURE_SHARED_PREFERENCE_NAME = "YearStructureSharedPreferences";
+    private static final String REMINDERS_SHARED_PREFERENCE_NAME = "RemindersSharedPreferences";
 
     public static int getSemesterStartDefault(int returnValue) {
         Calendar calendar = Calendar.getInstance();
@@ -51,7 +51,6 @@ public class Constants {
                 return 0;
         }
     }
-
     public static String getWeekDay(Context context, int day) {
         switch (day) {
             case MONDAY:
@@ -72,7 +71,6 @@ public class Constants {
                 return context.getResources().getString(R.string.nothing);
         }
     }
-
     public static String getFrequency(Context context, int frequency) {
         switch (frequency) {
             case EVEN_ONLY:
@@ -85,7 +83,6 @@ public class Constants {
                 return context.getResources().getString(R.string.nothing);
         }
     }
-
     public static String getSubjectComponentType(Context context, int type) {
         switch (type) {
             case LECTURE:
@@ -100,8 +97,10 @@ public class Constants {
                 return null;
         }
     }
-
-    public static String getSharedPreferenceName() {
-        return SHARED_PREFERENCE_NAME;
+    public static String getYearStructureSharedPreferenceName() {
+        return YEAR_STRUCTURE_SHARED_PREFERENCE_NAME;
+    }
+    public static String getRemindersSharedPreferenceName() {
+        return REMINDERS_SHARED_PREFERENCE_NAME;
     }
 }

@@ -1,5 +1,5 @@
 <resources>
-    <string-array name="weekDays">
+    <string-array name="week_days">
         <item>Monday</item>
         <item>Tuesday</item>
         <item>Wednesday</item>
@@ -9,5 +9,14 @@
         <item>Sunday</item>
     </string-array>
 
-
+    <!--!!!!! When modify these values, also update method computeNotificationTime from Reminder.java!!!!! -->
+    <string-array name="notification_intervals">
+        <item>Never</item>
+        <item>At deadline</item>
+        <item>15 minutes before deadline</item>
+        <item>1 hour before deadline</item>
+        <item>1 day before deadline</item>
+        <item>3 days before deadline</item>
+        <item>1 week before deadline</item>
+    </string-array>
 </resources>

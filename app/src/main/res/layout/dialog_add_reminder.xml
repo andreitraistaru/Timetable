@@ -94,6 +94,37 @@
         app:srcCompat="@android:drawable/ic_menu_edit" />
 
     <TextView
+        android:id="@+id/notificationInfo_dialog_add_reminder"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        android:labelFor="@id/details_dialog_add_reminder"
+        android:text="@string/notificationInfo_dialog_add_reminder"
+        android:textColor="@color/dialogTextColor"
+        android:textSize="14sp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/changeDeadline_dialog_add_reminder" />
+
+    <Spinner
+        android:id="@+id/notification_dialog_add_reminder"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/spinner_border"
+        android:entries="@array/notification_intervals"
+        android:popupBackground="@color/backgroundColor"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/notificationInfo_dialog_add_reminder" />
+
+    <TextView
         android:id="@+id/detailsInfo_dialog_add_reminder"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -106,7 +137,7 @@
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/changeDeadline_dialog_add_reminder" />
+        app:layout_constraintTop_toBottomOf="@+id/notification_dialog_add_reminder" />
 
     <EditText
         android:id="@+id/details_dialog_add_reminder"

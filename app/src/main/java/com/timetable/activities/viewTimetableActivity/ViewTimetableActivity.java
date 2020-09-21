@@ -131,7 +131,7 @@ public class ViewTimetableActivity extends AppCompatActivity {
             HolidaysDatabase.getDatabase(this).getHolidayDao().getAllHolidays().observe(this, new Observer<List<Holiday>>() {
                 @Override
                 public void onChanged(List<Holiday> data) {
-                    SharedPreferences sharedPreferences = getSharedPreferences(Constants.getSharedPreferenceName(), MODE_PRIVATE);
+                    SharedPreferences sharedPreferences = getSharedPreferences(Constants.getYearStructureSharedPreferenceName(), MODE_PRIVATE);
                     final Calendar semesterStart = Calendar.getInstance();
                     Date currentDate = new Date();
                     Date semesterStartDate;

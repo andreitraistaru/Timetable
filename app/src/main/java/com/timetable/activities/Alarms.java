@@ -7,41 +7,89 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
 import com.timetable.R;
+import com.timetable.database.reminders.Reminder;
+import com.timetable.database.reminders.ReminderDatabase;
+import com.timetable.utils.Constants;
+
+import java.util.Calendar;
+import java.util.Date;
 
 public class Alarms extends BroadcastReceiver {
+    private static final String notificationIdBundleKey = "notificationId";
+
     @Override
-    public void onReceive(Context context, Intent i) {
-        NotificationChannel notificationChannel = new NotificationChannel("Reminders", "Reminders notifications", NotificationManager.IMPORTANCE_HIGH);
-        notificationChannel.setDescription("Description");
+    public void onReceive(final Context context, Intent intent) {
+        if (intent.getExtras() == null) {
+            return;
+        }
+
+        final int notificationId = intent.getExtras().getInt(notificationIdBundleKey);
+
+        NotificationChannel notificationChannel = new NotificationChannel(context.getString(R.string.reminders_notification_channel_id), context.getString(R.string.reminders_notification_channel_name), NotificationManager.IMPORTANCE_HIGH);
 
         NotificationManager notificationManager = context.getSystemService(NotificationManager.class);
         notificationManager.createNotificationChannel(notificationChannel);
 
-        Intent intent = new Intent(context, Alarms.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
+        Intent notificationIntent = new Intent(context, Alarms.class);
+        notificationIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        final PendingIntent notificationPendingIntent = PendingIntent.getActivity(context, notificationId, notificationIntent, 0);
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "Reminders")
-                .setSmallIcon(R.drawable.launcher_icon)
-                .setContentTitle("Don't forget!")
-                .setContentText("Don't forget about your deadline!")
-                .setPriority(NotificationCompat.PRIORITY_MAX)
-                .setContentIntent(pendingIntent);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Reminder reminder = ReminderDatabase.getDatabase(context).getRemainderDao().getReminderWithNotificationId(notificationId);
+                Calendar calendar = Calendar.getInstance();
 
-        NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(context);
-        notificationManagerCompat.notify(0, builder.build());
+                calendar.setTime(reminder.getDeadline());
+
+                NotificationCompat.Builder builder = new NotificationCompat.Builder(context, context.getString(R.string.reminders_notification_channel_id))
+                        .setSmallIcon(R.drawable.launcher_icon)
+                        .setContentTitle(context.getString(R.string.reminders_notification_title, reminder.getTitle()))
+                        .setStyle(new NotificationCompat.BigTextStyle()
+                                .bigText(context.getString(R.string.reminders_notification_content, calendar.get(Calendar.DAY_OF_MONTH),
+                                        calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.YEAR), calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE),
+                                        reminder.getDetails())))
+                        .setContentIntent(notificationPendingIntent)
+                        .setPriority(NotificationCompat.PRIORITY_MAX)
+                        .setAutoCancel(true);
+
+                NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(context);
+                notificationManagerCompat.notify(notificationId, builder.build());
+            }
+        }).start();
     }
 
-    public static void createAlarm(Context context, PendingIntent pendingIntent, long time) {
+    public static void createAlarm(Reminder reminder, Context context) {
+        Date notificationTime = reminder.computeNotificationTime();
+
+        if (notificationTime == null) {
+            return;
+        }
+
+        SharedPreferences sharedPreferences = context.getSharedPreferences(Constants.getRemindersSharedPreferenceName(), Context.MODE_PRIVATE);
+        int counter = sharedPreferences.getInt("alarmsCounter", 0);
+        sharedPreferences.edit().putInt("AlarmsCounter", counter + 1).apply();
+
+        reminder.setNotificationId(counter + 1);
+
+        Intent intent = new Intent(context, Alarms.class);
+        intent.putExtra(notificationIdBundleKey, counter + 1);
+        intent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, counter + 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        AlarmManager.AlarmClockInfo alarmClockInfo = new AlarmManager.AlarmClockInfo(notificationTime.getTime(), null);
 
         if(alarmManager != null) {
-            alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, time, pendingIntent);
+            //alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, time, pendingIntent);
+
+            alarmManager.setAlarmClock(alarmClockInfo, pendingIntent);
         }
     }
 }

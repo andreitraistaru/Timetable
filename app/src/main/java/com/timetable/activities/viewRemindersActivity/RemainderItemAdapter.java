@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.CalendarView;
 import android.widget.CheckBox;
 import android.widget.PopupMenu;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -142,6 +143,8 @@ public class RemainderItemAdapter extends RecyclerView.Adapter<RecyclerView.View
                                     ((CheckBox) dialogView.findViewById(R.id.deadlineInfo_dialog_add_reminder)).setChecked(false);
                                     dialogView.findViewById(R.id.deadline_dialog_add_reminder).setVisibility(View.GONE);
                                     dialogView.findViewById(R.id.changeDeadline_dialog_add_reminder).setVisibility(View.GONE);
+                                    dialogView.findViewById(R.id.notificationInfo_dialog_add_reminder).setVisibility(View.GONE);
+                                    dialogView.findViewById(R.id.notification_dialog_add_reminder).setVisibility(View.GONE);
 
                                     deadline.setTimeInMillis(0);
 
@@ -150,6 +153,10 @@ public class RemainderItemAdapter extends RecyclerView.Adapter<RecyclerView.View
                                     ((CheckBox) dialogView.findViewById(R.id.deadlineInfo_dialog_add_reminder)).setChecked(true);
                                     dialogView.findViewById(R.id.deadline_dialog_add_reminder).setVisibility(View.VISIBLE);
                                     dialogView.findViewById(R.id.changeDeadline_dialog_add_reminder).setVisibility(View.VISIBLE);
+                                    dialogView.findViewById(R.id.notificationInfo_dialog_add_reminder).setVisibility(View.VISIBLE);
+                                    dialogView.findViewById(R.id.notification_dialog_add_reminder).setVisibility(View.VISIBLE);
+
+                                    ((Spinner) dialogView.findViewById(R.id.notification_dialog_add_reminder)).setSelection(reminder.getNotificationTime());
 
                                     deadline.setTime(reminder.getDeadline());
 
@@ -165,9 +172,13 @@ public class RemainderItemAdapter extends RecyclerView.Adapter<RecyclerView.View
                                         if (checkBox.isChecked()) {
                                             dialogView.findViewById(R.id.deadline_dialog_add_reminder).setVisibility(View.VISIBLE);
                                             dialogView.findViewById(R.id.changeDeadline_dialog_add_reminder).setVisibility(View.VISIBLE);
+                                            dialogView.findViewById(R.id.notificationInfo_dialog_add_reminder).setVisibility(View.VISIBLE);
+                                            dialogView.findViewById(R.id.notification_dialog_add_reminder).setVisibility(View.VISIBLE);
                                         } else {
                                             dialogView.findViewById(R.id.deadline_dialog_add_reminder).setVisibility(View.GONE);
                                             dialogView.findViewById(R.id.changeDeadline_dialog_add_reminder).setVisibility(View.GONE);
+                                            dialogView.findViewById(R.id.notificationInfo_dialog_add_reminder).setVisibility(View.GONE);
+                                            dialogView.findViewById(R.id.notification_dialog_add_reminder).setVisibility(View.GONE);
                                         }
                                     }
                                 });
@@ -239,8 +250,10 @@ public class RemainderItemAdapter extends RecyclerView.Adapter<RecyclerView.View
                                             }
 
                                             reminder.setDeadline(deadline.getTime());
+                                            reminder.setNotificationTime(((Spinner) dialogView.findViewById(R.id.notification_dialog_add_reminder)).getSelectedItemPosition());
                                         } else {
                                             reminder.setDeadline(null);
+                                            reminder.setNotificationTime(-1);
                                         }
 
                                         reminder.setTitle(title);

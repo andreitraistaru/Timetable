@@ -44,7 +44,7 @@ public class YearStructureActivity extends AppCompatActivity {
             getSupportActionBar().setTitle(R.string.year_structure_activity_title);
         }
 
-        final SharedPreferences sharedPreferences = getSharedPreferences(Constants.getSharedPreferenceName(), MODE_PRIVATE);
+        final SharedPreferences sharedPreferences = getSharedPreferences(Constants.getYearStructureSharedPreferenceName(), MODE_PRIVATE);
         TextView semesterStart = findViewById(R.id.startingDateInfo_year_structure_activity);
 
         semesterStart.setText(getResources().getString(R.string.starting_date_year_structure,
@@ -119,7 +119,7 @@ public class YearStructureActivity extends AppCompatActivity {
                 semesterBegin.setText(getResources().getString(R.string.starting_date_year_structure,
                         selectedDate.get(Calendar.DAY_OF_MONTH), selectedDate.get(Calendar.MONTH) + 1, selectedDate.get(Calendar.YEAR)));
 
-                SharedPreferences sharedPreferences = getSharedPreferences(Constants.getSharedPreferenceName(), MODE_PRIVATE);
+                SharedPreferences sharedPreferences = getSharedPreferences(Constants.getYearStructureSharedPreferenceName(), MODE_PRIVATE);
                 sharedPreferences.edit().putInt("semester_start_day", selectedDate.get(Calendar.DAY_OF_MONTH))
                                         .putInt("semester_start_month", selectedDate.get(Calendar.MONTH))
                                         .putInt("semester_start_year", selectedDate.get(Calendar.YEAR)).apply();

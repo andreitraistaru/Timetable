@@ -1,8 +1,6 @@
 package com.timetable.activities.viewRemindersActivity;
 
 import android.app.AlertDialog;
-import android.app.PendingIntent;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -11,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CalendarView;
 import android.widget.CheckBox;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -82,9 +81,13 @@ public class ViewRemindersActivity extends AppCompatActivity {
                     if (checkBox.isChecked()) {
                         dialogView.findViewById(R.id.deadline_dialog_add_reminder).setVisibility(View.VISIBLE);
                         dialogView.findViewById(R.id.changeDeadline_dialog_add_reminder).setVisibility(View.VISIBLE);
+                        dialogView.findViewById(R.id.notificationInfo_dialog_add_reminder).setVisibility(View.VISIBLE);
+                        dialogView.findViewById(R.id.notification_dialog_add_reminder).setVisibility(View.VISIBLE);
                     } else {
                         dialogView.findViewById(R.id.deadline_dialog_add_reminder).setVisibility(View.GONE);
                         dialogView.findViewById(R.id.changeDeadline_dialog_add_reminder).setVisibility(View.GONE);
+                        dialogView.findViewById(R.id.notificationInfo_dialog_add_reminder).setVisibility(View.GONE);
+                        dialogView.findViewById(R.id.notification_dialog_add_reminder).setVisibility(View.GONE);
                     }
                 }
             });
@@ -161,19 +164,15 @@ public class ViewRemindersActivity extends AppCompatActivity {
                         }
 
                         newReminder.setDeadline(deadline);
+                        newReminder.setNotificationTime(((Spinner) dialogView.findViewById(R.id.notification_dialog_add_reminder)).getSelectedItemPosition());
                     } else {
                         newReminder.setDeadline(null);
+                        newReminder.setNotificationTime(-1);
                     }
 
                     newReminder.setDetails(((TextView) dialogView.findViewById(R.id.details_dialog_add_reminder)).getText().toString());
 
-                    if (newReminder.getDeadline() != null) {
-                        Intent intent = new Intent(getApplicationContext(), Alarms.class);
-                        intent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND);
-                        PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-                        Alarms.createAlarm(getApplicationContext(), pendingIntent, System.currentTimeMillis() + 5000);
-                    }
+                    Alarms.createAlarm(newReminder, ViewRemindersActivity.this);
 
                     new Thread(new Runnable() {
                         @Override

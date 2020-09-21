@@ -69,6 +69,7 @@
 
     <string name="titleInfo_dialog_add_reminder">Type in reminder\'s title (required):</string>
     <string name="detailsInfo_dialog_add_reminder">Type in reminder\'s details:</string>
+    <string name="notificationInfo_dialog_add_reminder">Notify me:</string>
     <string name="deadlineInfo_dialog_add_reminder">Set a deadline</string>
     <string name="deadline_default_dialog_add_reminder">Not set yet</string>
     <string name="deadline_dialog_add_reminder">%02d.%02d.%d %02d:%02d</string>
@@ -148,4 +149,10 @@
     <string name="frequency_timetable_entry_dialog">Frequency: %s</string>
 
     <string name="title_view_reminders_lists_activity">ToDos</string>
+
+    <string name="reminders_notification_channel_id">Reminders</string>
+    <string name="reminders_notification_channel_name">Reminders\' notifications</string>
+
+    <string name="reminders_notification_title">Reminder: %s</string>
+    <string name="reminders_notification_content">Deadline: %02d.%02d.%02d %02d:%02d\n\n%s</string>
 </resources>
