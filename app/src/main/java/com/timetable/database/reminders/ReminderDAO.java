@@ -23,6 +23,6 @@ public interface ReminderDAO {
     @Query("SELECT * FROM reminders")
     LiveData<List<Reminder>> getAllReminders();
 
-    @Query("SELECT * FROM reminders WHERE notificationId == :id")
-    Reminder getReminderWithNotificationId(int id);
+    @Query("SELECT * FROM reminders WHERE notificationId = :notificationId")
+    Reminder getReminderWithNotificationId(int notificationId);
 }

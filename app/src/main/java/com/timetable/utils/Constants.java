@@ -30,7 +30,6 @@ public class Constants {
     public static final long HOLIDAY_WEEK = -3;
 
     private static final String YEAR_STRUCTURE_SHARED_PREFERENCE_NAME = "YearStructureSharedPreferences";
-    private static final String REMINDERS_SHARED_PREFERENCE_NAME = "RemindersSharedPreferences";
 
     public static int getSemesterStartDefault(int returnValue) {
         Calendar calendar = Calendar.getInstance();
@@ -99,8 +98,5 @@ public class Constants {
     }
     public static String getYearStructureSharedPreferenceName() {
         return YEAR_STRUCTURE_SHARED_PREFERENCE_NAME;
-    }
-    public static String getRemindersSharedPreferenceName() {
-        return REMINDERS_SHARED_PREFERENCE_NAME;
     }
 }

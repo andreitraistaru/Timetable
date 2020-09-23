@@ -114,6 +114,8 @@
     <string name="ending_hour_item_class_interval">Ends at: %d</string>
 
     <string name="deadline_item_reminder">Deadline: %02d.%02d.%02d %02d:%02d</string>
+    <string name="notification_item_reminder">Notify me: %s</string>
+    <string name="details_item_reminder">Details: %s</string>
     <string name="no_deadline_item_reminder">No deadline</string>
 
     <string name="working_week_item_holiday">Working week</string>
@@ -154,5 +156,5 @@
     <string name="reminders_notification_channel_name">Reminders\' notifications</string>
 
     <string name="reminders_notification_title">Reminder: %s</string>
-    <string name="reminders_notification_content">Deadline: %02d.%02d.%02d %02d:%02d\n\n%s</string>
+    <string name="reminders_notification_content">Deadline: %02d.%02d.%02d %02d:%02d\n\nDetails: %s</string>
 </resources>

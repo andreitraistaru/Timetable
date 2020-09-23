@@ -26,11 +26,14 @@ import com.timetable.activities.Alarms;
 import com.timetable.database.reminders.Reminder;
 import com.timetable.database.reminders.ReminderDatabase;
 
+import java.util.BitSet;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 public class ViewRemindersActivity extends AppCompatActivity {
+    private List<Reminder> reminders;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,13 +45,14 @@ public class ViewRemindersActivity extends AppCompatActivity {
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView_activity_view_remainders);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        final RemainderItemAdapter adapter = new RemainderItemAdapter(this);
+        final ReminderItemAdapter adapter = new ReminderItemAdapter(this);
         recyclerView.setAdapter(adapter);
 
         ReminderDatabase.getDatabase(this).getRemainderDao().getAllReminders().observe(this, new Observer<List<Reminder>>() {
             @Override
-            public void onChanged(List<Reminder> reminders) {
-                adapter.setReminders(reminders);
+            public void onChanged(List<Reminder> data) {
+                reminders = data;
+                adapter.setReminders(data);
             }
         });
     }
@@ -171,6 +175,7 @@ public class ViewRemindersActivity extends AppCompatActivity {
                     }
 
                     newReminder.setDetails(((TextView) dialogView.findViewById(R.id.details_dialog_add_reminder)).getText().toString());
+                    newReminder.setNotificationId(generateNewReminderId());
 
                     Alarms.createAlarm(newReminder, ViewRemindersActivity.this);
 
@@ -187,5 +192,15 @@ public class ViewRemindersActivity extends AppCompatActivity {
         }
 
         return true;
+    }
+
+    private int generateNewReminderId() {
+        BitSet bitSet = new BitSet();
+
+        for (Reminder reminder : reminders) {
+            bitSet.set(reminder.getNotificationId());
+        }
+
+        return bitSet.nextClearBit(0);
     }
 }

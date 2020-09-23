@@ -1,9 +1,12 @@
 package com.timetable.database.reminders;
 
+import android.content.Context;
 import android.text.format.DateUtils;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+
+import com.timetable.R;
 
 import java.util.Date;
 
@@ -86,6 +89,14 @@ public class Reminder implements Comparable<Reminder> {
             default:
                 return null;
         }
+    }
+
+    public String getNotificationString(Context context) {
+        if (notificationTime == -1) {
+            return context.getResources().getStringArray(R.array.notification_intervals)[0];
+        }
+
+        return context.getResources().getStringArray(R.array.notification_intervals)[notificationTime];
     }
 
     @Override

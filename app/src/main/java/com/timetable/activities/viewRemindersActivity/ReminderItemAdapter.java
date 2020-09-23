@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.rtugeek.android.colorseekbar.ColorSeekBar;
 import com.timetable.R;
+import com.timetable.activities.Alarms;
 import com.timetable.database.reminders.Reminder;
 import com.timetable.database.reminders.ReminderDatabase;
 
@@ -28,19 +29,21 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 
-public class RemainderItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    public static class RemainderItemViewHolder extends RecyclerView.ViewHolder {
+public class ReminderItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    public static class ReminderItemViewHolder extends RecyclerView.ViewHolder {
         private TextView title;
         private TextView deadline;
+        private TextView notification;
         private TextView details;
         private CardView cardView;
         private View view;
 
-        public RemainderItemViewHolder(@NonNull View itemView) {
+        public ReminderItemViewHolder(@NonNull View itemView) {
             super(itemView);
 
             this.title = itemView.findViewById(R.id.title_item_reminder);
             this.deadline = itemView.findViewById(R.id.deadline_item_reminder);
+            this.notification = itemView.findViewById(R.id.notification_item_reminder);
             this.details = itemView.findViewById(R.id.details_item_reminder);
             this.cardView = itemView.findViewById(R.id.cardView_item_reminder);
             this.view = itemView;
@@ -59,6 +62,9 @@ public class RemainderItemAdapter extends RecyclerView.Adapter<RecyclerView.View
         public void setDeadline(String data) {
             this.deadline.setText(data);
         }
+        public void setNotification(String data) {
+            this.notification.setText(data);
+        }
         public void setDetails(String data) {
             this.details.setText(data);
         }
@@ -70,7 +76,7 @@ public class RemainderItemAdapter extends RecyclerView.Adapter<RecyclerView.View
     private List<Reminder> reminders;
     private Context context;
 
-    public RemainderItemAdapter(Context context) {
+    public ReminderItemAdapter(Context context) {
         this.reminders = null;
         this.context = context;
     }
@@ -78,30 +84,31 @@ public class RemainderItemAdapter extends RecyclerView.Adapter<RecyclerView.View
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new RemainderItemViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_reminder, parent, false));
+        return new ReminderItemViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_reminder, parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, int position) {
         final Reminder reminder = reminders.get(position);
 
-        ((RemainderItemViewHolder) holder).setTitle(reminder.getTitle());
+        ((ReminderItemViewHolder) holder).setTitle(reminder.getTitle());
 
         if (reminder.getDeadline() != null) {
             Calendar deadline = Calendar.getInstance();
             deadline.setTime(reminder.getDeadline());
 
-            ((RemainderItemViewHolder) holder).setDeadline(context.getString(R.string.deadline_item_reminder,
+            ((ReminderItemViewHolder) holder).setDeadline(context.getString(R.string.deadline_item_reminder,
                     deadline.get(Calendar.DAY_OF_MONTH), deadline.get(Calendar.MONTH) + 1,
                     deadline.get(Calendar.YEAR), deadline.get(Calendar.HOUR_OF_DAY), deadline.get(Calendar.MINUTE)));
         } else {
-            ((RemainderItemViewHolder) holder).setDeadline(context.getString(R.string.no_deadline_item_reminder));
+            ((ReminderItemViewHolder) holder).setDeadline(context.getString(R.string.no_deadline_item_reminder));
         }
 
-        ((RemainderItemViewHolder) holder).setDetails(reminder.getDetails());
-        ((RemainderItemViewHolder) holder).setColor(reminder.getColor());
+        ((ReminderItemViewHolder) holder).setNotification(context.getString(R.string.notification_item_reminder, reminder.getNotificationString(context)));
+        ((ReminderItemViewHolder) holder).setDetails(context.getString(R.string.details_item_reminder, reminder.getDetails().isEmpty() ? "-" : reminder.getDetails()));
+        ((ReminderItemViewHolder) holder).setColor(reminder.getColor());
 
-        ((RemainderItemViewHolder) holder).getCardView().setOnLongClickListener(new View.OnLongClickListener() {
+        ((ReminderItemViewHolder) holder).getCardView().setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
                 Context popupContext = new ContextThemeWrapper(context, R.style.popupMenu);
@@ -120,13 +127,14 @@ public class RemainderItemAdapter extends RecyclerView.Adapter<RecyclerView.View
                                     }
                                 }).start();
 
+                                Alarms.removeAlarm(reminder, context);
                                 reminders.remove(reminder);
                                 notifyDataSetChanged();
 
                                 break;
                             case R.id.edit_popup_reminders_option:
                                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                                ViewGroup viewGroup = ((RemainderItemViewHolder) holder).getView().findViewById(android.R.id.content);
+                                ViewGroup viewGroup = ((ReminderItemViewHolder) holder).getView().findViewById(android.R.id.content);
                                 final View dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_add_reminder, viewGroup, false);
 
                                 builder.setView(dialogView);
@@ -187,7 +195,7 @@ public class RemainderItemAdapter extends RecyclerView.Adapter<RecyclerView.View
                                     @Override
                                     public void onClick(View view) {
                                         AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
-                                        ViewGroup viewGroup = ((RemainderItemViewHolder) holder).getView().findViewById(android.R.id.content);
+                                        ViewGroup viewGroup = ((ReminderItemViewHolder) holder).getView().findViewById(android.R.id.content);
                                         final View dateTimeDialogView = LayoutInflater.from(context).inflate(R.layout.dialog_date_time, viewGroup, false);
 
                                         builder.setView(dateTimeDialogView);
@@ -233,6 +241,8 @@ public class RemainderItemAdapter extends RecyclerView.Adapter<RecyclerView.View
                                 (dialogView.findViewById(R.id.save_dialog_add_reminder)).setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
+                                        Alarms.removeAlarm(reminder, context);
+
                                         String title = ((TextView) dialogView.findViewById(R.id.title_dialog_add_reminder)).getText().toString();
 
                                         if (title.isEmpty()) {
@@ -259,6 +269,8 @@ public class RemainderItemAdapter extends RecyclerView.Adapter<RecyclerView.View
                                         reminder.setTitle(title);
                                         reminder.setColor(((ColorSeekBar) dialogView.findViewById(R.id.color_dialog_add_reminder)).getColor());
                                         reminder.setDetails(((TextView) dialogView.findViewById(R.id.details_dialog_add_reminder)).getText().toString());
+
+                                        Alarms.createAlarm(reminder, context);
 
                                         new Thread(new Runnable() {
                                             @Override

@@ -7,7 +7,6 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
@@ -15,7 +14,6 @@ import androidx.core.app.NotificationManagerCompat;
 import com.timetable.R;
 import com.timetable.database.reminders.Reminder;
 import com.timetable.database.reminders.ReminderDatabase;
-import com.timetable.utils.Constants;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -54,7 +52,7 @@ public class Alarms extends BroadcastReceiver {
                         .setStyle(new NotificationCompat.BigTextStyle()
                                 .bigText(context.getString(R.string.reminders_notification_content, calendar.get(Calendar.DAY_OF_MONTH),
                                         calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.YEAR), calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE),
-                                        reminder.getDetails())))
+                                        reminder.getDetails().isEmpty() ? "-" : reminder.getDetails())))
                         .setContentIntent(notificationPendingIntent)
                         .setPriority(NotificationCompat.PRIORITY_MAX)
                         .setAutoCancel(true);
@@ -72,24 +70,37 @@ public class Alarms extends BroadcastReceiver {
             return;
         }
 
-        SharedPreferences sharedPreferences = context.getSharedPreferences(Constants.getRemindersSharedPreferenceName(), Context.MODE_PRIVATE);
-        int counter = sharedPreferences.getInt("alarmsCounter", 0);
-        sharedPreferences.edit().putInt("AlarmsCounter", counter + 1).apply();
-
-        reminder.setNotificationId(counter + 1);
-
         Intent intent = new Intent(context, Alarms.class);
-        intent.putExtra(notificationIdBundleKey, counter + 1);
+        intent.putExtra(notificationIdBundleKey, reminder.getNotificationId());
         intent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, counter + 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, reminder.getNotificationId(), intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         AlarmManager.AlarmClockInfo alarmClockInfo = new AlarmManager.AlarmClockInfo(notificationTime.getTime(), null);
 
         if(alarmManager != null) {
-            //alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, time, pendingIntent);
+            // alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, time, pendingIntent);
 
             alarmManager.setAlarmClock(alarmClockInfo, pendingIntent);
+        }
+    }
+
+    public static void removeAlarm(Reminder reminder, Context context) {
+        Date notificationTime = reminder.computeNotificationTime();
+
+        if (notificationTime == null) {
+            return;
+        }
+
+        Intent intent = new Intent(context, Alarms.class);
+        intent.putExtra(notificationIdBundleKey, reminder.getNotificationId());
+        intent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, reminder.getNotificationId(), intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+
+        if(alarmManager != null) {
+            alarmManager.cancel(pendingIntent);
         }
     }
 }
