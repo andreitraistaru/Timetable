@@ -269,6 +269,7 @@ public class ReminderItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                                         reminder.setTitle(title);
                                         reminder.setColor(((ColorSeekBar) dialogView.findViewById(R.id.color_dialog_add_reminder)).getColor());
                                         reminder.setDetails(((TextView) dialogView.findViewById(R.id.details_dialog_add_reminder)).getText().toString());
+                                        reminder.setUserNotified(false);
 
                                         Alarms.createAlarm(reminder, context);
 

@@ -21,8 +21,11 @@ public class Reminder implements Comparable<Reminder> {
     private int notificationTime;
     private String details;
     private int notificationId;
+    private boolean userNotified;
 
-    public Reminder() {}
+    public Reminder() {
+        this.userNotified = false;
+    }
 
     public int getId() {
         return id;
@@ -45,6 +48,9 @@ public class Reminder implements Comparable<Reminder> {
     public int getNotificationId() {
         return notificationId;
     }
+    public boolean isUserNotified() {
+        return userNotified;
+    }
 
     public void setId(int id) {
         this.id = id;
@@ -66,6 +72,9 @@ public class Reminder implements Comparable<Reminder> {
     }
     public void setNotificationId(int notificationId) {
         this.notificationId = notificationId;
+    }
+    public void setUserNotified(boolean userNotified) {
+        this.userNotified = userNotified;
     }
 
     public Date computeNotificationTime() {

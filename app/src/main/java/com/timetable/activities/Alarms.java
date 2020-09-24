@@ -17,12 +17,40 @@ import com.timetable.database.reminders.ReminderDatabase;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class Alarms extends BroadcastReceiver {
     private static final String notificationIdBundleKey = "notificationId";
 
     @Override
-    public void onReceive(final Context context, Intent intent) {
+    public void onReceive(Context context, Intent intent) {
+        String action = intent.getAction();
+
+        if(action != null && action.equals(Intent.ACTION_BOOT_COMPLETED)) {
+            setRemindersOnBootCompleted(context);
+
+            return;
+        }
+
+        displayNotification(context, intent);
+    }
+
+    private void setRemindersOnBootCompleted(final Context context) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                List<Reminder> reminders = ReminderDatabase.getDatabase(context).getRemainderDao().getRegisteredReminders();
+
+                for (Reminder reminder : reminders) {
+                    if (!reminder.isUserNotified()) {
+                        createAlarm(reminder, context);
+                    }
+                }
+            }
+        }).start();
+    }
+
+    private void displayNotification (final Context context, Intent intent) {
         if (intent.getExtras() == null) {
             return;
         }
@@ -59,6 +87,9 @@ public class Alarms extends BroadcastReceiver {
 
                 NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(context);
                 notificationManagerCompat.notify(notificationId, builder.build());
+
+                reminder.setUserNotified(true);
+                ReminderDatabase.getDatabase(context).getRemainderDao().updateReminder(reminder);
             }
         }).start();
     }

@@ -3,9 +3,9 @@
     package="com.timetable">
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
-        android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -21,7 +21,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.yearStructureActivity.YearStructureActivity" />
-        <receiver android:name=".activities.Alarms" />
+        <receiver android:name=".activities.Alarms">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
