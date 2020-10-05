@@ -32,6 +32,7 @@ import static java.time.temporal.ChronoUnit.DAYS;
 
 public class ViewTimetableActivity extends AppCompatActivity {
     private final String weekNumberBundleKey = "weekNumber";
+    private final String weekDayShownNumberBundleKey = "weekDayShownNumber";
     private long weekNumber = Constants.ODD_WEEK;
     private TabLayout tabLayout;
     private TimetableFragmentAdapter adapter;
@@ -61,12 +62,15 @@ public class ViewTimetableActivity extends AppCompatActivity {
             } else {
                 updateWeekNumber(true);
             }
+
+            TabLayout.Tab tab = tabLayout.getTabAt(savedInstanceState.getInt(weekDayShownNumberBundleKey));
+            tabLayout.selectTab(tab);
         } else {
             updateWeekNumber(true);
-        }
 
-        TabLayout.Tab tab = tabLayout.getTabAt(Calendar.getInstance().get(Calendar.DAY_OF_WEEK) - 2);
-        tabLayout.selectTab(tab);
+            TabLayout.Tab tab = tabLayout.getTabAt(Calendar.getInstance().get(Calendar.DAY_OF_WEEK) - 2);
+            tabLayout.selectTab(tab);
+        }
     }
 
     @Override
@@ -74,6 +78,7 @@ public class ViewTimetableActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
 
         outState.putLong(weekNumberBundleKey, weekNumber);
+        outState.putInt(weekDayShownNumberBundleKey, tabLayout.getSelectedTabPosition());
     }
 
     @Override
