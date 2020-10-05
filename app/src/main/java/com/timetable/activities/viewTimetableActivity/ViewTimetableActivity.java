@@ -64,6 +64,9 @@ public class ViewTimetableActivity extends AppCompatActivity {
         } else {
             updateWeekNumber(true);
         }
+
+        TabLayout.Tab tab = tabLayout.getTabAt(Calendar.getInstance().get(Calendar.DAY_OF_WEEK) - 2);
+        tabLayout.selectTab(tab);
     }
 
     @Override
