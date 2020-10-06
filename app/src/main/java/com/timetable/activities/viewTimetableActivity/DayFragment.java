@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.timetable.R;
@@ -22,6 +22,7 @@ import com.timetable.database.subjects.SubjectComponent;
 import com.timetable.database.subjects.SubjectsDatabase;
 import com.timetable.utils.Constants;
 import com.timetable.utils.GlobalVariables;
+import com.timetable.utils.Maths;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +37,7 @@ public class DayFragment extends Fragment {
     private static List<Holiday> holidays = null;
     private ArrayList<TimetableEntry> timetableEntries;
     private TimetableItemAdapter adapter = null;
+    private RecyclerView recyclerView = null;
 
     public DayFragment() {}
     private DayFragment(int day) {
@@ -67,9 +69,9 @@ public class DayFragment extends Fragment {
         }
 
         View view = inflater.inflate(R.layout.fragment_day, container, false);
-        RecyclerView recyclerView = view.findViewById(R.id.recyclerView_fragment_day);
+        recyclerView = view.findViewById(R.id.recyclerView_fragment_day);
+        recyclerView.setLayoutManager(new GridLayoutManager(view.getContext(), 1));
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         adapter = new TimetableItemAdapter();
         recyclerView.setAdapter(adapter);
 
@@ -151,8 +153,63 @@ public class DayFragment extends Fragment {
             TimetableEntry.fillBreakTimes(timetableEntries, context);
         }
 
+        final int[] cellSize = new int[timetableEntries.size()];
+        int maxWidth = 1;
+
+        for (int i = 0; i < timetableEntries.size(); i++) {
+            int counter = 1;
+            int j = i;
+            int minStartHour = timetableEntries.get(i).getStart();
+            int maxEndHour = timetableEntries.get(i).getEnd();
+
+            while (j < timetableEntries.size() - 1 && checkOverlapping(maxEndHour, timetableEntries.get(j + 1))) {
+                counter++;
+                if (maxEndHour < timetableEntries.get(j + 1).getEnd()) {
+                    maxEndHour = timetableEntries.get(j + 1).getEnd();
+                }
+
+                j++;
+            }
+
+            while (i <= j) {
+                cellSize[i] = counter;
+                timetableEntries.get(i).setSlotStart(minStartHour);
+                timetableEntries.get(i).setSlotEnd(maxEndHour);
+
+                i++;
+            }
+
+            i--;        //to work with i++ form for statement
+
+            maxWidth = Maths.lcm(maxWidth, counter);
+        }
+
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), maxWidth);
+
+        for (int i = 0; i < cellSize.length; i++) {
+            cellSize[i] = maxWidth / cellSize[i];
+        }
+
+        gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                return cellSize[position];
+            }
+        });
+
+        if (recyclerView != null) {
+            recyclerView.setLayoutManager(gridLayoutManager);
+        }
+
         if (adapter != null) {
             adapter.setTimetable(timetableEntries);
         }
+    }
+
+    private boolean checkOverlapping(int maxEndHour, TimetableEntry entry) {
+        if (entry.getStart() >= maxEndHour) {
+            return false;
+        }
+        return true;
     }
 }

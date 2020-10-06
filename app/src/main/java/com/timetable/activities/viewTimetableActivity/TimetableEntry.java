@@ -21,6 +21,8 @@ public class TimetableEntry implements Comparable<TimetableEntry> {
     private Context context;
     private int start;
     private int end;
+    private int slotStart; //starting hour for the slot
+    private int slotEnd; //ending hour for the slot
 
     public TimetableEntry(Subject subject, SubjectComponent component, ClassInterval interval, Context context) {
         this.breakTime = false;
@@ -156,9 +158,26 @@ public class TimetableEntry implements Comparable<TimetableEntry> {
 
         return Constants.getFrequency(context, interval.getFrequency());
     }
+    public int getSlotStart() {
+        return slotStart;
+    }
+    public int getSlotEnd() {
+        return slotEnd;
+    }
+
+    public void setSlotStart(int slotStart) {
+        this.slotStart = slotStart;
+    }
+    public void setSlotEnd(int slotEnd) {
+        this.slotEnd = slotEnd;
+    }
 
     @Override
     public int compareTo(TimetableEntry entry) {
+        if (getStart() == entry.getStart()) {
+            return getEnd() - entry.getEnd();
+        }
+
         return getStart() - entry.getStart();
     }
 

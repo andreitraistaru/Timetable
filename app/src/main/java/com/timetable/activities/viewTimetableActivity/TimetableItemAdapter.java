@@ -56,8 +56,30 @@ public class TimetableItemAdapter extends RecyclerView.Adapter<RecyclerView.View
         public void setColor(int color) {
             cardView.setCardBackgroundColor(color);
         }
-        public void setDuration(int duration) {
-            cardView.getLayoutParams().height = (int) ((duration * cardView.getContext().getResources().getDimension(R.dimen.item_timetable_hour_height)) +
+        public void setDuration(int entryStart, int entryEnd, int slotStart, int slotEnd) {
+            cardView.getLayoutParams().height = computeHeight(entryEnd - entryStart);
+
+            int offsetTop = computeHeight(entryStart - slotStart);
+            int offsetBottom = computeHeight(slotEnd - entryEnd);
+
+            if (offsetTop > 0) {
+                offsetTop += (((int) cardView.getContext().getResources().getDimension(R.dimen.item_timetable_hour_padding)));
+            }
+
+            if (offsetBottom > 0) {
+                offsetBottom += (((int) cardView.getContext().getResources().getDimension(R.dimen.item_timetable_hour_padding)));
+            }
+
+            ((ViewGroup.MarginLayoutParams) (cardView.getLayoutParams())).topMargin = (((int) cardView.getContext().getResources().getDimension(R.dimen.item_timetable_hour_padding)) / 2) + offsetTop;
+            ((ViewGroup.MarginLayoutParams) (cardView.getLayoutParams())).bottomMargin = (((int) cardView.getContext().getResources().getDimension(R.dimen.item_timetable_hour_padding)) / 2) + offsetBottom;
+        }
+
+        private int computeHeight(int duration) {
+            if (duration == 0) {
+                return 0;
+            }
+
+            return (int) ((duration * cardView.getContext().getResources().getDimension(R.dimen.item_timetable_hour_height)) +
                     ((duration - 1) * cardView.getContext().getResources().getDimension(R.dimen.item_timetable_hour_padding)));
         }
     }
@@ -84,7 +106,7 @@ public class TimetableItemAdapter extends RecyclerView.Adapter<RecyclerView.View
         ((TimetableItemViewHolder) holder).setLocation(entry.getLocation());
         ((TimetableItemViewHolder) holder).setEnd(entry.getEndHour());
         ((TimetableItemViewHolder) holder).setColor(entry.getColor());
-        ((TimetableItemViewHolder) holder).setDuration(entry.getDuration());
+        ((TimetableItemViewHolder) holder).setDuration(entry.getStart(), entry.getEnd(), entry.getSlotStart(), entry.getSlotEnd());
 
         if (!entry.isBreakTime() && !entry.isHolidayTime()) {
             ((TimetableItemViewHolder) holder).getCardView().setOnClickListener(new View.OnClickListener() {
